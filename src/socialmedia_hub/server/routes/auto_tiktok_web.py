@@ -796,18 +796,18 @@ async def fetch_sso_login_qrcode(
 
 @router.get("/fetch_sso_login_status")
 async def fetch_sso_login_status(
-    token: str,
-    device_id: str,
-    verifyFp: str,
-    region: str,
-    proxy: str,
-    request: Request,
+    sso_token: str | None = None,
+    device_id: str | None = None,
+    verifyFp: str | None = None,
+    region: str | None = None,
+    proxy: str | None = None,
+    request: Request = None,
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取SSO登录状态/Get SSO login status"""
     params: dict[str, Any] = {}
-    if token is not None:
-        params["token"] = token
+    if sso_token is not None:
+        params["token"] = sso_token
     if device_id is not None:
         params["device_id"] = device_id
     if verifyFp is not None:

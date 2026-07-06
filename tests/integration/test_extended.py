@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import asyncio
-import pytest
 
-from socialmedia_hub.websocket.manager import ConnectionManager
-from socialmedia_hub.proxy.cookies import CookieManager, CookieEntry
-from socialmedia_hub.proxy.pool import ProxyPool, ProxyEntry
+from socialmedia_hub.proxy.cookies import CookieManager
+from socialmedia_hub.proxy.pool import ProxyPool
 from socialmedia_hub.proxy.signatures import SignatureManager
+from socialmedia_hub.websocket.manager import ConnectionManager
 
 
 class TestWebSocketManagerExtended:

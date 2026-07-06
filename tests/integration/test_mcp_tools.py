@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from socialmedia_hub.mcp.server import MCPServer, create_mcp_server
+from socialmedia_hub.mcp.server import create_mcp_server
 
 
 @pytest.fixture
