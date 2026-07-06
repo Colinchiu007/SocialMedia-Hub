@@ -1,0 +1,142 @@
+# Changelog
+
+All notable changes to `socialmedia-hub` will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.2.0] - 2026-07-06
+
+### Added
+
+#### RealProxyLayer (真实代理层)
+- `CookieManager` - Cookie 存储/管理/过期处理
+- `SignatureGenerator` - 抖音/TikTok/Instagram 签名生成
+- `ProxyPool` - IP 轮换（round_robin/random/least_used/best_success）
+- `RealProxyLayer` - 统一代理层（认证+签名+代理+限流）
+
+#### WebSocket 支持
+- WebSocket 管理器（连接管理、频道订阅、广播）
+- 3 个 WebSocket 端点（live/subscribe/monitor）
+- 实时数据推送支持
+
+#### MCP 扩展
+- MCP 工具从 150 扩展到 314
+- 覆盖 16 个平台的完整工具集
+
+#### 测试
+- 新增 25 个代理层测试
+- 总测试数达到 166
+
+#### 文档
+- 新增 Security Audit Report
+- 更新 Quality Rhythm 至 v2
+
+### Changed
+- `proxy_request` 函数更新为使用 RealProxyLayer
+- 集成 Cookie 管理、签名生成、代理轮换
+
+## [0.1.0] - 2026-07-06
+
+### Added
+
+#### Core SDK
+- `SocialMediaHub` (sync) and `AsyncSocialMediaHub` (async) clients
+- Bearer-token authentication via constructor or `$SMH_API_KEY`
+- Cookie-based authentication (Method 2)
+- Automatic retry with exponential backoff
+- Rate-limit-aware sleeping based on `Retry-After` headers
+- Structured exception hierarchy (15 exception types)
+- Context manager support (`with` / `async with`)
+- Proper SDK exports in `__init__.py`
+
+#### API Server
+- FastAPI-based REST API server
+- 1068 endpoints across 20 platforms
+- Swagger UI at `/docs`
+- ReDoc at `/redoc`
+- OpenAPI spec at `/openapi.json`
+- CORS support
+- Generic platform proxy routes
+- API Key management (create, verify)
+- Rate limiting per API key
+
+#### Platform APIs (20 platforms)
+- **TikTok**: 150+ endpoints (Web, App V3, Creator, Analytics, Shop, Ads)
+- **Douyin**: 234 endpoints (Web, App V3, Search, Billboard, Xingtu, Creator)
+- **Instagram**: 88 endpoints (V1, V2, V3)
+- **YouTube**: 40 endpoints (Web, Web V2)
+- **Twitter/X**: 13 endpoints
+- **Xiaohongshu**: 79 endpoints (Web, Web V2, Web V3, App, App V2)
+- **Bilibili**: 41 endpoints (Web, App)
+- **Weibo**: 64 endpoints (Web, Web V2, App)
+- **Kuaishou**: 33 endpoints (Web, App)
+- **LinkedIn**: 25 endpoints
+- **Reddit**: 26 endpoints (App)
+- **Zhihu**: 34 endpoints
+- **Threads**: 11 endpoints
+- **WeChat**: 20 endpoints (Channels, Media Platform)
+- **Lemon8**: 16 endpoints
+- **PiPiXia**: 17 endpoints
+- **Sora2**: 17 endpoints
+- **Xigua**: 7 endpoints
+- **Toutiao**: 7 endpoints
+- **NetEase Cloud Music**: 24 endpoints
+
+#### MCP (Model Context Protocol)
+- 150 MCP tools across 16 platforms
+- MCP server implementation
+- Claude Desktop integration support
+- Tool listing and calling endpoints
+
+#### Live Room API
+- Real-time live streaming data endpoints
+- Support for Douyin, TikTok, Bilibili, Kuaishou, Weibo
+- Room info, danmaku, gift ranking, products
+
+#### Monitoring & Health
+- API status monitoring endpoints
+- Platform health checks
+- Metrics collection
+
+#### CLI
+- `smh` command-line tool
+- `smh-server` for starting the API server
+- Health check, URL parsing, API key management
+
+#### Documentation
+- PRD (Product Requirements Document)
+- User Guide
+- Feature Comparison with TikHub
+- Quality Rhythm workflow integration
+
+#### Testing
+- 93 unit + integration tests
+- API endpoint tests
+- SDK client tests
+- MCP server tests
+- Integration tests (SDK + Server)
+
+### Changed
+
+- Migrated from hand-written routes to auto-generated routes from OpenAPI spec
+- Improved MCP server with 150 tools (up from 36)
+- Enhanced Cookie authentication support
+- Added Swagger UI and ReDoc
+- Fixed SDK exports (SocialMediaHub, AsyncSocialMediaHub)
+
+### Fixed
+
+- MCP route conflict with generic proxy route
+- Import ordering issues
+- Unused import warnings
+- SDK client exports
+
+## [Unreleased]
+
+### Planned
+- Chrome Extension for browser-based analytics
+- Datasets marketplace
+- WebSocket support for real-time data push
+- Performance optimization
+- Security hardening
