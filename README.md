@@ -2,6 +2,8 @@
 
 High-performance Python SDK and API server for multi-platform social media data.
 
+**Version: v0.4.0**
+
 ## Features
 
 - **20 platforms**: Douyin, TikTok, Instagram, YouTube, Twitter/X, Xiaohongshu, Bilibili, Weibo, Kuaishou, Threads, LinkedIn, Reddit, WeChat, Zhihu, Lemon8, NetEase Cloud Music, and more
@@ -9,6 +11,7 @@ High-performance Python SDK and API server for multi-platform social media data.
 - **314 MCP tools**: Model Context Protocol integration for AI agents
 - **RealProxyLayer**: Cookie management, signature generation, proxy rotation
 - **WebSocket support**: Real-time data push for live rooms
+- **Chrome Extension**: Browser sidebar for social media analytics
 - **Sync + async clients**: `SocialMediaHub` and `AsyncSocialMediaHub`
 - **FastAPI server**: Production-ready API server with authentication and rate limiting
 - **Type-safe**: `mypy --strict` clean, built on `httpx` + `pydantic v2`
