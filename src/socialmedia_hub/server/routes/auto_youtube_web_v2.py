@@ -19,7 +19,6 @@ async def get_video_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频详情 /Get video information"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if video_id is not None:
         params["video_id"] = video_id
@@ -27,7 +26,7 @@ async def get_video_info(
         params["language_code"] = language_code
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_info", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_info", params=params)
 
 @router.get("/get_video_comments")
 async def get_video_comments(
@@ -41,7 +40,6 @@ async def get_video_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频评论/Get video comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if video_id is not None:
         params["video_id"] = video_id
@@ -55,7 +53,7 @@ async def get_video_comments(
         params["continuation_token"] = continuation_token
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_comments", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_comments", params=params)
 
 @router.get("/get_video_comment_replies")
 async def get_video_comment_replies(
@@ -67,7 +65,6 @@ async def get_video_comment_replies(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频二级评论/Get video sub comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if continuation_token is not None:
         params["continuation_token"] = continuation_token
@@ -77,7 +74,7 @@ async def get_video_comment_replies(
         params["country_code"] = country_code
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_comment_replies", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_comment_replies", params=params)
 
 @router.get("/get_channel_description")
 async def get_channel_description(
@@ -90,7 +87,6 @@ async def get_channel_description(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取频道描述信息/Get channel description"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if channel_id is not None:
         params["channel_id"] = channel_id
@@ -102,7 +98,7 @@ async def get_channel_description(
         params["country_code"] = country_code
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_description", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_description", params=params)
 
 @router.get("/get_general_search")
 async def get_general_search(
@@ -120,7 +116,6 @@ async def get_general_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """综合搜索（原始数据，推荐使用V2）/General search (raw data, recommend V2)"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if search_query is not None:
         params["search_query"] = search_query
@@ -142,7 +137,7 @@ async def get_general_search(
         params["sort_by"] = sort_by
     if continuation_token is not None:
         params["continuation_token"] = continuation_token
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_general_search", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_general_search", params=params)
 
 @router.get("/get_general_search_v2")
 async def get_general_search_v2(
@@ -157,7 +152,6 @@ async def get_general_search_v2(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """综合搜索V2/General search V2"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -173,7 +167,7 @@ async def get_general_search_v2(
         params["features"] = features
     if sort_by is not None:
         params["sort_by"] = sort_by
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_general_search_v2", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_general_search_v2", params=params)
 
 @router.get("/get_shorts_search")
 async def get_shorts_search(
@@ -189,7 +183,6 @@ async def get_shorts_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """Shorts搜索（原始数据，推荐使用V2）/Shorts search (raw data, recommend V2)"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if search_query is not None:
         params["search_query"] = search_query
@@ -207,7 +200,7 @@ async def get_shorts_search(
         params["continuation_token"] = continuation_token
     if filter_mixed_content is not None:
         params["filter_mixed_content"] = filter_mixed_content
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_shorts_search", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_shorts_search", params=params)
 
 @router.get("/get_shorts_search_v2")
 async def get_shorts_search_v2(
@@ -219,7 +212,6 @@ async def get_shorts_search_v2(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """Shorts搜索V2/Shorts search V2"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -229,7 +221,7 @@ async def get_shorts_search_v2(
         params["upload_date"] = upload_date
     if sort_by is not None:
         params["sort_by"] = sort_by
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_shorts_search_v2", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_shorts_search_v2", params=params)
 
 @router.get("/get_channel_id")
 async def get_channel_id(
@@ -238,11 +230,10 @@ async def get_channel_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """从频道URL获取频道ID /Get channel ID from URL"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if channel_url is not None:
         params["channel_url"] = channel_url
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_id", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_id", params=params)
 
 @router.get("/get_channel_url")
 async def get_channel_url(
@@ -251,11 +242,10 @@ async def get_channel_url(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """从频道ID获取频道URL/Get channel URL from channel ID"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if channel_id is not None:
         params["channel_id"] = channel_id
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_url", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_url", params=params)
 
 @router.get("/get_channel_videos")
 async def get_channel_videos(
@@ -268,7 +258,6 @@ async def get_channel_videos(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取频道视频 /Get channel videos"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if channel_id is not None:
         params["channel_id"] = channel_id
@@ -280,7 +269,7 @@ async def get_channel_videos(
         params["continuation_token"] = continuation_token
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_videos", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_videos", params=params)
 
 @router.get("/get_video_streams")
 async def get_video_streams(
@@ -290,13 +279,12 @@ async def get_video_streams(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频流信息/Get video streams info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if video_id is not None:
         params["video_id"] = video_id
     if video_url is not None:
         params["video_url"] = video_url
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_streams", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_streams", params=params)
 
 @router.get("/get_video_streams_v2")
 async def get_video_streams_v2(
@@ -306,13 +294,12 @@ async def get_video_streams_v2(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频流信息 V2/Get video streams info V2"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if video_id is not None:
         params["video_id"] = video_id
     if video_url is not None:
         params["video_url"] = video_url
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_streams_v2", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_streams_v2", params=params)
 
 @router.get("/get_signed_stream_url")
 async def get_signed_stream_url(
@@ -323,7 +310,6 @@ async def get_signed_stream_url(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取已签名的视频流URL/Get signed video stream URL"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if video_id is not None:
         params["video_id"] = video_id
@@ -331,7 +317,7 @@ async def get_signed_stream_url(
         params["video_url"] = video_url
     if itag is not None:
         params["itag"] = itag
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_signed_stream_url", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_signed_stream_url", params=params)
 
 @router.get("/get_video_captions")
 async def get_video_captions(
@@ -343,7 +329,6 @@ async def get_video_captions(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频字幕/Get video captions"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if video_id is not None:
         params["video_id"] = video_id
@@ -353,7 +338,7 @@ async def get_video_captions(
         params["language_code"] = language_code
     if format is not None:
         params["format"] = format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_captions", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_video_captions", params=params)
 
 @router.get("/get_related_videos")
 async def get_related_videos(
@@ -364,7 +349,6 @@ async def get_related_videos(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频相似内容/Get related videos"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if video_id is not None:
         params["video_id"] = video_id
@@ -372,7 +356,7 @@ async def get_related_videos(
         params["video_url"] = video_url
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_related_videos", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_related_videos", params=params)
 
 @router.get("/get_channel_shorts")
 async def get_channel_shorts(
@@ -384,7 +368,6 @@ async def get_channel_shorts(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取频道短视频列表/Get channel shorts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if channel_id is not None:
         params["channel_id"] = channel_id
@@ -394,7 +377,7 @@ async def get_channel_shorts(
         params["continuation_token"] = continuation_token
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_shorts", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_channel_shorts", params=params)
 
 @router.get("/get_search_suggestions")
 async def get_search_suggestions(
@@ -405,7 +388,6 @@ async def get_search_suggestions(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取搜索推荐词/Get search suggestions"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -413,7 +395,7 @@ async def get_search_suggestions(
         params["language"] = language
     if region is not None:
         params["region"] = region
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_search_suggestions", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/get_search_suggestions", params=params)
 
 @router.get("/search_channels")
 async def search_channels(
@@ -424,7 +406,6 @@ async def search_channels(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索频道/Search channels"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -432,4 +413,4 @@ async def search_channels(
         params["continuation_token"] = continuation_token
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("youtube", "/api/v1/youtube/web_v2/search_channels", params=params, json_body=body)
+    return await proxy_request("youtube", "/api/v1/youtube/web_v2/search_channels", params=params)

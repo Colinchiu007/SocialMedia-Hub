@@ -17,11 +17,10 @@ async def fetch_user_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户信息/Get user info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_info", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_info", params=params)
 
 @router.get("/fetch_user_info_by_id")
 async def fetch_user_info_by_id(
@@ -30,11 +29,10 @@ async def fetch_user_info_by_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """根据用户ID获取用户信息/Get user info by ID"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_info_by_id", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_info_by_id", params=params)
 
 @router.get("/fetch_user_posts")
 async def fetch_user_posts(
@@ -44,13 +42,12 @@ async def fetch_user_posts(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户帖子列表/Get user posts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
     if end_cursor is not None:
         params["end_cursor"] = end_cursor
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_posts", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_posts", params=params)
 
 @router.get("/fetch_user_reposts")
 async def fetch_user_reposts(
@@ -60,13 +57,12 @@ async def fetch_user_reposts(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户转发列表/Get user reposts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
     if end_cursor is not None:
         params["end_cursor"] = end_cursor
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_reposts", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_reposts", params=params)
 
 @router.get("/fetch_user_replies")
 async def fetch_user_replies(
@@ -76,13 +72,12 @@ async def fetch_user_replies(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户回复列表/Get user replies"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
     if end_cursor is not None:
         params["end_cursor"] = end_cursor
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_replies", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_user_replies", params=params)
 
 @router.get("/fetch_post_detail")
 async def fetch_post_detail(
@@ -91,11 +86,10 @@ async def fetch_post_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取帖子详情/Get post detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_id is not None:
         params["post_id"] = post_id
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_post_detail", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_post_detail", params=params)
 
 @router.get("/fetch_post_detail_v2")
 async def fetch_post_detail_v2(
@@ -105,13 +99,12 @@ async def fetch_post_detail_v2(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取帖子详情 V2(支持链接)/Get post detail V2(supports URL)"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_id is not None:
         params["post_id"] = post_id
     if url is not None:
         params["url"] = url
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_post_detail_v2", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_post_detail_v2", params=params)
 
 @router.get("/fetch_post_comments")
 async def fetch_post_comments(
@@ -121,13 +114,12 @@ async def fetch_post_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取帖子评论/Get post comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_id is not None:
         params["post_id"] = post_id
     if end_cursor is not None:
         params["end_cursor"] = end_cursor
-    return await proxy_request("threads", "/api/v1/threads/web/fetch_post_comments", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/fetch_post_comments", params=params)
 
 @router.get("/search_top")
 async def search_top(
@@ -137,13 +129,12 @@ async def search_top(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索热门内容/Search top content"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if query is not None:
         params["query"] = query
     if end_cursor is not None:
         params["end_cursor"] = end_cursor
-    return await proxy_request("threads", "/api/v1/threads/web/search_top", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/search_top", params=params)
 
 @router.get("/search_recent")
 async def search_recent(
@@ -153,13 +144,12 @@ async def search_recent(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索最新内容/Search recent content"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if query is not None:
         params["query"] = query
     if end_cursor is not None:
         params["end_cursor"] = end_cursor
-    return await proxy_request("threads", "/api/v1/threads/web/search_recent", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/search_recent", params=params)
 
 @router.get("/search_profiles")
 async def search_profiles(
@@ -168,8 +158,7 @@ async def search_profiles(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索用户档案/Search profiles"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if query is not None:
         params["query"] = query
-    return await proxy_request("threads", "/api/v1/threads/web/search_profiles", params=params, json_body=body)
+    return await proxy_request("threads", "/api/v1/threads/web/search_profiles", params=params)

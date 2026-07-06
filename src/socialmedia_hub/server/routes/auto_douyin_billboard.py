@@ -16,8 +16,7 @@ async def fetch_city_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取中国城市列表/Fetch Chinese city list"""
-    body = await request.json()
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_city_list", json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_city_list")
 
 @router.get("/fetch_content_tag")
 async def fetch_content_tag(
@@ -25,8 +24,7 @@ async def fetch_content_tag(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取垂类内容标签/Fetch vertical content tags"""
-    body = await request.json()
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_content_tag", json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_content_tag")
 
 @router.get("/fetch_hot_category_list")
 async def fetch_hot_category_list(
@@ -39,7 +37,6 @@ async def fetch_hot_category_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热点榜分类/Fetch hot list category"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if billboard_type is not None:
         params["billboard_type"] = billboard_type
@@ -51,7 +48,7 @@ async def fetch_hot_category_list(
         params["end_date"] = end_date
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_category_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_category_list", params=params)
 
 @router.get("/fetch_hot_rise_list")
 async def fetch_hot_rise_list(
@@ -64,7 +61,6 @@ async def fetch_hot_rise_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取上升热点榜/Fetch rising hot list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page is not None:
         params["page"] = page
@@ -76,7 +72,7 @@ async def fetch_hot_rise_list(
         params["sentence_tag"] = sentence_tag
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_rise_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_rise_list", params=params)
 
 @router.get("/fetch_hot_city_list")
 async def fetch_hot_city_list(
@@ -90,7 +86,6 @@ async def fetch_hot_city_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取同城热点榜/Fetch city hot list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page is not None:
         params["page"] = page
@@ -104,7 +99,7 @@ async def fetch_hot_city_list(
         params["sentence_tag"] = sentence_tag
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_city_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_city_list", params=params)
 
 @router.get("/fetch_hot_challenge_list")
 async def fetch_hot_challenge_list(
@@ -115,7 +110,6 @@ async def fetch_hot_challenge_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取挑战热榜/Fetch hot challenge list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page is not None:
         params["page"] = page
@@ -123,7 +117,7 @@ async def fetch_hot_challenge_list(
         params["page_size"] = page_size
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_challenge_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_challenge_list", params=params)
 
 @router.get("/fetch_hot_total_list")
 async def fetch_hot_total_list(
@@ -139,7 +133,6 @@ async def fetch_hot_total_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热点总榜/Fetch total hot list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page is not None:
         params["page"] = page
@@ -157,7 +150,7 @@ async def fetch_hot_total_list(
         params["sentence_tag"] = sentence_tag
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_total_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_total_list", params=params)
 
 @router.post("/fetch_hot_calendar_list")
 async def fetch_hot_calendar_list(
@@ -175,11 +168,10 @@ async def fetch_hot_calendar_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取活动日历详情/Fetch activity calendar detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if calendar_id is not None:
         params["calendar_id"] = calendar_id
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_calendar_detail", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_calendar_detail", params=params)
 
 @router.get("/fetch_hot_user_portrait_list")
 async def fetch_hot_user_portrait_list(
@@ -189,13 +181,12 @@ async def fetch_hot_user_portrait_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取作品点赞观众画像-仅限热门榜/Fetch work like audience portrait - hot list only"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if aweme_id is not None:
         params["aweme_id"] = aweme_id
     if option is not None:
         params["option"] = option
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_user_portrait_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_user_portrait_list", params=params)
 
 @router.get("/fetch_hot_comment_word_list")
 async def fetch_hot_comment_word_list(
@@ -204,11 +195,10 @@ async def fetch_hot_comment_word_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取作品评论分析-词云权重/Fetch work comment analysis word cloud weight"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if aweme_id is not None:
         params["aweme_id"] = aweme_id
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_comment_word_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_comment_word_list", params=params)
 
 @router.get("/fetch_hot_item_trends_list")
 async def fetch_hot_item_trends_list(
@@ -219,7 +209,6 @@ async def fetch_hot_item_trends_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取作品数据趋势/Fetch post data trend"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if aweme_id is not None:
         params["aweme_id"] = aweme_id
@@ -227,7 +216,7 @@ async def fetch_hot_item_trends_list(
         params["option"] = option
     if date_window is not None:
         params["date_window"] = date_window
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_item_trends_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_item_trends_list", params=params)
 
 @router.post("/fetch_hot_account_list")
 async def fetch_hot_account_list(
@@ -246,13 +235,12 @@ async def fetch_hot_account_search_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索用户名或抖音号/Fetch account search list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_search_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_search_list", params=params)
 
 @router.get("/fetch_hot_account_trends_list")
 async def fetch_hot_account_trends_list(
@@ -263,7 +251,6 @@ async def fetch_hot_account_trends_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取账号粉丝数据趋势/Fetch account fan data trend"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sec_uid is not None:
         params["sec_uid"] = sec_uid
@@ -271,7 +258,7 @@ async def fetch_hot_account_trends_list(
         params["option"] = option
     if date_window is not None:
         params["date_window"] = date_window
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_trends_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_trends_list", params=params)
 
 @router.get("/fetch_hot_account_item_analysis_list")
 async def fetch_hot_account_item_analysis_list(
@@ -280,11 +267,10 @@ async def fetch_hot_account_item_analysis_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取账号作品分析-上周/Fetch account work analysis - last week"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sec_uid is not None:
         params["sec_uid"] = sec_uid
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_item_analysis_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_item_analysis_list", params=params)
 
 @router.get("/fetch_hot_account_fans_portrait_list")
 async def fetch_hot_account_fans_portrait_list(
@@ -294,13 +280,12 @@ async def fetch_hot_account_fans_portrait_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取粉丝画像/Fetch fan portrait"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sec_uid is not None:
         params["sec_uid"] = sec_uid
     if option is not None:
         params["option"] = option
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_portrait_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_portrait_list", params=params)
 
 @router.get("/fetch_hot_account_fans_interest_account_list")
 async def fetch_hot_account_fans_interest_account_list(
@@ -309,11 +294,10 @@ async def fetch_hot_account_fans_interest_account_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取粉丝兴趣作者 20个用户/Fetch fan interest author 20 users"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sec_uid is not None:
         params["sec_uid"] = sec_uid
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_interest_account_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_interest_account_list", params=params)
 
 @router.get("/fetch_hot_account_fans_interest_topic_list")
 async def fetch_hot_account_fans_interest_topic_list(
@@ -322,11 +306,10 @@ async def fetch_hot_account_fans_interest_topic_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取粉丝近3天感兴趣的话题 10个话题/Fetch fan interest topic in the last 3 days 10 topics"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sec_uid is not None:
         params["sec_uid"] = sec_uid
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_interest_topic_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_interest_topic_list", params=params)
 
 @router.get("/fetch_hot_account_fans_interest_search_list")
 async def fetch_hot_account_fans_interest_search_list(
@@ -335,11 +318,10 @@ async def fetch_hot_account_fans_interest_search_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取粉丝近3天搜索词 10个搜索词/Fetch fan interest search term in the last 3 days 10 search terms"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sec_uid is not None:
         params["sec_uid"] = sec_uid
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_interest_search_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_account_fans_interest_search_list", params=params)
 
 @router.post("/fetch_hot_total_video_list")
 async def fetch_hot_total_video_list(
@@ -440,7 +422,6 @@ async def fetch_hot_total_hot_word_detail_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取内容词详情/Fetch content word details"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -448,4 +429,4 @@ async def fetch_hot_total_hot_word_detail_list(
         params["word_id"] = word_id
     if query_day is not None:
         params["query_day"] = query_day
-    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_total_hot_word_detail_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/billboard/fetch_hot_total_hot_word_detail_list", params=params)

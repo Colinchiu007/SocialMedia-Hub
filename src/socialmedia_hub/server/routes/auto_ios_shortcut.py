@@ -16,5 +16,4 @@ async def shortcut(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """用于iOS快捷指令的版本更新信息/Version update information for iOS shortcuts"""
-    body = await request.json()
-    return await proxy_request("ios_shortcut", "/api/v1/ios_shortcut/shortcut", json_body=body)
+    return await proxy_request("ios_shortcut", "/api/v1/ios_shortcut/shortcut")

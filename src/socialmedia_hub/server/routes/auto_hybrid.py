@@ -19,7 +19,6 @@ async def video_data(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """混合解析单一视频接口/Hybrid parsing single video endpoint"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if url is not None:
         params["url"] = url
@@ -27,7 +26,7 @@ async def video_data(
         params["minimal"] = minimal
     if base64_url is not None:
         params["base64_url"] = base64_url
-    return await proxy_request("hybrid", "/api/v1/hybrid/video_data", params=params, json_body=body)
+    return await proxy_request("hybrid", "/api/v1/hybrid/video_data", params=params)
 
 @router.get("/video_data")
 async def video_data(
@@ -38,7 +37,6 @@ async def video_data(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """混合解析单一视频接口/Hybrid parsing single video endpoint"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if url is not None:
         params["url"] = url
@@ -46,4 +44,4 @@ async def video_data(
         params["minimal"] = minimal
     if base64_url is not None:
         params["base64_url"] = base64_url
-    return await proxy_request("hybrid", "/api/v1/hybrid/video_data", params=params, json_body=body)
+    return await proxy_request("hybrid", "/api/v1/hybrid/video_data", params=params)

@@ -17,11 +17,10 @@ async def get_article_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定文章的信息/Get information of specified article"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if group_id is not None:
         params["group_id"] = group_id
-    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_article_info", params=params, json_body=body)
+    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_article_info", params=params)
 
 @router.get("/get_video_info")
 async def get_video_info(
@@ -30,11 +29,10 @@ async def get_video_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定视频的信息/Get information of specified video"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if group_id is not None:
         params["group_id"] = group_id
-    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_video_info", params=params, json_body=body)
+    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_video_info", params=params)
 
 @router.get("/get_comments")
 async def get_comments(
@@ -44,13 +42,12 @@ async def get_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定作品的评论/Get comments of specified post"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if group_id is not None:
         params["group_id"] = group_id
     if offset is not None:
         params["offset"] = offset
-    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_comments", params=params, json_body=body)
+    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_comments", params=params)
 
 @router.get("/get_user_info")
 async def get_user_info(
@@ -59,11 +56,10 @@ async def get_user_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定用户的信息/Get information of specified user"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
-    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_user_info", params=params, json_body=body)
+    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_user_info", params=params)
 
 @router.get("/get_user_id")
 async def get_user_id(
@@ -72,8 +68,7 @@ async def get_user_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """从头条用户主页获取用户user_id/Get user_id from user profile"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_profile_url is not None:
         params["user_profile_url"] = user_profile_url
-    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_user_id", params=params, json_body=body)
+    return await proxy_request("toutiao", "/api/v1/toutiao/app/get_user_id", params=params)

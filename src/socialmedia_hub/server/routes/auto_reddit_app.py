@@ -20,7 +20,6 @@ async def fetch_home_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP首页推荐内容/Fetch Reddit APP Home Feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sort is not None:
         params["sort"] = sort
@@ -30,7 +29,7 @@ async def fetch_home_feed(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_home_feed", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_home_feed", params=params)
 
 @router.get("/fetch_popular_feed")
 async def fetch_popular_feed(
@@ -43,7 +42,6 @@ async def fetch_popular_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP流行推荐内容/Fetch Reddit APP Popular Feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sort is not None:
         params["sort"] = sort
@@ -55,7 +53,7 @@ async def fetch_popular_feed(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_popular_feed", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_popular_feed", params=params)
 
 @router.get("/fetch_games_feed")
 async def fetch_games_feed(
@@ -67,7 +65,6 @@ async def fetch_games_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP游戏推荐内容/Fetch Reddit APP Games Feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sort is not None:
         params["sort"] = sort
@@ -77,7 +74,7 @@ async def fetch_games_feed(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_games_feed", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_games_feed", params=params)
 
 @router.get("/fetch_news_feed")
 async def fetch_news_feed(
@@ -88,7 +85,6 @@ async def fetch_news_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP资讯推荐内容/Fetch Reddit APP News Feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subtopic_ids is not None:
         params["subtopic_ids"] = subtopic_ids
@@ -96,7 +92,7 @@ async def fetch_news_feed(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_news_feed", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_news_feed", params=params)
 
 @router.get("/fetch_post_details")
 async def fetch_post_details(
@@ -108,7 +104,6 @@ async def fetch_post_details(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取单个Reddit帖子详情/Fetch Single Reddit Post Details"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_id is not None:
         params["post_id"] = post_id
@@ -118,7 +113,7 @@ async def fetch_post_details(
         params["comment_id"] = comment_id
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_details", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_details", params=params)
 
 @router.get("/fetch_post_details_batch")
 async def fetch_post_details_batch(
@@ -130,7 +125,6 @@ async def fetch_post_details_batch(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """批量获取Reddit帖子详情(最多5条)/Fetch Reddit Post Details in Batch (Max 5)"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_ids is not None:
         params["post_ids"] = post_ids
@@ -140,7 +134,7 @@ async def fetch_post_details_batch(
         params["comment_id"] = comment_id
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_details_batch", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_details_batch", params=params)
 
 @router.get("/fetch_post_details_batch_large")
 async def fetch_post_details_batch_large(
@@ -152,7 +146,6 @@ async def fetch_post_details_batch_large(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """大批量获取Reddit帖子详情(最多30条)/Fetch Reddit Post Details in Large Batch (Max 30)"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_ids is not None:
         params["post_ids"] = post_ids
@@ -162,7 +155,7 @@ async def fetch_post_details_batch_large(
         params["comment_id"] = comment_id
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_details_batch_large", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_details_batch_large", params=params)
 
 @router.get("/fetch_post_comments")
 async def fetch_post_comments(
@@ -174,7 +167,6 @@ async def fetch_post_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP帖子评论/Fetch Reddit APP Post Comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_id is not None:
         params["post_id"] = post_id
@@ -184,7 +176,7 @@ async def fetch_post_comments(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_comments", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_post_comments", params=params)
 
 @router.get("/fetch_comment_replies")
 async def fetch_comment_replies(
@@ -196,7 +188,6 @@ async def fetch_comment_replies(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP评论回复（二级评论）/Fetch Reddit APP Comment Replies (Sub-comments)"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if post_id is not None:
         params["post_id"] = post_id
@@ -206,7 +197,7 @@ async def fetch_comment_replies(
         params["sort_type"] = sort_type
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_comment_replies", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_comment_replies", params=params)
 
 @router.get("/fetch_subreddit_style")
 async def fetch_subreddit_style(
@@ -216,13 +207,12 @@ async def fetch_subreddit_style(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP版块规则样式信息/Fetch Reddit APP Subreddit Rules and Style Info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subreddit_name is not None:
         params["subreddit_name"] = subreddit_name
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_style", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_style", params=params)
 
 @router.get("/fetch_subreddit_post_channels")
 async def fetch_subreddit_post_channels(
@@ -234,7 +224,6 @@ async def fetch_subreddit_post_channels(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP版块帖子频道信息/Fetch Reddit APP Subreddit Post Channels"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subreddit_name is not None:
         params["subreddit_name"] = subreddit_name
@@ -244,7 +233,7 @@ async def fetch_subreddit_post_channels(
         params["range"] = range
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_post_channels", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_post_channels", params=params)
 
 @router.get("/fetch_subreddit_info")
 async def fetch_subreddit_info(
@@ -254,13 +243,12 @@ async def fetch_subreddit_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP版块信息/Fetch Reddit APP Subreddit Info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subreddit_name is not None:
         params["subreddit_name"] = subreddit_name
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_info", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_info", params=params)
 
 @router.get("/fetch_subreddit_settings")
 async def fetch_subreddit_settings(
@@ -270,13 +258,12 @@ async def fetch_subreddit_settings(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP版块设置/Fetch Reddit APP Subreddit Settings"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subreddit_id is not None:
         params["subreddit_id"] = subreddit_id
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_settings", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_settings", params=params)
 
 @router.get("/fetch_search_typeahead")
 async def fetch_search_typeahead(
@@ -288,7 +275,6 @@ async def fetch_search_typeahead(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP搜索自动补全建议/Fetch Reddit APP Search Typeahead Suggestions"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if query is not None:
         params["query"] = query
@@ -298,7 +284,7 @@ async def fetch_search_typeahead(
         params["allow_nsfw"] = allow_nsfw
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_search_typeahead", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_search_typeahead", params=params)
 
 @router.get("/fetch_dynamic_search")
 async def fetch_dynamic_search(
@@ -314,7 +300,6 @@ async def fetch_dynamic_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP动态搜索结果/Fetch Reddit APP Dynamic Search Results"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if query is not None:
         params["query"] = query
@@ -332,7 +317,7 @@ async def fetch_dynamic_search(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_dynamic_search", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_dynamic_search", params=params)
 
 @router.get("/fetch_community_highlights")
 async def fetch_community_highlights(
@@ -342,13 +327,12 @@ async def fetch_community_highlights(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP社区亮点/Fetch Reddit APP Community Highlights"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subreddit_id is not None:
         params["subreddit_id"] = subreddit_id
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_community_highlights", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_community_highlights", params=params)
 
 @router.get("/fetch_trending_searches")
 async def fetch_trending_searches(
@@ -357,11 +341,10 @@ async def fetch_trending_searches(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP今日热门搜索/Fetch Reddit APP Trending Searches"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_trending_searches", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_trending_searches", params=params)
 
 @router.get("/fetch_user_profile")
 async def fetch_user_profile(
@@ -371,13 +354,12 @@ async def fetch_user_profile(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP用户资料信息/Fetch Reddit APP User Profile"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_profile", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_profile", params=params)
 
 @router.get("/fetch_user_active_subreddits")
 async def fetch_user_active_subreddits(
@@ -387,13 +369,12 @@ async def fetch_user_active_subreddits(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户活跃的社区列表/Fetch User's Active Subreddits"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_active_subreddits", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_active_subreddits", params=params)
 
 @router.get("/fetch_user_comments")
 async def fetch_user_comments(
@@ -406,7 +387,6 @@ async def fetch_user_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户评论列表/Fetch User Comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
@@ -418,7 +398,7 @@ async def fetch_user_comments(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_comments", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_comments", params=params)
 
 @router.get("/fetch_user_posts")
 async def fetch_user_posts(
@@ -430,7 +410,6 @@ async def fetch_user_posts(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户发布的帖子列表/Fetch User Posts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
@@ -440,7 +419,7 @@ async def fetch_user_posts(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_posts", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_posts", params=params)
 
 @router.get("/fetch_subreddit_feed")
 async def fetch_subreddit_feed(
@@ -453,7 +432,6 @@ async def fetch_subreddit_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取Reddit APP版块Feed内容/Fetch Reddit APP Subreddit Feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subreddit_name is not None:
         params["subreddit_name"] = subreddit_name
@@ -465,7 +443,7 @@ async def fetch_subreddit_feed(
         params["after"] = after
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_feed", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_subreddit_feed", params=params)
 
 @router.get("/check_subreddit_muted")
 async def check_subreddit_muted(
@@ -475,13 +453,12 @@ async def check_subreddit_muted(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """检查版块是否静音/Check if Subreddit is Muted"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if subreddit_id is not None:
         params["subreddit_id"] = subreddit_id
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/check_subreddit_muted", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/check_subreddit_muted", params=params)
 
 @router.get("/fetch_user_trophies")
 async def fetch_user_trophies(
@@ -491,10 +468,9 @@ async def fetch_user_trophies(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户公开奖杯/Fetch User Public Trophies"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
     if need_format is not None:
         params["need_format"] = need_format
-    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_trophies", params=params, json_body=body)
+    return await proxy_request("reddit", "/api/v1/reddit/app/fetch_user_trophies", params=params)

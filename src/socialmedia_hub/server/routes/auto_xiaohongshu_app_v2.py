@@ -18,13 +18,12 @@ async def get_image_note_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取图文笔记详情/Get image note detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
     if share_text is not None:
         params["share_text"] = share_text
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_image_note_detail", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_image_note_detail", params=params)
 
 @router.get("/get_video_note_detail")
 async def get_video_note_detail(
@@ -34,13 +33,12 @@ async def get_video_note_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频笔记详情/Get video note detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
     if share_text is not None:
         params["share_text"] = share_text
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_video_note_detail", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_video_note_detail", params=params)
 
 @router.get("/get_mixed_note_detail")
 async def get_mixed_note_detail(
@@ -50,13 +48,12 @@ async def get_mixed_note_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取首页推荐流笔记详情/Get mixed note detail from feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
     if share_text is not None:
         params["share_text"] = share_text
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_mixed_note_detail", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_mixed_note_detail", params=params)
 
 @router.get("/get_note_comments")
 async def get_note_comments(
@@ -70,7 +67,6 @@ async def get_note_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取笔记评论列表/Get note comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
@@ -84,7 +80,7 @@ async def get_note_comments(
         params["pageArea"] = pageArea
     if sort_strategy is not None:
         params["sort_strategy"] = sort_strategy
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_note_comments", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_note_comments", params=params)
 
 @router.get("/get_note_sub_comments")
 async def get_note_sub_comments(
@@ -97,7 +93,6 @@ async def get_note_sub_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取笔记二级评论列表/Get note sub comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
@@ -109,7 +104,7 @@ async def get_note_sub_comments(
         params["cursor"] = cursor
     if index is not None:
         params["index"] = index
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_note_sub_comments", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_note_sub_comments", params=params)
 
 @router.get("/get_user_info")
 async def get_user_info(
@@ -119,13 +114,12 @@ async def get_user_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户信息/Get user info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
     if share_text is not None:
         params["share_text"] = share_text
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_user_info", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_user_info", params=params)
 
 @router.get("/get_user_posted_notes")
 async def get_user_posted_notes(
@@ -136,7 +130,6 @@ async def get_user_posted_notes(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户笔记列表/Get user posted notes"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
@@ -144,7 +137,7 @@ async def get_user_posted_notes(
         params["share_text"] = share_text
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_user_posted_notes", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_user_posted_notes", params=params)
 
 @router.get("/get_user_faved_notes")
 async def get_user_faved_notes(
@@ -155,7 +148,6 @@ async def get_user_faved_notes(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户收藏笔记列表/Get user faved notes"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
@@ -163,7 +155,7 @@ async def get_user_faved_notes(
         params["share_text"] = share_text
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_user_faved_notes", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_user_faved_notes", params=params)
 
 @router.get("/search_notes")
 async def search_notes(
@@ -180,7 +172,6 @@ async def search_notes(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索笔记/Search notes"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -200,7 +191,7 @@ async def search_notes(
         params["source"] = source
     if ai_mode is not None:
         params["ai_mode"] = ai_mode
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_notes", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_notes", params=params)
 
 @router.get("/search_users")
 async def search_users(
@@ -212,7 +203,6 @@ async def search_users(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索用户/Search users"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -222,7 +212,7 @@ async def search_users(
         params["search_id"] = search_id
     if source is not None:
         params["source"] = source
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_users", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_users", params=params)
 
 @router.get("/search_images")
 async def search_images(
@@ -236,7 +226,6 @@ async def search_images(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索图片/Search images"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -250,7 +239,7 @@ async def search_images(
         params["word_request_id"] = word_request_id
     if source is not None:
         params["source"] = source
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_images", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_images", params=params)
 
 @router.get("/search_products")
 async def search_products(
@@ -262,7 +251,6 @@ async def search_products(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索商品/Search products"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -272,7 +260,7 @@ async def search_products(
         params["search_id"] = search_id
     if source is not None:
         params["source"] = source
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_products", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_products", params=params)
 
 @router.get("/search_groups")
 async def search_groups(
@@ -285,7 +273,6 @@ async def search_groups(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索群聊/Search groups"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -297,7 +284,7 @@ async def search_groups(
         params["source"] = source
     if is_recommend is not None:
         params["is_recommend"] = is_recommend
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_groups", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/search_groups", params=params)
 
 @router.get("/get_product_detail")
 async def get_product_detail(
@@ -308,7 +295,6 @@ async def get_product_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取商品详情/Get product detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sku_id is not None:
         params["sku_id"] = sku_id
@@ -316,7 +302,7 @@ async def get_product_detail(
         params["source"] = source
     if pre_page is not None:
         params["pre_page"] = pre_page
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_detail", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_detail", params=params)
 
 @router.get("/get_product_review_overview")
 async def get_product_review_overview(
@@ -326,13 +312,12 @@ async def get_product_review_overview(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取商品评论总览/Get product review overview"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sku_id is not None:
         params["sku_id"] = sku_id
     if tab is not None:
         params["tab"] = tab
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_review_overview", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_review_overview", params=params)
 
 @router.get("/get_product_reviews")
 async def get_product_reviews(
@@ -345,7 +330,6 @@ async def get_product_reviews(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取商品评论列表/Get product reviews"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sku_id is not None:
         params["sku_id"] = sku_id
@@ -357,7 +341,7 @@ async def get_product_reviews(
         params["share_pics_only"] = share_pics_only
     if from_page is not None:
         params["from_page"] = from_page
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_reviews", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_reviews", params=params)
 
 @router.get("/get_product_recommendations")
 async def get_product_recommendations(
@@ -368,7 +352,6 @@ async def get_product_recommendations(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取商品推荐列表/Get product recommendations"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sku_id is not None:
         params["sku_id"] = sku_id
@@ -376,7 +359,7 @@ async def get_product_recommendations(
         params["cursor_score"] = cursor_score
     if region is not None:
         params["region"] = region
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_recommendations", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_product_recommendations", params=params)
 
 @router.get("/get_topic_info")
 async def get_topic_info(
@@ -387,7 +370,6 @@ async def get_topic_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取话题详情/Get topic info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page_id is not None:
         params["page_id"] = page_id
@@ -395,7 +377,7 @@ async def get_topic_info(
         params["source"] = source
     if note_id is not None:
         params["note_id"] = note_id
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_topic_info", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_topic_info", params=params)
 
 @router.get("/get_topic_feed")
 async def get_topic_feed(
@@ -411,7 +393,6 @@ async def get_topic_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取话题笔记列表/Get topic feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page_id is not None:
         params["page_id"] = page_id
@@ -429,7 +410,7 @@ async def get_topic_feed(
         params["first_load_time"] = first_load_time
     if source is not None:
         params["source"] = source
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_topic_feed", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_topic_feed", params=params)
 
 @router.get("/get_creator_inspiration_feed")
 async def get_creator_inspiration_feed(
@@ -440,7 +421,6 @@ async def get_creator_inspiration_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者推荐灵感列表/Get creator inspiration feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if cursor is not None:
         params["cursor"] = cursor
@@ -448,7 +428,7 @@ async def get_creator_inspiration_feed(
         params["tab"] = tab
     if source is not None:
         params["source"] = source
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_creator_inspiration_feed", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_creator_inspiration_feed", params=params)
 
 @router.get("/get_creator_hot_inspiration_feed")
 async def get_creator_hot_inspiration_feed(
@@ -457,8 +437,7 @@ async def get_creator_hot_inspiration_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者热点灵感列表/Get creator hot inspiration feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_creator_hot_inspiration_feed", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/app_v2/get_creator_hot_inspiration_feed", params=params)

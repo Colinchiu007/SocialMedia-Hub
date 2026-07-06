@@ -18,13 +18,12 @@ async def fetch_one_video(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取单个视频详情信息/Get single video data"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if av_id is not None:
         params["av_id"] = av_id
     if bv_id is not None:
         params["bv_id"] = bv_id
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_one_video", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_one_video", params=params)
 
 @router.get("/fetch_video_comments")
 async def fetch_video_comments(
@@ -36,7 +35,6 @@ async def fetch_video_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取视频评论列表/Get video comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if av_id is not None:
         params["av_id"] = av_id
@@ -46,7 +44,7 @@ async def fetch_video_comments(
         params["mode"] = mode
     if next_offset is not None:
         params["next_offset"] = next_offset
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_video_comments", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_video_comments", params=params)
 
 @router.get("/fetch_reply_detail")
 async def fetch_reply_detail(
@@ -59,7 +57,6 @@ async def fetch_reply_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取二级评论回复/Get reply detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if root is not None:
         params["root"] = root
@@ -71,7 +68,7 @@ async def fetch_reply_detail(
         params["next_offset"] = next_offset
     if ps is not None:
         params["ps"] = ps
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_reply_detail", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_reply_detail", params=params)
 
 @router.get("/fetch_user_videos")
 async def fetch_user_videos(
@@ -83,7 +80,6 @@ async def fetch_user_videos(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户投稿视频/Get user videos"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
@@ -93,7 +89,7 @@ async def fetch_user_videos(
         params["page"] = page
     if ps is not None:
         params["ps"] = ps
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_user_videos", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_user_videos", params=params)
 
 @router.get("/fetch_user_info")
 async def fetch_user_info(
@@ -102,11 +98,10 @@ async def fetch_user_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户信息/Get user info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_user_info", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_user_info", params=params)
 
 @router.get("/fetch_home_feed")
 async def fetch_home_feed(
@@ -117,7 +112,6 @@ async def fetch_home_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取主页推荐视频流/Get home feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if idx is not None:
         params["idx"] = idx
@@ -125,7 +119,7 @@ async def fetch_home_feed(
         params["flush"] = flush
     if pull is not None:
         params["pull"] = pull
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_home_feed", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_home_feed", params=params)
 
 @router.get("/fetch_popular_feed")
 async def fetch_popular_feed(
@@ -135,13 +129,12 @@ async def fetch_popular_feed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热门推荐/Get popular feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if idx is not None:
         params["idx"] = idx
     if last_param is not None:
         params["last_param"] = last_param
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_popular_feed", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_popular_feed", params=params)
 
 @router.get("/fetch_search_all")
 async def fetch_search_all(
@@ -153,7 +146,6 @@ async def fetch_search_all(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """综合搜索/search all"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -163,7 +155,7 @@ async def fetch_search_all(
         params["page_size"] = page_size
     if order is not None:
         params["order"] = order
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_search_all", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_search_all", params=params)
 
 @router.get("/fetch_search_by_type")
 async def fetch_search_by_type(
@@ -176,7 +168,6 @@ async def fetch_search_by_type(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """分类搜索/ search by type"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -188,7 +179,7 @@ async def fetch_search_by_type(
         params["page_size"] = page_size
     if order is not None:
         params["order"] = order
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_search_by_type", params=params, json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_search_by_type", params=params)
 
 @router.get("/fetch_cinema_tab")
 async def fetch_cinema_tab(
@@ -196,8 +187,7 @@ async def fetch_cinema_tab(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取影视推荐/Get cinema tab"""
-    body = await request.json()
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_cinema_tab", json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_cinema_tab")
 
 @router.get("/fetch_bangumi_tab")
 async def fetch_bangumi_tab(
@@ -205,5 +195,4 @@ async def fetch_bangumi_tab(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取番剧推荐/Get bangumi tab"""
-    body = await request.json()
-    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_bangumi_tab", json_body=body)
+    return await proxy_request("bilibili", "/api/v1/bilibili/app/fetch_bangumi_tab")

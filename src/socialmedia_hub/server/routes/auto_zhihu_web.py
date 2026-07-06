@@ -19,7 +19,6 @@ async def fetch_column_articles(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎专栏文章列表/Get Zhihu Column Articles"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if column_id is not None:
         params["column_id"] = column_id
@@ -27,7 +26,7 @@ async def fetch_column_articles(
         params["limit"] = limit
     if offset is not None:
         params["offset"] = offset
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_articles", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_articles", params=params)
 
 @router.get("/fetch_column_article_detail")
 async def fetch_column_article_detail(
@@ -36,11 +35,10 @@ async def fetch_column_article_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎专栏文章详情/Get Zhihu Column Article Detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if article_id is not None:
         params["article_id"] = article_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_article_detail", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_article_detail", params=params)
 
 @router.get("/fetch_column_recommend")
 async def fetch_column_recommend(
@@ -51,7 +49,6 @@ async def fetch_column_recommend(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎相似专栏推荐/Get Zhihu Similar Column Recommend"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if article_id is not None:
         params["article_id"] = article_id
@@ -59,7 +56,7 @@ async def fetch_column_recommend(
         params["limit"] = limit
     if offset is not None:
         params["offset"] = offset
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_recommend", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_recommend", params=params)
 
 @router.get("/fetch_column_relationship")
 async def fetch_column_relationship(
@@ -68,11 +65,10 @@ async def fetch_column_relationship(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎专栏文章互动关系/Get Zhihu Column Article Relationship"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if article_id is not None:
         params["article_id"] = article_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_relationship", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_relationship", params=params)
 
 @router.get("/fetch_column_comment_config")
 async def fetch_column_comment_config(
@@ -81,11 +77,10 @@ async def fetch_column_comment_config(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎专栏评论区配置/Get Zhihu Column Comment Config"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if article_id is not None:
         params["article_id"] = article_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_comment_config", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_comment_config", params=params)
 
 @router.get("/fetch_hot_recommend")
 async def fetch_hot_recommend(
@@ -96,7 +91,6 @@ async def fetch_hot_recommend(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎首页推荐/Get Zhihu Hot Recommend"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if offset is not None:
         params["offset"] = offset
@@ -104,7 +98,7 @@ async def fetch_hot_recommend(
         params["page_number"] = page_number
     if session_token is not None:
         params["session_token"] = session_token
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_hot_recommend", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_hot_recommend", params=params)
 
 @router.get("/fetch_hot_list")
 async def fetch_hot_list(
@@ -114,13 +108,12 @@ async def fetch_hot_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎首页热榜/Get Zhihu Hot List"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if limit is not None:
         params["limit"] = limit
     if desktop is not None:
         params["desktop"] = desktop
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_hot_list", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_hot_list", params=params)
 
 @router.get("/fetch_video_list")
 async def fetch_video_list(
@@ -130,13 +123,12 @@ async def fetch_video_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎首页视频榜/Get Zhihu Video List"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if offset is not None:
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_video_list", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_video_list", params=params)
 
 @router.get("/fetch_article_search_v3")
 async def fetch_article_search_v3(
@@ -154,7 +146,6 @@ async def fetch_article_search_v3(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎文章搜索V3/Get Zhihu Article Search V3"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -176,7 +167,7 @@ async def fetch_article_search_v3(
         params["time_interval"] = time_interval
     if vertical_info is not None:
         params["vertical_info"] = vertical_info
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_article_search_v3", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_article_search_v3", params=params)
 
 @router.get("/fetch_user_search_v3")
 async def fetch_user_search_v3(
@@ -187,7 +178,6 @@ async def fetch_user_search_v3(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户搜索V3/Get Zhihu User Search V3"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -195,7 +185,7 @@ async def fetch_user_search_v3(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_search_v3", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_search_v3", params=params)
 
 @router.get("/fetch_topic_search_v3")
 async def fetch_topic_search_v3(
@@ -206,7 +196,6 @@ async def fetch_topic_search_v3(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎话题搜索V3/Get Zhihu Topic Search V3"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -214,7 +203,7 @@ async def fetch_topic_search_v3(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_topic_search_v3", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_topic_search_v3", params=params)
 
 @router.post("/fetch_scholar_search_v3")
 async def fetch_scholar_search_v3(
@@ -242,11 +231,10 @@ async def fetch_ai_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎AI搜索/Get Zhihu AI Search"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if message_content is not None:
         params["message_content"] = message_content
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_ai_search", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_ai_search", params=params)
 
 @router.get("/fetch_ai_search_result")
 async def fetch_ai_search_result(
@@ -255,11 +243,10 @@ async def fetch_ai_search_result(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎AI搜索结果/Get Zhihu AI Search Result"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if message_id is not None:
         params["message_id"] = message_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_ai_search_result", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_ai_search_result", params=params)
 
 @router.get("/fetch_video_search_v3")
 async def fetch_video_search_v3(
@@ -271,7 +258,6 @@ async def fetch_video_search_v3(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎视频搜索V3/Get Zhihu Video Search V3"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -281,7 +267,7 @@ async def fetch_video_search_v3(
         params["offset"] = offset
     if search_hash_id is not None:
         params["search_hash_id"] = search_hash_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_video_search_v3", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_video_search_v3", params=params)
 
 @router.get("/fetch_column_search_v3")
 async def fetch_column_search_v3(
@@ -293,7 +279,6 @@ async def fetch_column_search_v3(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎专栏搜索V3/Get Zhihu Column Search V3"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -303,7 +288,7 @@ async def fetch_column_search_v3(
         params["limit"] = limit
     if search_hash_id is not None:
         params["search_hash_id"] = search_hash_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_search_v3", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_column_search_v3", params=params)
 
 @router.get("/fetch_salt_search_v3")
 async def fetch_salt_search_v3(
@@ -315,7 +300,6 @@ async def fetch_salt_search_v3(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎盐选内容搜索V3/Get Zhihu Salt Search V3"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -325,7 +309,7 @@ async def fetch_salt_search_v3(
         params["limit"] = limit
     if search_hash_id is not None:
         params["search_hash_id"] = search_hash_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_salt_search_v3", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_salt_search_v3", params=params)
 
 @router.get("/fetch_ebook_search_v3")
 async def fetch_ebook_search_v3(
@@ -337,7 +321,6 @@ async def fetch_ebook_search_v3(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎电子书搜索V3/Get Zhihu Ebook Search V3"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -347,7 +330,7 @@ async def fetch_ebook_search_v3(
         params["limit"] = limit
     if search_hash_id is not None:
         params["search_hash_id"] = search_hash_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_ebook_search_v3", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_ebook_search_v3", params=params)
 
 @router.get("/fetch_preset_search")
 async def fetch_preset_search(
@@ -355,8 +338,7 @@ async def fetch_preset_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎搜索预设词/Get Zhihu Preset Search"""
-    body = await request.json()
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_preset_search", json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_preset_search")
 
 @router.get("/fetch_search_recommend")
 async def fetch_search_recommend(
@@ -364,8 +346,7 @@ async def fetch_search_recommend(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎搜索发现/Get Zhihu Search Recommend"""
-    body = await request.json()
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_search_recommend", json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_search_recommend")
 
 @router.get("/fetch_search_suggest")
 async def fetch_search_suggest(
@@ -374,11 +355,10 @@ async def fetch_search_suggest(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """知乎搜索预测词/Get Zhihu Search Suggest"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_search_suggest", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_search_suggest", params=params)
 
 @router.get("/fetch_comment_v5")
 async def fetch_comment_v5(
@@ -390,7 +370,6 @@ async def fetch_comment_v5(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎评论区V5/Get Zhihu Comment V5"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if answer_id is not None:
         params["answer_id"] = answer_id
@@ -400,7 +379,7 @@ async def fetch_comment_v5(
         params["limit"] = limit
     if offset is not None:
         params["offset"] = offset
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_comment_v5", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_comment_v5", params=params)
 
 @router.get("/fetch_sub_comment_v5")
 async def fetch_sub_comment_v5(
@@ -412,7 +391,6 @@ async def fetch_sub_comment_v5(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎子评论区V5/Get Zhihu Sub Comment V5"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if comment_id is not None:
         params["comment_id"] = comment_id
@@ -422,7 +400,7 @@ async def fetch_sub_comment_v5(
         params["limit"] = limit
     if offset is not None:
         params["offset"] = offset
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_sub_comment_v5", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_sub_comment_v5", params=params)
 
 @router.get("/fetch_user_info")
 async def fetch_user_info(
@@ -431,11 +409,10 @@ async def fetch_user_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户信息/Get Zhihu User Info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_info", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_info", params=params)
 
 @router.get("/fetch_user_followees")
 async def fetch_user_followees(
@@ -446,7 +423,6 @@ async def fetch_user_followees(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户关注列表/Get Zhihu User Following"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -454,7 +430,7 @@ async def fetch_user_followees(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_followees", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_followees", params=params)
 
 @router.get("/fetch_user_followers")
 async def fetch_user_followers(
@@ -465,7 +441,6 @@ async def fetch_user_followers(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户粉丝列表/Get Zhihu User Followers"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -473,7 +448,7 @@ async def fetch_user_followers(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_followers", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_followers", params=params)
 
 @router.get("/fetch_user_articles")
 async def fetch_user_articles(
@@ -485,7 +460,6 @@ async def fetch_user_articles(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户的文章列表/Get Zhihu User Articles"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -495,7 +469,7 @@ async def fetch_user_articles(
         params["limit"] = limit
     if sort_type is not None:
         params["sort_type"] = sort_type
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_articles", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_articles", params=params)
 
 @router.get("/fetch_user_included_articles")
 async def fetch_user_included_articles(
@@ -506,7 +480,6 @@ async def fetch_user_included_articles(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户的被收录文章列表/Get Zhihu User Included Articles"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -514,7 +487,7 @@ async def fetch_user_included_articles(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_included_articles", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_included_articles", params=params)
 
 @router.get("/fetch_user_follow_columns")
 async def fetch_user_follow_columns(
@@ -525,7 +498,6 @@ async def fetch_user_follow_columns(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户订阅的专栏/Get Zhihu User Columns"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -533,7 +505,7 @@ async def fetch_user_follow_columns(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_columns", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_columns", params=params)
 
 @router.get("/fetch_user_follow_questions")
 async def fetch_user_follow_questions(
@@ -544,7 +516,6 @@ async def fetch_user_follow_questions(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户关注的问题/Get Zhihu User Follow Questions"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -552,7 +523,7 @@ async def fetch_user_follow_questions(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_questions", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_questions", params=params)
 
 @router.get("/fetch_user_follow_collections")
 async def fetch_user_follow_collections(
@@ -563,7 +534,6 @@ async def fetch_user_follow_collections(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户关注的收藏/Get Zhihu User Follow Collections"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -571,7 +541,7 @@ async def fetch_user_follow_collections(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_collections", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_collections", params=params)
 
 @router.get("/fetch_user_follow_topics")
 async def fetch_user_follow_topics(
@@ -582,7 +552,6 @@ async def fetch_user_follow_topics(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎用户关注的话题/Get Zhihu User Follow Topics"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_url_token is not None:
         params["user_url_token"] = user_url_token
@@ -590,7 +559,7 @@ async def fetch_user_follow_topics(
         params["offset"] = offset
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_topics", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_user_follow_topics", params=params)
 
 @router.get("/fetch_recommend_followees")
 async def fetch_recommend_followees(
@@ -598,8 +567,7 @@ async def fetch_recommend_followees(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎推荐关注列表/Get Zhihu Recommend Followees"""
-    body = await request.json()
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_recommend_followees", json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_recommend_followees")
 
 @router.get("/fetch_question_answers")
 async def fetch_question_answers(
@@ -613,7 +581,6 @@ async def fetch_question_answers(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取知乎问题回答列表/Get Zhihu Question Answers"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if question_id is not None:
         params["question_id"] = question_id
@@ -627,4 +594,4 @@ async def fetch_question_answers(
         params["order"] = order
     if session_id is not None:
         params["session_id"] = session_id
-    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_question_answers", params=params, json_body=body)
+    return await proxy_request("zhihu", "/api/v1/zhihu/web/fetch_question_answers", params=params)

@@ -18,13 +18,12 @@ async def fetch_creator_activity_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者活动列表/Get creator activity list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if start_time is not None:
         params["start_time"] = start_time
     if end_time is not None:
         params["end_time"] = end_time
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_activity_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_activity_list", params=params)
 
 @router.get("/fetch_creator_activity_detail")
 async def fetch_creator_activity_detail(
@@ -33,11 +32,10 @@ async def fetch_creator_activity_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者活动详情/Get creator activity detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if activity_id is not None:
         params["activity_id"] = activity_id
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_activity_detail", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_activity_detail", params=params)
 
 @router.get("/fetch_creator_material_center_config")
 async def fetch_creator_material_center_config(
@@ -45,8 +43,7 @@ async def fetch_creator_material_center_config(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者中心配置/Get creator material center config"""
-    body = await request.json()
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_material_center_config", json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_material_center_config")
 
 @router.get("/fetch_creator_material_center_billboard")
 async def fetch_creator_material_center_billboard(
@@ -57,7 +54,6 @@ async def fetch_creator_material_center_billboard(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者中心热门视频榜单/Get creator material center billboard"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if billboard_tag is not None:
         params["billboard_tag"] = billboard_tag
@@ -65,7 +61,7 @@ async def fetch_creator_material_center_billboard(
         params["order_key"] = order_key
     if time_filter is not None:
         params["time_filter"] = time_filter
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_material_center_billboard", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_material_center_billboard", params=params)
 
 @router.get("/fetch_creator_hot_spot_billboard")
 async def fetch_creator_hot_spot_billboard(
@@ -76,7 +72,6 @@ async def fetch_creator_hot_spot_billboard(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者中心创作热点/Get creator hot spot billboard"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if billboard_tag is not None:
         params["billboard_tag"] = billboard_tag
@@ -84,7 +79,7 @@ async def fetch_creator_hot_spot_billboard(
         params["hot_search_type"] = hot_search_type
     if city_code is not None:
         params["city_code"] = city_code
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_spot_billboard", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_spot_billboard", params=params)
 
 @router.get("/fetch_creator_hot_topic_billboard")
 async def fetch_creator_hot_topic_billboard(
@@ -95,7 +90,6 @@ async def fetch_creator_hot_topic_billboard(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者热门话题榜单/Get creator hot topic billboard"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if billboard_tag is not None:
         params["billboard_tag"] = billboard_tag
@@ -103,7 +97,7 @@ async def fetch_creator_hot_topic_billboard(
         params["order_key"] = order_key
     if time_filter is not None:
         params["time_filter"] = time_filter
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_topic_billboard", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_topic_billboard", params=params)
 
 @router.get("/fetch_creator_hot_props_billboard")
 async def fetch_creator_hot_props_billboard(
@@ -114,7 +108,6 @@ async def fetch_creator_hot_props_billboard(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者热门道具榜单/Get creator hot props billboard"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if billboard_tag is not None:
         params["billboard_tag"] = billboard_tag
@@ -122,7 +115,7 @@ async def fetch_creator_hot_props_billboard(
         params["order_key"] = order_key
     if time_filter is not None:
         params["time_filter"] = time_filter
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_props_billboard", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_props_billboard", params=params)
 
 @router.get("/fetch_creator_hot_challenge_billboard")
 async def fetch_creator_hot_challenge_billboard(
@@ -130,8 +123,7 @@ async def fetch_creator_hot_challenge_billboard(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者热门挑战榜单/Get creator hot challenge billboard"""
-    body = await request.json()
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_challenge_billboard", json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_challenge_billboard")
 
 @router.get("/fetch_creator_hot_music_billboard")
 async def fetch_creator_hot_music_billboard(
@@ -142,7 +134,6 @@ async def fetch_creator_hot_music_billboard(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者热门音乐榜单/Get creator hot music billboard"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if billboard_tag is not None:
         params["billboard_tag"] = billboard_tag
@@ -150,7 +141,7 @@ async def fetch_creator_hot_music_billboard(
         params["order_key"] = order_key
     if time_filter is not None:
         params["time_filter"] = time_filter
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_music_billboard", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_music_billboard", params=params)
 
 @router.get("/fetch_creator_hot_course")
 async def fetch_creator_hot_course(
@@ -162,7 +153,6 @@ async def fetch_creator_hot_course(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者热门课程/Get creator hot course"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if order is not None:
         params["order"] = order
@@ -172,7 +162,7 @@ async def fetch_creator_hot_course(
         params["offset"] = offset
     if category_id is not None:
         params["category_id"] = category_id
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_course", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_hot_course", params=params)
 
 @router.get("/fetch_creator_content_category")
 async def fetch_creator_content_category(
@@ -180,8 +170,7 @@ async def fetch_creator_content_category(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者内容创作合集分类/Get creator content creation category"""
-    body = await request.json()
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_content_category", json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_content_category")
 
 @router.get("/fetch_creator_content_course")
 async def fetch_creator_content_course(
@@ -193,7 +182,6 @@ async def fetch_creator_content_course(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者内容创作课程/Get creator content creation course"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if category_id is not None:
         params["category_id"] = category_id
@@ -203,7 +191,7 @@ async def fetch_creator_content_course(
         params["limit"] = limit
     if offset is not None:
         params["offset"] = offset
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_content_course", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_creator_content_course", params=params)
 
 @router.get("/fetch_video_danmaku_list")
 async def fetch_video_danmaku_list(
@@ -216,7 +204,6 @@ async def fetch_video_danmaku_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取作品弹幕列表/Get video danmaku list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if item_id is not None:
         params["item_id"] = item_id
@@ -228,7 +215,7 @@ async def fetch_video_danmaku_list(
         params["order_type"] = order_type
     if is_blocked is not None:
         params["is_blocked"] = is_blocked
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_video_danmaku_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_video_danmaku_list", params=params)
 
 @router.get("/fetch_user_search")
 async def fetch_user_search(
@@ -237,11 +224,10 @@ async def fetch_user_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索用户/Search users"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_name is not None:
         params["user_name"] = user_name
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_user_search", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_user_search", params=params)
 
 @router.get("/fetch_mission_task_list")
 async def fetch_mission_task_list(
@@ -261,7 +247,6 @@ async def fetch_mission_task_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取商单任务列表/Get mission task list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if cursor is not None:
         params["cursor"] = cursor
@@ -287,7 +272,7 @@ async def fetch_mission_task_list(
         params["quick_selector_scene"] = quick_selector_scene
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_mission_task_list", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_mission_task_list", params=params)
 
 @router.get("/fetch_industry_category_config")
 async def fetch_industry_category_config(
@@ -295,5 +280,4 @@ async def fetch_industry_category_config(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取行业分类配置/Get industry category config"""
-    body = await request.json()
-    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_industry_category_config", json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/creator/fetch_industry_category_config")

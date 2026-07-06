@@ -17,11 +17,10 @@ async def get_ads_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取单个广告详情/Get single ad detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if ads_id is not None:
         params["ads_id"] = ads_id
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ads_detail", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ads_detail", params=params)
 
 @router.get("/search_ads")
 async def search_ads(
@@ -41,7 +40,6 @@ async def search_ads(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索广告/Search ads"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if objective is not None:
         params["objective"] = objective
@@ -67,7 +65,7 @@ async def search_ads(
         params["ad_language"] = ad_language
     if search_id is not None:
         params["search_id"] = search_id
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_ads", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_ads", params=params)
 
 @router.get("/get_keyword_insights")
 async def get_keyword_insights(
@@ -85,7 +83,6 @@ async def get_keyword_insights(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取关键词洞察数据/Get keyword insights data"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page is not None:
         params["page"] = page
@@ -107,7 +104,7 @@ async def get_keyword_insights(
         params["keyword_type"] = keyword_type
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_insights", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_insights", params=params)
 
 @router.get("/get_top_products")
 async def get_top_products(
@@ -124,7 +121,6 @@ async def get_top_products(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热门产品列表/Get top products list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if last is not None:
         params["last"] = last
@@ -144,7 +140,7 @@ async def get_top_products(
         params["order_by"] = order_by
     if order_type is not None:
         params["order_type"] = order_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_top_products", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_top_products", params=params)
 
 @router.get("/get_hashtag_list")
 async def get_hashtag_list(
@@ -159,7 +155,6 @@ async def get_hashtag_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热门标签列表/Get popular hashtags list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page is not None:
         params["page"] = page
@@ -175,7 +170,7 @@ async def get_hashtag_list(
         params["industry_id"] = industry_id
     if filter_by is not None:
         params["filter_by"] = filter_by
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_hashtag_list", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_hashtag_list", params=params)
 
 @router.get("/get_sound_rank_list")
 async def get_sound_rank_list(
@@ -190,7 +185,6 @@ async def get_sound_rank_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热门音乐排行榜/Get popular sound rankings"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if period is not None:
         params["period"] = period
@@ -206,7 +200,7 @@ async def get_sound_rank_list(
         params["commercial_music"] = commercial_music
     if country_code is not None:
         params["country_code"] = country_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_rank_list", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_rank_list", params=params)
 
 @router.get("/get_keyword_list")
 async def get_keyword_list(
@@ -220,7 +214,6 @@ async def get_keyword_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取关键词列表/Get keyword list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -234,7 +227,7 @@ async def get_keyword_list(
         params["country_code"] = country_code
     if industry is not None:
         params["industry"] = industry
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_list", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_list", params=params)
 
 @router.get("/get_top_ads_spotlight")
 async def get_top_ads_spotlight(
@@ -245,7 +238,6 @@ async def get_top_ads_spotlight(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热门广告聚光灯/Get top ads spotlight"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if industry is not None:
         params["industry"] = industry
@@ -253,7 +245,7 @@ async def get_top_ads_spotlight(
         params["page"] = page
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_top_ads_spotlight", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_top_ads_spotlight", params=params)
 
 @router.get("/get_ad_keyframe_analysis")
 async def get_ad_keyframe_analysis(
@@ -263,13 +255,12 @@ async def get_ad_keyframe_analysis(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取广告关键帧分析/Get ad keyframe analysis"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if material_id is not None:
         params["material_id"] = material_id
     if metric is not None:
         params["metric"] = metric
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ad_keyframe_analysis", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ad_keyframe_analysis", params=params)
 
 @router.get("/get_ad_percentile")
 async def get_ad_percentile(
@@ -280,7 +271,6 @@ async def get_ad_percentile(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取广告百分位数据/Get ad percentile data"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if material_id is not None:
         params["material_id"] = material_id
@@ -288,7 +278,7 @@ async def get_ad_percentile(
         params["metric"] = metric
     if period_type is not None:
         params["period_type"] = period_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ad_percentile", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ad_percentile", params=params)
 
 @router.get("/get_ad_interactive_analysis")
 async def get_ad_interactive_analysis(
@@ -299,7 +289,6 @@ async def get_ad_interactive_analysis(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取广告互动分析/Get ad interactive analysis"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if material_id is not None:
         params["material_id"] = material_id
@@ -307,7 +296,7 @@ async def get_ad_interactive_analysis(
         params["metric_type"] = metric_type
     if period_type is not None:
         params["period_type"] = period_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ad_interactive_analysis", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_ad_interactive_analysis", params=params)
 
 @router.get("/get_recommended_ads")
 async def get_recommended_ads(
@@ -318,7 +307,6 @@ async def get_recommended_ads(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取推荐广告/Get recommended ads"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if material_id is not None:
         params["material_id"] = material_id
@@ -326,7 +314,7 @@ async def get_recommended_ads(
         params["industry"] = industry
     if country_code is not None:
         params["country_code"] = country_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_recommended_ads", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_recommended_ads", params=params)
 
 @router.get("/get_query_suggestions")
 async def get_query_suggestions(
@@ -336,13 +324,12 @@ async def get_query_suggestions(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取查询建议/Get query suggestions"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if count is not None:
         params["count"] = count
     if scenario is not None:
         params["scenario"] = scenario
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_query_suggestions", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_query_suggestions", params=params)
 
 @router.get("/get_keyword_filters")
 async def get_keyword_filters(
@@ -350,8 +337,7 @@ async def get_keyword_filters(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取关键词筛选器/Get keyword filters"""
-    body = await request.json()
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_filters", json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_filters")
 
 @router.get("/get_related_keywords")
 async def get_related_keywords(
@@ -366,7 +352,6 @@ async def get_related_keywords(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取相关关键词/Get related keywords"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -382,7 +367,7 @@ async def get_related_keywords(
         params["page"] = page
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_related_keywords", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_related_keywords", params=params)
 
 @router.get("/get_keyword_details")
 async def get_keyword_details(
@@ -400,7 +385,6 @@ async def get_keyword_details(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取关键词详细信息/Get keyword details"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -422,7 +406,7 @@ async def get_keyword_details(
         params["objective"] = objective
     if keyword_type is not None:
         params["keyword_type"] = keyword_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_details", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_keyword_details", params=params)
 
 @router.get("/get_creative_patterns")
 async def get_creative_patterns(
@@ -437,7 +421,6 @@ async def get_creative_patterns(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创意模式排行榜/Get creative pattern rankings"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if first_industry_id is not None:
         params["first_industry_id"] = first_industry_id
@@ -453,7 +436,7 @@ async def get_creative_patterns(
         params["page"] = page
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_creative_patterns", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_creative_patterns", params=params)
 
 @router.get("/get_product_filters")
 async def get_product_filters(
@@ -461,8 +444,7 @@ async def get_product_filters(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取产品筛选器/Get product filters"""
-    body = await request.json()
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_product_filters", json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_product_filters")
 
 @router.get("/get_product_metrics")
 async def get_product_metrics(
@@ -476,7 +458,6 @@ async def get_product_metrics(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取产品指标数据/Get product metrics"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if id is not None:
         params["id"] = id
@@ -490,7 +471,7 @@ async def get_product_metrics(
         params["period_type"] = period_type
     if country_code is not None:
         params["country_code"] = country_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_product_metrics", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_product_metrics", params=params)
 
 @router.get("/get_product_detail")
 async def get_product_detail(
@@ -503,7 +484,6 @@ async def get_product_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取产品详细信息/Get product detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if id is not None:
         params["id"] = id
@@ -515,7 +495,7 @@ async def get_product_detail(
         params["period_type"] = period_type
     if country_code is not None:
         params["country_code"] = country_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_product_detail", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_product_detail", params=params)
 
 @router.get("/get_hashtag_filters")
 async def get_hashtag_filters(
@@ -523,8 +503,7 @@ async def get_hashtag_filters(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取标签筛选器/Get hashtag filters"""
-    body = await request.json()
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_hashtag_filters", json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_hashtag_filters")
 
 @router.get("/get_hashtag_creator")
 async def get_hashtag_creator(
@@ -533,11 +512,10 @@ async def get_hashtag_creator(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取标签创作者信息/Get hashtag creator info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if hashtag is not None:
         params["hashtag"] = hashtag
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_hashtag_creator", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_hashtag_creator", params=params)
 
 @router.get("/get_sound_filters")
 async def get_sound_filters(
@@ -546,11 +524,10 @@ async def get_sound_filters(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取音乐筛选器/Get sound filters"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if rank_type is not None:
         params["rank_type"] = rank_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_filters", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_filters", params=params)
 
 @router.get("/get_sound_detail")
 async def get_sound_detail(
@@ -561,7 +538,6 @@ async def get_sound_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取音乐详情/Get sound detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if clip_id is not None:
         params["clip_id"] = clip_id
@@ -569,7 +545,7 @@ async def get_sound_detail(
         params["period"] = period
     if country_code is not None:
         params["country_code"] = country_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_detail", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_detail", params=params)
 
 @router.get("/search_sound_hint")
 async def search_sound_hint(
@@ -585,7 +561,6 @@ async def search_sound_hint(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索音乐提示/Search sound hints"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -603,7 +578,7 @@ async def search_sound_hint(
         params["filter_by_checked"] = filter_by_checked
     if commercial_music is not None:
         params["commercial_music"] = commercial_music
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_sound_hint", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_sound_hint", params=params)
 
 @router.get("/search_sound")
 async def search_sound(
@@ -619,7 +594,6 @@ async def search_sound(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索音乐/Search sounds"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -637,7 +611,7 @@ async def search_sound(
         params["commercial_music"] = commercial_music
     if country_code is not None:
         params["country_code"] = country_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_sound", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_sound", params=params)
 
 @router.get("/get_sound_recommendations")
 async def get_sound_recommendations(
@@ -647,13 +621,12 @@ async def get_sound_recommendations(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取音乐推荐/Get sound recommendations"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if clip_id is not None:
         params["clip_id"] = clip_id
     if limit is not None:
         params["limit"] = limit
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_recommendations", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_sound_recommendations", params=params)
 
 @router.get("/get_creator_filters")
 async def get_creator_filters(
@@ -661,8 +634,7 @@ async def get_creator_filters(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者筛选器/Get creator filters"""
-    body = await request.json()
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_creator_filters", json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_creator_filters")
 
 @router.get("/get_creator_list")
 async def get_creator_list(
@@ -677,7 +649,6 @@ async def get_creator_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取创作者列表/Get creator list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if page is not None:
         params["page"] = page
@@ -693,7 +664,7 @@ async def get_creator_list(
         params["audience_count"] = audience_count
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_creator_list", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_creator_list", params=params)
 
 @router.get("/search_creators")
 async def search_creators(
@@ -706,7 +677,6 @@ async def search_creators(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索创作者/Search creators"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -718,7 +688,7 @@ async def search_creators(
         params["sort_by"] = sort_by
     if creator_country is not None:
         params["creator_country"] = creator_country
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_creators", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/search_creators", params=params)
 
 @router.get("/get_popular_trends")
 async def get_popular_trends(
@@ -731,7 +701,6 @@ async def get_popular_trends(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取流行趋势视频/Get popular trend videos"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if period is not None:
         params["period"] = period
@@ -743,4 +712,4 @@ async def get_popular_trends(
         params["order_by"] = order_by
     if country_code is not None:
         params["country_code"] = country_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_popular_trends", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/ads/get_popular_trends", params=params)

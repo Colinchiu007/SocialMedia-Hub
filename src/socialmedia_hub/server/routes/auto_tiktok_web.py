@@ -17,11 +17,10 @@ async def fetch_post_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取单个作品数据/Get single video data"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if itemId is not None:
         params["itemId"] = itemId
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_detail", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_detail", params=params)
 
 @router.get("/fetch_post_detail_v2")
 async def fetch_post_detail_v2(
@@ -30,11 +29,10 @@ async def fetch_post_detail_v2(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取单个作品数据 V2/Get single video data V2"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if itemId is not None:
         params["itemId"] = itemId
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_detail_v2", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_detail_v2", params=params)
 
 @router.get("/fetch_explore_post")
 async def fetch_explore_post(
@@ -44,13 +42,12 @@ async def fetch_explore_post(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取探索作品数据/Get explore video data"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if categoryType is not None:
         params["categoryType"] = categoryType
     if count is not None:
         params["count"] = count
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_explore_post", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_explore_post", params=params)
 
 @router.get("/fetch_trending_post")
 async def fetch_trending_post(
@@ -58,8 +55,7 @@ async def fetch_trending_post(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取每日热门内容作品数据/Get daily trending video data"""
-    body = await request.json()
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_trending_post", json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_trending_post")
 
 @router.get("/fetch_trending_searchwords")
 async def fetch_trending_searchwords(
@@ -67,8 +63,7 @@ async def fetch_trending_searchwords(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取每日趋势搜索关键词/Get daily trending search words"""
-    body = await request.json()
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_trending_searchwords", json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_trending_searchwords")
 
 @router.get("/fetch_user_profile")
 async def fetch_user_profile(
@@ -78,13 +73,12 @@ async def fetch_user_profile(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的个人信息/Get user profile"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if uniqueId is not None:
         params["uniqueId"] = uniqueId
     if secUid is not None:
         params["secUid"] = secUid
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_profile", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_profile", params=params)
 
 @router.get("/fetch_user_post")
 async def fetch_user_post(
@@ -97,7 +91,6 @@ async def fetch_user_post(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的作品列表/Get user posts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if secUid is not None:
         params["secUid"] = secUid
@@ -109,7 +102,7 @@ async def fetch_user_post(
         params["coverFormat"] = coverFormat
     if post_item_list_request_type is not None:
         params["post_item_list_request_type"] = post_item_list_request_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_post", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_post", params=params)
 
 @router.get("/fetch_user_repost")
 async def fetch_user_repost(
@@ -121,7 +114,6 @@ async def fetch_user_repost(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的转发作品列表/Get user reposts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if secUid is not None:
         params["secUid"] = secUid
@@ -131,7 +123,7 @@ async def fetch_user_repost(
         params["count"] = count
     if coverFormat is not None:
         params["coverFormat"] = coverFormat
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_repost", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_repost", params=params)
 
 @router.get("/fetch_user_like")
 async def fetch_user_like(
@@ -144,7 +136,6 @@ async def fetch_user_like(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的点赞列表/Get user likes"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if secUid is not None:
         params["secUid"] = secUid
@@ -156,7 +147,7 @@ async def fetch_user_like(
         params["coverFormat"] = coverFormat
     if post_item_list_request_type is not None:
         params["post_item_list_request_type"] = post_item_list_request_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_like", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_like", params=params)
 
 @router.get("/fetch_user_collect")
 async def fetch_user_collect(
@@ -169,7 +160,6 @@ async def fetch_user_collect(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的收藏列表/Get user favorites"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if cookie is not None:
         params["cookie"] = cookie
@@ -181,7 +171,7 @@ async def fetch_user_collect(
         params["count"] = count
     if coverFormat is not None:
         params["coverFormat"] = coverFormat
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_collect", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_collect", params=params)
 
 @router.get("/fetch_user_play_list")
 async def fetch_user_play_list(
@@ -192,7 +182,6 @@ async def fetch_user_play_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的播放列表/Get user play list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if secUid is not None:
         params["secUid"] = secUid
@@ -200,7 +189,7 @@ async def fetch_user_play_list(
         params["cursor"] = cursor
     if count is not None:
         params["count"] = count
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_play_list", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_play_list", params=params)
 
 @router.get("/fetch_user_mix")
 async def fetch_user_mix(
@@ -211,7 +200,6 @@ async def fetch_user_mix(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的合辑列表/Get user mix list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if mixId is not None:
         params["mixId"] = mixId
@@ -219,7 +207,7 @@ async def fetch_user_mix(
         params["cursor"] = cursor
     if count is not None:
         params["count"] = count
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_mix", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_mix", params=params)
 
 @router.get("/fetch_post_comment")
 async def fetch_post_comment(
@@ -231,7 +219,6 @@ async def fetch_post_comment(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取作品的评论列表/Get video comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if aweme_id is not None:
         params["aweme_id"] = aweme_id
@@ -241,7 +228,7 @@ async def fetch_post_comment(
         params["count"] = count
     if current_region is not None:
         params["current_region"] = current_region
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_comment", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_comment", params=params)
 
 @router.get("/fetch_post_comment_reply")
 async def fetch_post_comment_reply(
@@ -254,7 +241,6 @@ async def fetch_post_comment_reply(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取作品的评论回复列表/Get video comment replies"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if item_id is not None:
         params["item_id"] = item_id
@@ -266,7 +252,7 @@ async def fetch_post_comment_reply(
         params["count"] = count
     if current_region is not None:
         params["current_region"] = current_region
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_comment_reply", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_post_comment_reply", params=params)
 
 @router.get("/fetch_user_fans")
 async def fetch_user_fans(
@@ -278,7 +264,6 @@ async def fetch_user_fans(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的粉丝列表/Get user followers"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if secUid is not None:
         params["secUid"] = secUid
@@ -288,7 +273,7 @@ async def fetch_user_fans(
         params["maxCursor"] = maxCursor
     if minCursor is not None:
         params["minCursor"] = minCursor
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_fans", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_fans", params=params)
 
 @router.get("/fetch_user_follow")
 async def fetch_user_follow(
@@ -300,7 +285,6 @@ async def fetch_user_follow(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的关注列表/Get user followings"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if secUid is not None:
         params["secUid"] = secUid
@@ -310,7 +294,7 @@ async def fetch_user_follow(
         params["maxCursor"] = maxCursor
     if minCursor is not None:
         params["minCursor"] = minCursor
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_follow", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_follow", params=params)
 
 @router.get("/fetch_user_live_detail")
 async def fetch_user_live_detail(
@@ -319,11 +303,10 @@ async def fetch_user_live_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户的直播详情/Get user live details"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if uniqueId is not None:
         params["uniqueId"] = uniqueId
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_live_detail", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_user_live_detail", params=params)
 
 @router.get("/fetch_general_search")
 async def fetch_general_search(
@@ -335,7 +318,6 @@ async def fetch_general_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取综合搜索列表/Get general search list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -345,7 +327,7 @@ async def fetch_general_search(
         params["search_id"] = search_id
     if cookie is not None:
         params["cookie"] = cookie
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_general_search", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_general_search", params=params)
 
 @router.get("/fetch_search_keyword_suggest")
 async def fetch_search_keyword_suggest(
@@ -354,11 +336,10 @@ async def fetch_search_keyword_suggest(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索关键字推荐/Search keyword suggest"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_keyword_suggest", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_keyword_suggest", params=params)
 
 @router.get("/fetch_search_user")
 async def fetch_search_user(
@@ -370,7 +351,6 @@ async def fetch_search_user(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索用户/Search user"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -380,7 +360,7 @@ async def fetch_search_user(
         params["search_id"] = search_id
     if cookie is not None:
         params["cookie"] = cookie
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_user", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_user", params=params)
 
 @router.get("/fetch_search_video")
 async def fetch_search_video(
@@ -393,7 +373,6 @@ async def fetch_search_video(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索视频/Search video"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -405,7 +384,7 @@ async def fetch_search_video(
         params["search_id"] = search_id
     if cookie is not None:
         params["cookie"] = cookie
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_video", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_video", params=params)
 
 @router.get("/fetch_search_live")
 async def fetch_search_live(
@@ -418,7 +397,6 @@ async def fetch_search_live(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索直播/Search live"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -430,7 +408,7 @@ async def fetch_search_live(
         params["search_id"] = search_id
     if cookie is not None:
         params["cookie"] = cookie
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_live", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_live", params=params)
 
 @router.get("/fetch_search_photo")
 async def fetch_search_photo(
@@ -443,7 +421,6 @@ async def fetch_search_photo(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索照片/Search photo"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -455,7 +432,7 @@ async def fetch_search_photo(
         params["search_id"] = search_id
     if cookie is not None:
         params["cookie"] = cookie
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_photo", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_search_photo", params=params)
 
 @router.get("/fetch_tag_detail")
 async def fetch_tag_detail(
@@ -464,11 +441,10 @@ async def fetch_tag_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """Tag详情/Tag Detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if tag_name is not None:
         params["tag_name"] = tag_name
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tag_detail", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tag_detail", params=params)
 
 @router.get("/fetch_tag_post")
 async def fetch_tag_post(
@@ -479,7 +455,6 @@ async def fetch_tag_post(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """Tag作品/Tag Post"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if challengeID is not None:
         params["challengeID"] = challengeID
@@ -487,7 +462,7 @@ async def fetch_tag_post(
         params["count"] = count
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tag_post", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tag_post", params=params)
 
 @router.post("/fetch_home_feed")
 async def fetch_home_feed(
@@ -506,13 +481,12 @@ async def generate_real_msToken(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """生成真实msToken/Generate real msToken"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if random_strData is not None:
         params["random_strData"] = random_strData
     if browser_type is not None:
         params["browser_type"] = browser_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_real_msToken", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_real_msToken", params=params)
 
 @router.get("/encrypt_strData")
 async def encrypt_strData(
@@ -521,11 +495,10 @@ async def encrypt_strData(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """加密strData/Encrypt strData"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if data is not None:
         params["data"] = data
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/encrypt_strData", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/encrypt_strData", params=params)
 
 @router.get("/decrypt_strData")
 async def decrypt_strData(
@@ -534,11 +507,10 @@ async def decrypt_strData(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """解密strData/Decrypt strData"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if encrypted_data is not None:
         params["encrypted_data"] = encrypted_data
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/decrypt_strData", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/decrypt_strData", params=params)
 
 @router.get("/generate_fingerprint")
 async def generate_fingerprint(
@@ -547,11 +519,10 @@ async def generate_fingerprint(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """生成浏览器指纹/Generate browser fingerprint"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if browser_type is not None:
         params["browser_type"] = browser_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_fingerprint", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_fingerprint", params=params)
 
 @router.get("/generate_webid")
 async def generate_webid(
@@ -565,7 +536,6 @@ async def generate_webid(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """生成web_id/Generate web_id"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if cookie is not None:
         params["cookie"] = cookie
@@ -579,7 +549,7 @@ async def generate_webid(
         params["user_unique_id"] = user_unique_id
     if app_id is not None:
         params["app_id"] = app_id
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_webid", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_webid", params=params)
 
 @router.get("/generate_ttwid")
 async def generate_ttwid(
@@ -588,11 +558,10 @@ async def generate_ttwid(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """生成ttwid/Generate ttwid"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_agent is not None:
         params["user_agent"] = user_agent
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_ttwid", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_ttwid", params=params)
 
 @router.post("/generate_xbogus")
 async def generate_xbogus(
@@ -637,11 +606,10 @@ async def get_user_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """提取用户user_id/Extract user user_id"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if url is not None:
         params["url"] = url
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_user_id", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_user_id", params=params)
 
 @router.get("/get_sec_user_id")
 async def get_sec_user_id(
@@ -650,11 +618,10 @@ async def get_sec_user_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """提取用户sec_user_id/Extract user sec_user_id"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if url is not None:
         params["url"] = url
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_sec_user_id", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_sec_user_id", params=params)
 
 @router.post("/get_all_sec_user_id")
 async def get_all_sec_user_id(
@@ -672,11 +639,10 @@ async def get_aweme_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """提取单个作品id/Extract single video id"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if url is not None:
         params["url"] = url
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_aweme_id", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_aweme_id", params=params)
 
 @router.post("/get_all_aweme_id")
 async def get_all_aweme_id(
@@ -694,11 +660,10 @@ async def get_unique_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户unique_id/Get user unique_id"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if url is not None:
         params["url"] = url
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_unique_id", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_unique_id", params=params)
 
 @router.post("/get_all_unique_id")
 async def get_all_unique_id(
@@ -717,13 +682,12 @@ async def tiktok_live_room(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """提取直播间弹幕/Extract live room danmaku"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if live_room_url is not None:
         params["live_room_url"] = live_room_url
     if danmaku_type is not None:
         params["danmaku_type"] = danmaku_type
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/tiktok_live_room", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/tiktok_live_room", params=params)
 
 @router.get("/fetch_live_im_fetch")
 async def fetch_live_im_fetch(
@@ -733,13 +697,12 @@ async def fetch_live_im_fetch(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """TikTok直播间弹幕参数获取/tiktok live room danmaku parameters"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if room_id is not None:
         params["room_id"] = room_id
     if user_unique_id is not None:
         params["user_unique_id"] = user_unique_id
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_live_im_fetch", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_live_im_fetch", params=params)
 
 @router.get("/get_live_room_id")
 async def get_live_room_id(
@@ -748,11 +711,10 @@ async def get_live_room_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """根据直播间链接提取直播间ID/Extract live room ID from live room link"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if live_room_url is not None:
         params["live_room_url"] = live_room_url
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_live_room_id", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/get_live_room_id", params=params)
 
 @router.get("/fetch_check_live_alive")
 async def fetch_check_live_alive(
@@ -761,11 +723,10 @@ async def fetch_check_live_alive(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """直播间开播状态检测/Live room start status check"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if room_id is not None:
         params["room_id"] = room_id
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_check_live_alive", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_check_live_alive", params=params)
 
 @router.get("/fetch_batch_check_live_alive")
 async def fetch_batch_check_live_alive(
@@ -774,11 +735,10 @@ async def fetch_batch_check_live_alive(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """批量直播间开播状态检测/Batch live room start status check"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if room_ids is not None:
         params["room_ids"] = room_ids
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_batch_check_live_alive", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_batch_check_live_alive", params=params)
 
 @router.get("/fetch_tiktok_live_data")
 async def fetch_tiktok_live_data(
@@ -787,11 +747,10 @@ async def fetch_tiktok_live_data(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """通过直播链接获取直播间信息/Get live room information via live link"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if live_room_url is not None:
         params["live_room_url"] = live_room_url
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tiktok_live_data", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tiktok_live_data", params=params)
 
 @router.get("/fetch_live_recommend")
 async def fetch_live_recommend(
@@ -800,11 +759,10 @@ async def fetch_live_recommend(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取直播间首页推荐列表/Get live room homepage recommendation list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if related_live_tag is not None:
         params["related_live_tag"] = related_live_tag
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_live_recommend", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_live_recommend", params=params)
 
 @router.get("/fetch_live_gift_list")
 async def fetch_live_gift_list(
@@ -813,11 +771,10 @@ async def fetch_live_gift_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取直播间礼物列表/Get live room gift list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if room_id is not None:
         params["room_id"] = room_id
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_live_gift_list", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_live_gift_list", params=params)
 
 @router.get("/fetch_sso_login_qrcode")
 async def fetch_sso_login_qrcode(
@@ -828,7 +785,6 @@ async def fetch_sso_login_qrcode(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取SSO登录二维码/Get SSO login QR code"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if device_id is not None:
         params["device_id"] = device_id
@@ -836,10 +792,11 @@ async def fetch_sso_login_qrcode(
         params["region"] = region
     if proxy is not None:
         params["proxy"] = proxy
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_sso_login_qrcode", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_sso_login_qrcode", params=params)
 
 @router.get("/fetch_sso_login_status")
 async def fetch_sso_login_status(
+    token: str,
     device_id: str,
     verifyFp: str,
     region: str,
@@ -848,8 +805,9 @@ async def fetch_sso_login_status(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取SSO登录状态/Get SSO login status"""
-    body = await request.json()
     params: dict[str, Any] = {}
+    if token is not None:
+        params["token"] = token
     if device_id is not None:
         params["device_id"] = device_id
     if verifyFp is not None:
@@ -858,7 +816,7 @@ async def fetch_sso_login_status(
         params["region"] = region
     if proxy is not None:
         params["proxy"] = proxy
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_sso_login_status", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_sso_login_status", params=params)
 
 @router.get("/fetch_sso_login_auth")
 async def fetch_sso_login_auth(
@@ -870,7 +828,6 @@ async def fetch_sso_login_auth(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """认证SSO登录/Authenticate SSO login"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if device_id is not None:
         params["device_id"] = device_id
@@ -880,7 +837,7 @@ async def fetch_sso_login_auth(
         params["region"] = region
     if proxy is not None:
         params["proxy"] = proxy
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_sso_login_auth", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_sso_login_auth", params=params)
 
 @router.get("/generate_hashed_id")
 async def generate_hashed_id(
@@ -889,11 +846,10 @@ async def generate_hashed_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """生成哈希ID/Generate hashed ID"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if email is not None:
         params["email"] = email
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_hashed_id", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/generate_hashed_id", params=params)
 
 @router.post("/fetch_gift_name_by_id")
 async def fetch_gift_name_by_id(
@@ -920,11 +876,10 @@ async def fetch_tiktok_web_guest_cookie(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取游客 Cookie/Get the guest Cookie"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_agent is not None:
         params["user_agent"] = user_agent
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tiktok_web_guest_cookie", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/fetch_tiktok_web_guest_cookie", params=params)
 
 @router.get("/device_register")
 async def device_register(
@@ -932,5 +887,4 @@ async def device_register(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """设备注册/Register device for TikTok Web"""
-    body = await request.json()
-    return await proxy_request("tiktok", "/api/v1/tiktok/web/device_register", json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/web/device_register")

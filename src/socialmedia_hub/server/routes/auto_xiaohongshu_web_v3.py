@@ -18,13 +18,12 @@ async def fetch_note_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取笔记详情/Fetch note detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
     if xsec_token is not None:
         params["xsec_token"] = xsec_token
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_note_detail", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_note_detail", params=params)
 
 @router.get("/fetch_note_comments")
 async def fetch_note_comments(
@@ -34,13 +33,12 @@ async def fetch_note_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取笔记评论/Fetch note comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_note_comments", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_note_comments", params=params)
 
 @router.get("/fetch_sub_comments")
 async def fetch_sub_comments(
@@ -52,7 +50,6 @@ async def fetch_sub_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取子评论/Fetch sub comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if note_id is not None:
         params["note_id"] = note_id
@@ -62,7 +59,7 @@ async def fetch_sub_comments(
         params["num"] = num
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_sub_comments", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_sub_comments", params=params)
 
 @router.get("/fetch_search_notes")
 async def fetch_search_notes(
@@ -74,7 +71,6 @@ async def fetch_search_notes(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索笔记/Search notes"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -84,7 +80,7 @@ async def fetch_search_notes(
         params["sort"] = sort
     if note_type is not None:
         params["note_type"] = note_type
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_search_notes", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_search_notes", params=params)
 
 @router.get("/fetch_search_users")
 async def fetch_search_users(
@@ -94,13 +90,12 @@ async def fetch_search_users(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索用户/Search users"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
     if page is not None:
         params["page"] = page
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_search_users", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_search_users", params=params)
 
 @router.get("/fetch_trending")
 async def fetch_trending(
@@ -108,8 +103,7 @@ async def fetch_trending(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热搜词/Fetch trending keywords"""
-    body = await request.json()
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_trending", json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_trending")
 
 @router.get("/fetch_search_suggest")
 async def fetch_search_suggest(
@@ -118,11 +112,10 @@ async def fetch_search_suggest(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取搜索联想词/Fetch search suggestions"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_search_suggest", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_search_suggest", params=params)
 
 @router.get("/fetch_homefeed")
 async def fetch_homefeed(
@@ -134,7 +127,6 @@ async def fetch_homefeed(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取首页推荐/Fetch homepage feed"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if num is not None:
         params["num"] = num
@@ -144,7 +136,7 @@ async def fetch_homefeed(
         params["category"] = category
     if need_filter_image is not None:
         params["need_filter_image"] = need_filter_image
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_homefeed", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_homefeed", params=params)
 
 @router.get("/fetch_homefeed_categories")
 async def fetch_homefeed_categories(
@@ -152,8 +144,7 @@ async def fetch_homefeed_categories(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取首页分类列表/Fetch homepage categories"""
-    body = await request.json()
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_homefeed_categories", json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_homefeed_categories")
 
 @router.get("/fetch_user_info")
 async def fetch_user_info(
@@ -162,11 +153,10 @@ async def fetch_user_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户信息/Fetch user info"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_user_info", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_user_info", params=params)
 
 @router.get("/fetch_user_notes")
 async def fetch_user_notes(
@@ -177,7 +167,6 @@ async def fetch_user_notes(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户笔记列表/Fetch user notes"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
@@ -185,4 +174,4 @@ async def fetch_user_notes(
         params["cursor"] = cursor
     if num is not None:
         params["num"] = num
-    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_user_notes", params=params, json_body=body)
+    return await proxy_request("xiaohongshu", "/api/v1/xiaohongshu/web_v3/fetch_user_notes", params=params)

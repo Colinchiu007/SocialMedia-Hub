@@ -19,7 +19,6 @@ async def get_sign_image(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取加密图片解析/Get Sign Image"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if uri is not None:
         params["uri"] = uri
@@ -27,7 +26,7 @@ async def get_sign_image(
         params["durationTS"] = durationTS
     if format is not None:
         params["format"] = format
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_sign_image", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_sign_image", params=params)
 
 @router.get("/get_xingtu_kolid_by_uid")
 async def get_xingtu_kolid_by_uid(
@@ -36,11 +35,10 @@ async def get_xingtu_kolid_by_uid(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """根据抖音用户ID获取游客星图kolid/Get XingTu kolid by Douyin User ID"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if uid is not None:
         params["uid"] = uid
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_xingtu_kolid_by_uid", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_xingtu_kolid_by_uid", params=params)
 
 @router.get("/get_xingtu_kolid_by_sec_user_id")
 async def get_xingtu_kolid_by_sec_user_id(
@@ -49,11 +47,10 @@ async def get_xingtu_kolid_by_sec_user_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """根据抖音sec_user_id获取游客星图kolid/Get XingTu kolid by Douyin sec_user_id"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if sec_user_id is not None:
         params["sec_user_id"] = sec_user_id
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_xingtu_kolid_by_sec_user_id", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_xingtu_kolid_by_sec_user_id", params=params)
 
 @router.get("/get_xingtu_kolid_by_unique_id")
 async def get_xingtu_kolid_by_unique_id(
@@ -62,11 +59,10 @@ async def get_xingtu_kolid_by_unique_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """根据抖音号获取游客星图kolid/Get XingTu kolid by Douyin unique_id"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if unique_id is not None:
         params["unique_id"] = unique_id
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_xingtu_kolid_by_unique_id", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/get_xingtu_kolid_by_unique_id", params=params)
 
 @router.get("/kol_base_info_v1")
 async def kol_base_info_v1(
@@ -76,13 +72,12 @@ async def kol_base_info_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol基本信息V1/Get kol Base Info V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
     if platformChannel is not None:
         params["platformChannel"] = platformChannel
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_base_info_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_base_info_v1", params=params)
 
 @router.get("/kol_audience_portrait_v1")
 async def kol_audience_portrait_v1(
@@ -91,11 +86,10 @@ async def kol_audience_portrait_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol观众画像V1/Get kol Audience Portrait V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_audience_portrait_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_audience_portrait_v1", params=params)
 
 @router.get("/kol_fans_portrait_v1")
 async def kol_fans_portrait_v1(
@@ -105,13 +99,12 @@ async def kol_fans_portrait_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol粉丝画像V1/Get kol Fans Portrait V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
     if fansType is not None:
         params["fansType"] = fansType
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_fans_portrait_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_fans_portrait_v1", params=params)
 
 @router.get("/kol_service_price_v1")
 async def kol_service_price_v1(
@@ -121,13 +114,12 @@ async def kol_service_price_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol服务报价V1/Get kol Service Price V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
     if platformChannel is not None:
         params["platformChannel"] = platformChannel
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_service_price_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_service_price_v1", params=params)
 
 @router.get("/kol_data_overview_v1")
 async def kol_data_overview_v1(
@@ -140,7 +132,6 @@ async def kol_data_overview_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol数据概览V1/Get kol Data Overview V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
@@ -152,7 +143,7 @@ async def kol_data_overview_v1(
         params["flowType"] = flowType
     if onlyAssign is not None:
         params["onlyAssign"] = onlyAssign
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_data_overview_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_data_overview_v1", params=params)
 
 @router.get("/search_kol_v1")
 async def search_kol_v1(
@@ -163,7 +154,6 @@ async def search_kol_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """关键词搜索kol V1/Search Kol V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -171,7 +161,7 @@ async def search_kol_v1(
         params["platformSource"] = platformSource
     if page is not None:
         params["page"] = page
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/search_kol_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/search_kol_v1", params=params)
 
 @router.get("/search_kol_v2")
 async def search_kol_v2(
@@ -182,7 +172,6 @@ async def search_kol_v2(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """高级搜索kol V2/Search Kol Advanced V2"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -190,7 +179,7 @@ async def search_kol_v2(
         params["followerRange"] = followerRange
     if contentTag is not None:
         params["contentTag"] = contentTag
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/search_kol_v2", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/search_kol_v2", params=params)
 
 @router.get("/kol_conversion_ability_analysis_v1")
 async def kol_conversion_ability_analysis_v1(
@@ -200,13 +189,12 @@ async def kol_conversion_ability_analysis_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol转化能力分析V1/Get kol Conversion Ability Analysis V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
     if _range is not None:
         params["_range"] = _range
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_conversion_ability_analysis_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_conversion_ability_analysis_v1", params=params)
 
 @router.get("/kol_video_performance_v1")
 async def kol_video_performance_v1(
@@ -216,13 +204,12 @@ async def kol_video_performance_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol视频表现V1/Get kol Video Performance V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
     if onlyAssign is not None:
         params["onlyAssign"] = onlyAssign
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_video_performance_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_video_performance_v1", params=params)
 
 @router.get("/kol_xingtu_index_v1")
 async def kol_xingtu_index_v1(
@@ -231,11 +218,10 @@ async def kol_xingtu_index_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol星图指数V1/Get kol Xingtu Index V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_xingtu_index_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_xingtu_index_v1", params=params)
 
 @router.get("/kol_convert_video_display_v1")
 async def kol_convert_video_display_v1(
@@ -246,7 +232,6 @@ async def kol_convert_video_display_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol转化视频展示V1/Get kol Convert Video Display V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
@@ -254,7 +239,7 @@ async def kol_convert_video_display_v1(
         params["detailType"] = detailType
     if page is not None:
         params["page"] = page
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_convert_video_display_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_convert_video_display_v1", params=params)
 
 @router.get("/kol_link_struct_v1")
 async def kol_link_struct_v1(
@@ -263,11 +248,10 @@ async def kol_link_struct_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol连接用户V1/Get kol Link Struct V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_link_struct_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_link_struct_v1", params=params)
 
 @router.get("/kol_touch_distribution_v1")
 async def kol_touch_distribution_v1(
@@ -276,11 +260,10 @@ async def kol_touch_distribution_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol连接用户来源V1/Get kol Touch Distribution V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_touch_distribution_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_touch_distribution_v1", params=params)
 
 @router.get("/kol_cp_info_v1")
 async def kol_cp_info_v1(
@@ -289,11 +272,10 @@ async def kol_cp_info_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol性价比能力分析V1/Get kol Cp Info V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_cp_info_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_cp_info_v1", params=params)
 
 @router.get("/kol_rec_videos_v1")
 async def kol_rec_videos_v1(
@@ -302,11 +284,10 @@ async def kol_rec_videos_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol内容表现V1/Get kol Rec Videos V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_rec_videos_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_rec_videos_v1", params=params)
 
 @router.get("/kol_daily_fans_v1")
 async def kol_daily_fans_v1(
@@ -317,7 +298,6 @@ async def kol_daily_fans_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol粉丝趋势V1/Get kol Daily Fans V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
@@ -325,7 +305,7 @@ async def kol_daily_fans_v1(
         params["startDate"] = startDate
     if endDate is not None:
         params["endDate"] = endDate
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_daily_fans_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/kol_daily_fans_v1", params=params)
 
 @router.get("/author_hot_comment_tokens_v1")
 async def author_hot_comment_tokens_v1(
@@ -334,11 +314,10 @@ async def author_hot_comment_tokens_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol热词分析评论V1/Get Author Hot Comment Tokens V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/author_hot_comment_tokens_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/author_hot_comment_tokens_v1", params=params)
 
 @router.get("/author_content_hot_comment_keywords_v1")
 async def author_content_hot_comment_keywords_v1(
@@ -347,8 +326,7 @@ async def author_content_hot_comment_keywords_v1(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取kol热词分析内容V1/Get Author Content Hot Comment Keywords V1"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if kolId is not None:
         params["kolId"] = kolId
-    return await proxy_request("douyin", "/api/v1/douyin/xingtu/author_content_hot_comment_keywords_v1", params=params, json_body=body)
+    return await proxy_request("douyin", "/api/v1/douyin/xingtu/author_content_hot_comment_keywords_v1", params=params)

@@ -18,13 +18,12 @@ async def apply(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """申请使用TikTok交互API权限（Scope）/Apply for TikTok Interaction API permission (Scope)"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if api_key is not None:
         params["api_key"] = api_key
     if invite_code is not None:
         params["invite_code"] = invite_code
-    return await proxy_request("tiktok", "/api/v1/tiktok/interaction/apply", params=params, json_body=body)
+    return await proxy_request("tiktok", "/api/v1/tiktok/interaction/apply", params=params)
 
 @router.post("/post_comment")
 async def post_comment(

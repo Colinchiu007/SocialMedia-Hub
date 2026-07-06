@@ -17,11 +17,10 @@ async def fetch_user_profile(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定用户的信息/Get information of specified user"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_user_profile", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_user_profile", params=params)
 
 @router.get("/fetch_post_detail")
 async def fetch_post_detail(
@@ -30,11 +29,10 @@ async def fetch_post_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定作品的信息/Get information of specified post"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if item_id is not None:
         params["item_id"] = item_id
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_post_detail", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_post_detail", params=params)
 
 @router.get("/fetch_user_follower_list")
 async def fetch_user_follower_list(
@@ -44,13 +42,12 @@ async def fetch_user_follower_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定用户的粉丝列表/Get fans list of specified user"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_user_follower_list", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_user_follower_list", params=params)
 
 @router.get("/fetch_user_following_list")
 async def fetch_user_following_list(
@@ -60,13 +57,12 @@ async def fetch_user_following_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定用户的关注列表/Get following list of specified user"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if user_id is not None:
         params["user_id"] = user_id
     if cursor is not None:
         params["cursor"] = cursor
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_user_following_list", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_user_following_list", params=params)
 
 @router.get("/fetch_post_comment_list")
 async def fetch_post_comment_list(
@@ -78,7 +74,6 @@ async def fetch_post_comment_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定作品的评论列表/Get comments list of specified post"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if group_id is not None:
         params["group_id"] = group_id
@@ -88,7 +83,7 @@ async def fetch_post_comment_list(
         params["media_id"] = media_id
     if offset is not None:
         params["offset"] = offset
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_post_comment_list", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_post_comment_list", params=params)
 
 @router.get("/fetch_discover_banners")
 async def fetch_discover_banners(
@@ -96,8 +91,7 @@ async def fetch_discover_banners(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取发现页Banner/Get banners of discover page"""
-    body = await request.json()
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_discover_banners", json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_discover_banners")
 
 @router.get("/fetch_discover_tab")
 async def fetch_discover_tab(
@@ -105,8 +99,7 @@ async def fetch_discover_tab(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取发现页主体内容/Get main content of discover page"""
-    body = await request.json()
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_discover_tab", json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_discover_tab")
 
 @router.get("/fetch_discover_tab_information_tabs")
 async def fetch_discover_tab_information_tabs(
@@ -114,8 +107,7 @@ async def fetch_discover_tab_information_tabs(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取发现页的 Editor's Picks/Get Editor's Picks of discover page"""
-    body = await request.json()
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_discover_tab_information_tabs", json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_discover_tab_information_tabs")
 
 @router.get("/fetch_hot_search_keywords")
 async def fetch_hot_search_keywords(
@@ -123,8 +115,7 @@ async def fetch_hot_search_keywords(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取热搜关键词/Get hot search keywords"""
-    body = await request.json()
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_hot_search_keywords", json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_hot_search_keywords")
 
 @router.get("/fetch_topic_info")
 async def fetch_topic_info(
@@ -133,11 +124,10 @@ async def fetch_topic_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取话题信息/Get topic information"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if forum_id is not None:
         params["forum_id"] = forum_id
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_topic_info", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_topic_info", params=params)
 
 @router.get("/fetch_topic_post_list")
 async def fetch_topic_post_list(
@@ -150,7 +140,6 @@ async def fetch_topic_post_list(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取话题作品列表/Get topic post list"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if category is not None:
         params["category"] = category
@@ -162,7 +151,7 @@ async def fetch_topic_post_list(
         params["hashtag_name"] = hashtag_name
     if sort_type is not None:
         params["sort_type"] = sort_type
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_topic_post_list", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_topic_post_list", params=params)
 
 @router.get("/fetch_search")
 async def fetch_search(
@@ -175,7 +164,6 @@ async def fetch_search(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索接口/Search API"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if query is not None:
         params["query"] = query
@@ -187,7 +175,7 @@ async def fetch_search(
         params["order_by"] = order_by
     if search_tab is not None:
         params["search_tab"] = search_tab
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_search", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/fetch_search", params=params)
 
 @router.get("/get_item_id")
 async def get_item_id(
@@ -196,11 +184,10 @@ async def get_item_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """通过分享链接获取作品ID/Get post ID through sharing link"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if share_text is not None:
         params["share_text"] = share_text
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/get_item_id", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/get_item_id", params=params)
 
 @router.get("/get_user_id")
 async def get_user_id(
@@ -209,11 +196,10 @@ async def get_user_id(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """通过分享链接获取用户ID/Get user ID through sharing link"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if share_text is not None:
         params["share_text"] = share_text
-    return await proxy_request("lemon8", "/api/v1/lemon8/app/get_user_id", params=params, json_body=body)
+    return await proxy_request("lemon8", "/api/v1/lemon8/app/get_user_id", params=params)
 
 @router.post("/get_item_ids")
 async def get_item_ids(

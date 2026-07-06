@@ -128,7 +128,8 @@ def generate_route_file(tag: str, prefix: str, operations: list[dict[str, Any]])
 
         # Build function body
         body_lines = []
-        if has_body:
+        # Only add request.json() for POST requests with body
+        if has_body and method == "POST":
             body_lines.append("        body = await request.json()")
             if params:
                 body_lines.append("        params: dict[str, Any] = {}")

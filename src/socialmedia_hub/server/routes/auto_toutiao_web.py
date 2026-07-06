@@ -17,11 +17,10 @@ async def get_article_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定文章的信息/Get information of specified article"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if aweme_id is not None:
         params["aweme_id"] = aweme_id
-    return await proxy_request("toutiao", "/api/v1/toutiao/web/get_article_info", params=params, json_body=body)
+    return await proxy_request("toutiao", "/api/v1/toutiao/web/get_article_info", params=params)
 
 @router.get("/get_video_info")
 async def get_video_info(
@@ -30,8 +29,7 @@ async def get_video_info(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取指定视频的信息/Get information of specified video"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if aweme_id is not None:
         params["aweme_id"] = aweme_id
-    return await proxy_request("toutiao", "/api/v1/toutiao/web/get_video_info", params=params, json_body=body)
+    return await proxy_request("toutiao", "/api/v1/toutiao/web/get_video_info", params=params)

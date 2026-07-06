@@ -27,7 +27,6 @@ async def get_user_profile(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户资料/Get user profile"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
@@ -51,7 +50,7 @@ async def get_user_profile(
         params["include_interests"] = include_interests
     if include_bio is not None:
         params["include_bio"] = include_bio
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_profile", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_profile", params=params)
 
 @router.get("/get_user_posts")
 async def get_user_posts(
@@ -62,7 +61,6 @@ async def get_user_posts(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户帖子/Get user posts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
@@ -70,7 +68,7 @@ async def get_user_posts(
         params["page"] = page
     if pagination_token is not None:
         params["pagination_token"] = pagination_token
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_posts", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_posts", params=params)
 
 @router.get("/get_user_comments")
 async def get_user_comments(
@@ -81,7 +79,6 @@ async def get_user_comments(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户评论/Get user comments"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
@@ -89,7 +86,7 @@ async def get_user_comments(
         params["page"] = page
     if pagination_token is not None:
         params["pagination_token"] = pagination_token
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_comments", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_comments", params=params)
 
 @router.get("/get_user_contact")
 async def get_user_contact(
@@ -98,11 +95,10 @@ async def get_user_contact(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户联系信息/Get user contact information"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_contact", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_contact", params=params)
 
 @router.get("/get_user_recommendations")
 async def get_user_recommendations(
@@ -114,7 +110,6 @@ async def get_user_recommendations(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户推荐信/Get user recommendations"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
@@ -124,7 +119,7 @@ async def get_user_recommendations(
         params["type"] = type
     if pagination_token is not None:
         params["pagination_token"] = pagination_token
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_recommendations", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_recommendations", params=params)
 
 @router.get("/get_user_videos")
 async def get_user_videos(
@@ -135,7 +130,6 @@ async def get_user_videos(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户视频/Get user videos"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
@@ -143,7 +137,7 @@ async def get_user_videos(
         params["page"] = page
     if pagination_token is not None:
         params["pagination_token"] = pagination_token
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_videos", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_videos", params=params)
 
 @router.get("/get_user_images")
 async def get_user_images(
@@ -154,7 +148,6 @@ async def get_user_images(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户图片/Get user images"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
@@ -162,7 +155,7 @@ async def get_user_images(
         params["page"] = page
     if pagination_token is not None:
         params["pagination_token"] = pagination_token
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_images", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_images", params=params)
 
 @router.get("/get_company_profile")
 async def get_company_profile(
@@ -172,13 +165,12 @@ async def get_company_profile(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取公司资料/Get company profile"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if company is not None:
         params["company"] = company
     if company_id is not None:
         params["company_id"] = company_id
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_profile", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_profile", params=params)
 
 @router.get("/get_company_people")
 async def get_company_people(
@@ -188,13 +180,12 @@ async def get_company_people(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取公司员工/Get company people"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if company_id is not None:
         params["company_id"] = company_id
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_people", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_people", params=params)
 
 @router.get("/get_company_posts")
 async def get_company_posts(
@@ -205,7 +196,6 @@ async def get_company_posts(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取公司帖子/Get company posts"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if company_id is not None:
         params["company_id"] = company_id
@@ -213,7 +203,7 @@ async def get_company_posts(
         params["page"] = page
     if sort_by is not None:
         params["sort_by"] = sort_by
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_posts", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_posts", params=params)
 
 @router.get("/get_company_jobs")
 async def get_company_jobs(
@@ -231,7 +221,6 @@ async def get_company_jobs(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取公司职位/Get company jobs"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if company_id is not None:
         params["company_id"] = company_id
@@ -253,7 +242,7 @@ async def get_company_jobs(
         params["under_10_applicants"] = under_10_applicants
     if fair_chance_employer is not None:
         params["fair_chance_employer"] = fair_chance_employer
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_jobs", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_jobs", params=params)
 
 @router.get("/get_company_job_count")
 async def get_company_job_count(
@@ -262,11 +251,10 @@ async def get_company_job_count(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取公司职位数量/Get company job count"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if company_id is not None:
         params["company_id"] = company_id
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_job_count", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_company_job_count", params=params)
 
 @router.get("/get_user_about")
 async def get_user_about(
@@ -275,11 +263,10 @@ async def get_user_about(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户简介/Get user about"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_about", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_about", params=params)
 
 @router.get("/get_user_follower_and_connection")
 async def get_user_follower_and_connection(
@@ -288,11 +275,10 @@ async def get_user_follower_and_connection(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户粉丝和连接数/Get user follower and connection"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if username is not None:
         params["username"] = username
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_follower_and_connection", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_follower_and_connection", params=params)
 
 @router.get("/get_user_experience")
 async def get_user_experience(
@@ -302,13 +288,12 @@ async def get_user_experience(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户工作经历/Get user experience"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_experience", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_experience", params=params)
 
 @router.get("/get_user_skills")
 async def get_user_skills(
@@ -318,13 +303,12 @@ async def get_user_skills(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户技能/Get user skills"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_skills", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_skills", params=params)
 
 @router.get("/get_user_educations")
 async def get_user_educations(
@@ -334,13 +318,12 @@ async def get_user_educations(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户教育背景/Get user educations"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_educations", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_educations", params=params)
 
 @router.get("/get_user_publications")
 async def get_user_publications(
@@ -350,13 +333,12 @@ async def get_user_publications(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户出版物/Get user publications"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_publications", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_publications", params=params)
 
 @router.get("/get_user_certifications")
 async def get_user_certifications(
@@ -366,13 +348,12 @@ async def get_user_certifications(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户认证/Get user certifications"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_certifications", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_certifications", params=params)
 
 @router.get("/get_user_honors")
 async def get_user_honors(
@@ -382,13 +363,12 @@ async def get_user_honors(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户荣誉奖项/Get user honors"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_honors", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_honors", params=params)
 
 @router.get("/get_user_interests_groups")
 async def get_user_interests_groups(
@@ -398,13 +378,12 @@ async def get_user_interests_groups(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户感兴趣的群组/Get user interests groups"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_interests_groups", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_interests_groups", params=params)
 
 @router.get("/get_user_interests_companies")
 async def get_user_interests_companies(
@@ -414,13 +393,12 @@ async def get_user_interests_companies(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取用户感兴趣的公司/Get user interests companies"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if urn is not None:
         params["urn"] = urn
     if page is not None:
         params["page"] = page
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_interests_companies", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_user_interests_companies", params=params)
 
 @router.get("/get_job_detail")
 async def get_job_detail(
@@ -430,13 +408,12 @@ async def get_job_detail(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """获取职位详情/Get job detail"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if job_id is not None:
         params["job_id"] = job_id
     if include_skills is not None:
         params["include_skills"] = include_skills
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_job_detail", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/get_job_detail", params=params)
 
 @router.get("/search_jobs")
 async def search_jobs(
@@ -457,7 +434,6 @@ async def search_jobs(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索职位/Search jobs"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if keyword is not None:
         params["keyword"] = keyword
@@ -485,7 +461,7 @@ async def search_jobs(
         params["under_10_applicants"] = under_10_applicants
     if fair_chance_employer is not None:
         params["fair_chance_employer"] = fair_chance_employer
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/search_jobs", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/search_jobs", params=params)
 
 @router.get("/search_people")
 async def search_people(
@@ -505,7 +481,6 @@ async def search_people(
     token: str = Depends(verify_api_key)
 ) -> dict[str, Any]:
     """搜索用户/Search people"""
-    body = await request.json()
     params: dict[str, Any] = {}
     if name is not None:
         params["name"] = name
@@ -531,4 +506,4 @@ async def search_people(
         params["industry"] = industry
     if service_category is not None:
         params["service_category"] = service_category
-    return await proxy_request("linkedin", "/api/v1/linkedin/web/search_people", params=params, json_body=body)
+    return await proxy_request("linkedin", "/api/v1/linkedin/web/search_people", params=params)
