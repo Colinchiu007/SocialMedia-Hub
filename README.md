@@ -2,7 +2,7 @@
 
 High-performance Python SDK and API server for multi-platform social media data.
 
-**Version: v1.3.0**
+**Version: v1.4.0**
 
 ## Features
 
