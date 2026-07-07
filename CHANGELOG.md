@@ -5,6 +5,19 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-07-07
+
+### Added
+
+#### 测试覆盖率持续提升
+- 新增 62 个测试 (260 → 322)
+- WebSocket manager 覆盖率: 48% → 100%
+- 新增 auto routes 集成测试覆盖 16+ 平台
+- 新增 server 核心端点测试
+
+### Changed
+- 版本号更新至 1.2.0
+
 ## [1.1.0] - 2026-07-07
 
 ### Added
