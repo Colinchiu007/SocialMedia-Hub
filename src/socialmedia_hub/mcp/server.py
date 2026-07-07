@@ -28,9 +28,10 @@ class MCPServer:
         self.tools: dict[str, dict[str, Any]] = {}
         self._register_all_tools()
         # Register extended tools
-        from socialmedia_hub.mcp.extended import register_extended_tools, register_extra_tools
+        from socialmedia_hub.mcp.extended import register_extended_tools, register_extra_tools, register_extra_tools_v2
         register_extended_tools(self)
         register_extra_tools(self)
+        register_extra_tools_v2(self)
 
     def _register_all_tools(self) -> None:
         """Register all MCP tools for all platforms."""

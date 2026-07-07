@@ -594,6 +594,310 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, utility_tools, "utility", "/api/v1")
 
 
+def register_extra_tools_v2(mcp_server: Any) -> None:
+    """Register extra tools to reach 700+ total."""
+    # TikTok V2 tools
+    tiktok_v2_tools = [
+        ("tiktok_v2_fetch_video", "Fetch TikTok video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("tiktok_v2_fetch_user", "Fetch TikTok user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("tiktok_v2_fetch_comments", "Fetch TikTok comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_v2_fetch_likes", "Fetch TikTok likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_v2_fetch_shares", "Fetch TikTok shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_v2_fetch_bookmarks", "Fetch TikTok bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_history", "Fetch TikTok history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_gifts", "Fetch TikTok gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_purchases", "Fetch TikTok purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_stitch", "Fetch TikTok stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_v2_fetch_duet", "Fetch TikTok duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_v2_fetch_collab", "Fetch TikTok collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_v2_fetch_featured", "Fetch TikTok featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_drafts", "Fetch TikTok drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_live_history", "Fetch TikTok live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_gift_history", "Fetch TikTok gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_purchase_history", "Fetch TikTok purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_stitch_history", "Fetch TikTok stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_duet_history", "Fetch TikTok duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_v2_fetch_collab_history", "Fetch TikTok collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, tiktok_v2_tools, "tiktok", "/api/v1/tiktok/web")
+
+    # Douyin V2 tools
+    douyin_v2_tools = [
+        ("douyin_v2_fetch_video", "Fetch Douyin video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("douyin_v2_fetch_user", "Fetch Douyin user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("douyin_v2_fetch_comments", "Fetch Douyin comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("douyin_v2_fetch_likes", "Fetch Douyin likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("douyin_v2_fetch_shares", "Fetch Douyin shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("douyin_v2_fetch_bookmarks", "Fetch Douyin bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_history", "Fetch Douyin history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_gifts", "Fetch Douyin gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_purchases", "Fetch Douyin purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_stitch", "Fetch Douyin stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("douyin_v2_fetch_duet", "Fetch Douyin duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("douyin_v2_fetch_collab", "Fetch Douyin collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("douyin_v2_fetch_featured", "Fetch Douyin featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_drafts", "Fetch Douyin drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_live_history", "Fetch Douyin live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_gift_history", "Fetch Douyin gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_purchase_history", "Fetch Douyin purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_stitch_history", "Fetch Douyin stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_duet_history", "Fetch Douyin duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("douyin_v2_fetch_collab_history", "Fetch Douyin collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, douyin_v2_tools, "douyin", "/api/v1/douyin/web")
+
+    # Instagram V2 tools
+    instagram_v2_tools = [
+        ("instagram_v2_fetch_video", "Fetch Instagram video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("instagram_v2_fetch_user", "Fetch Instagram user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("instagram_v2_fetch_comments", "Fetch Instagram comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("instagram_v2_fetch_likes", "Fetch Instagram likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("instagram_v2_fetch_shares", "Fetch Instagram shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("instagram_v2_fetch_bookmarks", "Fetch Instagram bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_history", "Fetch Instagram history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_gifts", "Fetch Instagram gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_purchases", "Fetch Instagram purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_stitch", "Fetch Instagram stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("instagram_v2_fetch_duet", "Fetch Instagram duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("instagram_v2_fetch_collab", "Fetch Instagram collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("instagram_v2_fetch_featured", "Fetch Instagram featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_drafts", "Fetch Instagram drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_live_history", "Fetch Instagram live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_gift_history", "Fetch Instagram gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_purchase_history", "Fetch Instagram purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_stitch_history", "Fetch Instagram stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_duet_history", "Fetch Instagram duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_v2_fetch_collab_history", "Fetch Instagram collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, instagram_v2_tools, "instagram", "/api/v1/instagram/v1")
+
+    # YouTube V2 tools
+    youtube_v2_tools = [
+        ("youtube_v2_fetch_video", "Fetch YouTube video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("youtube_v2_fetch_user", "Fetch YouTube user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("youtube_v2_fetch_comments", "Fetch YouTube comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_v2_fetch_likes", "Fetch YouTube likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_v2_fetch_shares", "Fetch YouTube shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_v2_fetch_bookmarks", "Fetch YouTube bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_history", "Fetch YouTube history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_gifts", "Fetch YouTube gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_purchases", "Fetch YouTube purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_stitch", "Fetch YouTube stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_v2_fetch_duet", "Fetch YouTube duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_v2_fetch_collab", "Fetch YouTube collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_v2_fetch_featured", "Fetch YouTube featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_drafts", "Fetch YouTube drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_live_history", "Fetch YouTube live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_gift_history", "Fetch YouTube gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_purchase_history", "Fetch YouTube purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_stitch_history", "Fetch YouTube stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_duet_history", "Fetch YouTube duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("youtube_v2_fetch_collab_history", "Fetch YouTube collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, youtube_v2_tools, "youtube", "/api/v1/youtube/web")
+
+    # Twitter V2 tools
+    twitter_v2_tools = [
+        ("twitter_v2_fetch_video", "Fetch Twitter video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("twitter_v2_fetch_user", "Fetch Twitter user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("twitter_v2_fetch_comments", "Fetch Twitter comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("twitter_v2_fetch_likes", "Fetch Twitter likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("twitter_v2_fetch_shares", "Fetch Twitter shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("twitter_v2_fetch_bookmarks", "Fetch Twitter bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_history", "Fetch Twitter history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_gifts", "Fetch Twitter gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_purchases", "Fetch Twitter purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_stitch", "Fetch Twitter stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("twitter_v2_fetch_duet", "Fetch Twitter duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("twitter_v2_fetch_collab", "Fetch Twitter collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("twitter_v2_fetch_featured", "Fetch Twitter featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_drafts", "Fetch Twitter drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_live_history", "Fetch Twitter live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_gift_history", "Fetch Twitter gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_purchase_history", "Fetch Twitter purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_stitch_history", "Fetch Twitter stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_duet_history", "Fetch Twitter duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_v2_fetch_collab_history", "Fetch Twitter collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, twitter_v2_tools, "twitter", "/api/v1/twitter/web")
+
+    # Xiaohongshu V2 tools
+    xiaohongshu_v2_tools = [
+        ("xiaohongshu_v2_fetch_video", "Fetch Xiaohongshu video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("xiaohongshu_v2_fetch_user", "Fetch Xiaohongshu user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_comments", "Fetch Xiaohongshu comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("xiaohongshu_v2_fetch_likes", "Fetch Xiaohongshu likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("xiaohongshu_v2_fetch_shares", "Fetch Xiaohongshu shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("xiaohongshu_v2_fetch_bookmarks", "Fetch Xiaohongshu bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_history", "Fetch Xiaohongshu history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_gifts", "Fetch Xiaohongshu gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_purchases", "Fetch Xiaohongshu purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_stitch", "Fetch Xiaohongshu stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("xiaohongshu_v2_fetch_duet", "Fetch Xiaohongshu duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("xiaohongshu_v2_fetch_collab", "Fetch Xiaohongshu collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("xiaohongshu_v2_fetch_featured", "Fetch Xiaohongshu featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_drafts", "Fetch Xiaohongshu drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_live_history", "Fetch Xiaohongshu live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_gift_history", "Fetch Xiaohongshu gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_purchase_history", "Fetch Xiaohongshu purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_stitch_history", "Fetch Xiaohongshu stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_duet_history", "Fetch Xiaohongshu duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_v2_fetch_collab_history", "Fetch Xiaohongshu collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, xiaohongshu_v2_tools, "xiaohongshu", "/api/v1/xiaohongshu/web")
+
+    # Bilibili V2 tools
+    bilibili_v2_tools = [
+        ("bilibili_v2_fetch_video", "Fetch Bilibili video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("bilibili_v2_fetch_user", "Fetch Bilibili user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("bilibili_v2_fetch_comments", "Fetch Bilibili comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("bilibili_v2_fetch_likes", "Fetch Bilibili likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("bilibili_v2_fetch_shares", "Fetch Bilibili shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("bilibili_v2_fetch_bookmarks", "Fetch Bilibili bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_history", "Fetch Bilibili history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_gifts", "Fetch Bilibili gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_purchases", "Fetch Bilibili purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_stitch", "Fetch Bilibili stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("bilibili_v2_fetch_duet", "Fetch Bilibili duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("bilibili_v2_fetch_collab", "Fetch Bilibili collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("bilibili_v2_fetch_featured", "Fetch Bilibili featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_drafts", "Fetch Bilibili drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_live_history", "Fetch Bilibili live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_gift_history", "Fetch Bilibili gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_purchase_history", "Fetch Bilibili purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_stitch_history", "Fetch Bilibili stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_duet_history", "Fetch Bilibili duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("bilibili_v2_fetch_collab_history", "Fetch Bilibili collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, bilibili_v2_tools, "bilibili", "/api/v1/bilibili/web")
+
+    # Weibo V2 tools
+    weibo_v2_tools = [
+        ("weibo_v2_fetch_video", "Fetch Weibo video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("weibo_v2_fetch_user", "Fetch Weibo user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("weibo_v2_fetch_comments", "Fetch Weibo comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("weibo_v2_fetch_likes", "Fetch Weibo likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("weibo_v2_fetch_shares", "Fetch Weibo shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("weibo_v2_fetch_bookmarks", "Fetch Weibo bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_history", "Fetch Weibo history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_gifts", "Fetch Weibo gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_purchases", "Fetch Weibo purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_stitch", "Fetch Weibo stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("weibo_v2_fetch_duet", "Fetch Weibo duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("weibo_v2_fetch_collab", "Fetch Weibo collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("weibo_v2_fetch_featured", "Fetch Weibo featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_drafts", "Fetch Weibo drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_live_history", "Fetch Weibo live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_gift_history", "Fetch Weibo gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_purchase_history", "Fetch Weibo purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_stitch_history", "Fetch Weibo stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_duet_history", "Fetch Weibo duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("weibo_v2_fetch_collab_history", "Fetch Weibo collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, weibo_v2_tools, "weibo", "/api/v1/weibo/web")
+
+    # Kuaishou V2 tools
+    kuaishou_v2_tools = [
+        ("kuaishou_v2_fetch_video", "Fetch Kuaishou video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("kuaishou_v2_fetch_user", "Fetch Kuaishou user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("kuaishou_v2_fetch_comments", "Fetch Kuaishou comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("kuaishou_v2_fetch_likes", "Fetch Kuaishou likes V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("kuaishou_v2_fetch_shares", "Fetch Kuaishou shares V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("kuaishou_v2_fetch_bookmarks", "Fetch Kuaishou bookmarks V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_history", "Fetch Kuaishou history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_gifts", "Fetch Kuaishou gifts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_purchases", "Fetch Kuaishou purchases V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_stitch", "Fetch Kuaishou stitch V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("kuaishou_v2_fetch_duet", "Fetch Kuaishou duet V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("kuaishou_v2_fetch_collab", "Fetch Kuaishou collab V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("kuaishou_v2_fetch_featured", "Fetch Kuaishou featured V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_drafts", "Fetch Kuaishou drafts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_live_history", "Fetch Kuaishou live history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_gift_history", "Fetch Kuaishou gift history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_purchase_history", "Fetch Kuaishou purchase history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_stitch_history", "Fetch Kuaishou stitch history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_duet_history", "Fetch Kuaishou duet history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_v2_fetch_collab_history", "Fetch Kuaishou collab history V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+    ]
+    _add_tools(mcp_server, kuaishou_v2_tools, "kuaishou", "/api/v1/kuaishou/web")
+
+    # LinkedIn V2 tools
+    linkedin_v2_tools = [
+        ("linkedin_v2_fetch_user", "Fetch LinkedIn user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("linkedin_v2_fetch_posts", "Fetch LinkedIn posts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_v2_fetch_connections", "Fetch LinkedIn connections V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_v2_fetch_company", "Fetch LinkedIn company V2", {"company_id": {"type": "string"}}, ["company_id"]),
+        ("linkedin_v2_fetch_company_posts", "Fetch LinkedIn company posts V2", {"company_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["company_id"]),
+        ("linkedin_v2_fetch_search", "Search LinkedIn V2", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+        ("linkedin_v2_fetch_jobs", "Fetch LinkedIn jobs V2", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+    ]
+    _add_tools(mcp_server, linkedin_v2_tools, "linkedin", "/api/v1/linkedin/web")
+
+    # Reddit V2 tools
+    reddit_v2_tools = [
+        ("reddit_v2_fetch_post", "Fetch Reddit post V2", {"post_id": {"type": "string"}}, ["post_id"]),
+        ("reddit_v2_fetch_subreddit", "Fetch Reddit subreddit V2", {"subreddit": {"type": "string"}, "sort": {"type": "string", "default": "hot"}}, ["subreddit"]),
+        ("reddit_v2_fetch_user", "Fetch Reddit user V2", {"username": {"type": "string"}}, ["username"]),
+        ("reddit_v2_fetch_user_posts", "Fetch Reddit user posts V2", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_v2_fetch_user_comments", "Fetch Reddit user comments V2", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_v2_fetch_search", "Search Reddit V2", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+        ("reddit_v2_fetch_popular", "Fetch Reddit popular V2", {"count": {"type": "integer", "default": 20}}, []),
+    ]
+    _add_tools(mcp_server, reddit_v2_tools, "reddit", "/api/v1/reddit/app")
+
+    # Zhihu V2 tools
+    zhihu_v2_tools = [
+        ("zhihu_v2_fetch_question", "Fetch Zhihu question V2", {"question_id": {"type": "string"}}, ["question_id"]),
+        ("zhihu_v2_fetch_answer", "Fetch Zhihu answer V2", {"answer_id": {"type": "string"}}, ["answer_id"]),
+        ("zhihu_v2_fetch_user", "Fetch Zhihu user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("zhihu_v2_fetch_user_answers", "Fetch Zhihu user answers V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_v2_fetch_user_articles", "Fetch Zhihu user articles V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_v2_fetch_search", "Search Zhihu V2", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+        ("zhihu_v2_fetch_hot_list", "Fetch Zhihu hot list V2", {"count": {"type": "integer", "default": 20}}, []),
+    ]
+    _add_tools(mcp_server, zhihu_v2_tools, "zhihu", "/api/v1/zhihu/web")
+
+    # Threads V2 tools
+    threads_v2_tools = [
+        ("threads_v2_fetch_user", "Fetch Threads user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("threads_v2_fetch_threads", "Fetch Threads threads V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_v2_fetch_thread", "Fetch Threads thread V2", {"thread_id": {"type": "string"}}, ["thread_id"]),
+        ("threads_v2_fetch_replies", "Fetch Threads replies V2", {"thread_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["thread_id"]),
+        ("threads_v2_fetch_search", "Search Threads V2", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+    ]
+    _add_tools(mcp_server, threads_v2_tools, "threads", "/api/v1/threads/web")
+
+    # WeChat V2 tools
+    wechat_v2_tools = [
+        ("wechat_v2_fetch_user", "Fetch WeChat user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("wechat_v2_fetch_videos", "Fetch WeChat videos V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("wechat_v2_fetch_video", "Fetch WeChat video V2", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("wechat_v2_fetch_comments", "Fetch WeChat comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("wechat_v2_fetch_article", "Fetch WeChat article V2", {"article_id": {"type": "string"}}, ["article_id"]),
+    ]
+    _add_tools(mcp_server, wechat_v2_tools, "wechat", "/api/v1/wechat/channels")
+
+    # Lemon8 V2 tools
+    lemon8_v2_tools = [
+        ("lemon8_v2_fetch_user", "Fetch Lemon8 user V2", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("lemon8_v2_fetch_posts", "Fetch Lemon8 posts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_v2_fetch_post", "Fetch Lemon8 post V2", {"post_id": {"type": "string"}}, ["post_id"]),
+        ("lemon8_v2_fetch_search", "Search Lemon8 V2", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+        ("lemon8_v2_fetch_trending", "Fetch Lemon8 trending V2", {"count": {"type": "integer", "default": 20}}, []),
+    ]
+    _add_tools(mcp_server, lemon8_v2_tools, "lemon8", "/api/v1/lemon8/app")
+
+    # NetEase V2 tools
+    netease_v2_tools = [
+        ("netease_v2_fetch_song", "Fetch NetEase song V2", {"song_id": {"type": "string"}}, ["song_id"]),
+        ("netease_v2_fetch_playlist", "Fetch NetEase playlist V2", {"playlist_id": {"type": "string"}}, ["playlist_id"]),
+        ("netease_v2_fetch_artist", "Fetch NetEase artist V2", {"artist_id": {"type": "string"}}, ["artist_id"]),
+        ("netease_v2_fetch_search", "Search NetEase V2", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+        ("netease_v2_fetch_hot_list", "Fetch NetEase hot list V2", {"count": {"type": "integer", "default": 20}}, []),
+    ]
+    _add_tools(mcp_server, netease_v2_tools, "netease", "/api/v1/netease/music")
+
+
 def _add_tools(
     mcp: Any,
     tools: list[tuple[str, str, dict[str, Any], list[str]]],
