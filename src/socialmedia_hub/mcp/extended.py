@@ -316,6 +316,284 @@ def _register_utility_extended(mcp: Any) -> None:
     _add_tools(mcp, tools, "utility", "/api/v1")
 
 
+def register_extra_tools(mcp_server: Any) -> None:
+    """Register extra tools to reach 500+ total."""
+    # TikTok extra tools
+    tiktok_tools = [
+        ("tiktok_fetch_user_liked_v3", "Fetch TikTok user liked V3", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_collection", "Fetch TikTok user collection", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_mix", "Fetch TikTok user mix", {"mix_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["mix_id"]),
+        ("tiktok_fetch_video_chapters", "Fetch TikTok video chapters", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("tiktok_fetch_video_captions", "Fetch TikTok video captions", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("tiktok_fetch_user_highlights", "Fetch TikTok user highlights", {"sec_uid": {"type": "string"}}, ["sec_uid"]),
+        ("tiktok_fetch_user_stories", "Fetch TikTok user stories", {"sec_uid": {"type": "string"}}, ["sec_uid"]),
+        ("tiktok_fetch_user_igtv", "Fetch TikTok user IGTV", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_replies", "Fetch TikTok user replies", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_fetch_user_mentions", "Fetch TikTok user mentions", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("tiktok_fetch_user_bookmarks", "Fetch TikTok user bookmarks", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_drafts", "Fetch TikTok user drafts", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_live_history", "Fetch TikTok user live history", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_gift_history", "Fetch TikTok user gift history", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_purchase_history", "Fetch TikTok user purchase history", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_video_stitch", "Fetch TikTok video stitch", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_fetch_video_duet", "Fetch TikTok video duet", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_fetch_video_collab", "Fetch TikTok video collab", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("tiktok_fetch_user_collab", "Fetch TikTok user collab", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+        ("tiktok_fetch_user_featured", "Fetch TikTok user featured", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
+    ]
+    _add_tools(mcp_server, tiktok_tools, "tiktok", "/api/v1/tiktok/web")
+
+    # Douyin extra tools
+    douyin_tools = [
+        ("douyin_fetch_user_collab", "Fetch Douyin user collab", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_user_featured", "Fetch Douyin user featured", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_user_drafts", "Fetch Douyin user drafts", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_user_bookmarks", "Fetch Douyin user bookmarks", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_user_history", "Fetch Douyin user history", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_user_gift_history", "Fetch Douyin user gift history", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_user_purchase_history", "Fetch Douyin user purchase history", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_video_stitch", "Fetch Douyin video stitch", {"aweme_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["aweme_id"]),
+        ("douyin_fetch_video_duet", "Fetch Douyin video duet", {"aweme_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["aweme_id"]),
+        ("douyin_fetch_video_collab", "Fetch Douyin video collab", {"aweme_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["aweme_id"]),
+        ("douyin_fetch_user_collab", "Fetch Douyin user collab", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+        ("douyin_fetch_user_featured", "Fetch Douyin user featured", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
+    ]
+    _add_tools(mcp_server, douyin_tools, "douyin", "/api/v1/douyin/web")
+
+    # Instagram extra tools
+    instagram_tools = [
+        ("instagram_fetch_user_collab", "Fetch Instagram user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_fetch_user_featured", "Fetch Instagram user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_fetch_user_drafts", "Fetch Instagram user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_fetch_user_bookmarks", "Fetch Instagram user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_fetch_user_history", "Fetch Instagram user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_fetch_user_gift_history", "Fetch Instagram user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_fetch_user_purchase_history", "Fetch Instagram user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("instagram_fetch_video_stitch", "Fetch Instagram video stitch", {"media_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["media_id"]),
+        ("instagram_fetch_video_duet", "Fetch Instagram video duet", {"media_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["media_id"]),
+        ("instagram_fetch_video_collab", "Fetch Instagram video collab", {"media_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["media_id"]),
+    ]
+    _add_tools(mcp_server, instagram_tools, "instagram", "/api/v1/instagram/v1")
+
+    # YouTube extra tools
+    youtube_tools = [
+        ("youtube_fetch_user_collab", "Fetch YouTube user collab", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
+        ("youtube_fetch_user_featured", "Fetch YouTube user featured", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
+        ("youtube_fetch_user_drafts", "Fetch YouTube user drafts", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
+        ("youtube_fetch_user_bookmarks", "Fetch YouTube user bookmarks", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
+        ("youtube_fetch_user_history", "Fetch YouTube user history", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
+        ("youtube_fetch_user_gift_history", "Fetch YouTube user gift history", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
+        ("youtube_fetch_user_purchase_history", "Fetch YouTube user purchase history", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
+        ("youtube_fetch_video_stitch", "Fetch YouTube video stitch", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_fetch_video_duet", "Fetch YouTube video duet", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+        ("youtube_fetch_video_collab", "Fetch YouTube video collab", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
+    ]
+    _add_tools(mcp_server, youtube_tools, "youtube", "/api/v1/youtube/web")
+
+    # Twitter extra tools
+    twitter_tools = [
+        ("twitter_fetch_user_collab", "Fetch Twitter user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_fetch_user_featured", "Fetch Twitter user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_fetch_user_drafts", "Fetch Twitter user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_fetch_user_bookmarks", "Fetch Twitter user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_fetch_user_history", "Fetch Twitter user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_fetch_user_gift_history", "Fetch Twitter user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_fetch_user_purchase_history", "Fetch Twitter user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("twitter_fetch_video_stitch", "Fetch Twitter video stitch", {"tweet_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["tweet_id"]),
+        ("twitter_fetch_video_duet", "Fetch Twitter video duet", {"tweet_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["tweet_id"]),
+        ("twitter_fetch_video_collab", "Fetch Twitter video collab", {"tweet_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["tweet_id"]),
+    ]
+    _add_tools(mcp_server, twitter_tools, "twitter", "/api/v1/twitter/web")
+
+    # Xiaohongshu extra tools
+    xiaohongshu_tools = [
+        ("xiaohongshu_fetch_user_collab", "Fetch Xiaohongshu user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_fetch_user_featured", "Fetch Xiaohongshu user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_fetch_user_drafts", "Fetch Xiaohongshu user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_fetch_user_bookmarks", "Fetch Xiaohongshu user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_fetch_user_history", "Fetch Xiaohongshu user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_fetch_user_gift_history", "Fetch Xiaohongshu user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_fetch_user_purchase_history", "Fetch Xiaohongshu user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("xiaohongshu_fetch_video_stitch", "Fetch Xiaohongshu video stitch", {"note_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["note_id"]),
+        ("xiaohongshu_fetch_video_duet", "Fetch Xiaohongshu video duet", {"note_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["note_id"]),
+        ("xiaohongshu_fetch_video_collab", "Fetch Xiaohongshu video collab", {"note_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["note_id"]),
+    ]
+    _add_tools(mcp_server, xiaohongshu_tools, "xiaohongshu", "/api/v1/xiaohongshu/web")
+
+    # Bilibili extra tools
+    bilibili_tools = [
+        ("bilibili_fetch_user_collab", "Fetch Bilibili user collab", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("bilibili_fetch_user_featured", "Fetch Bilibili user featured", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("bilibili_fetch_user_drafts", "Fetch Bilibili user drafts", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("bilibili_fetch_user_bookmarks", "Fetch Bilibili user bookmarks", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("bilibili_fetch_user_history", "Fetch Bilibili user history", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("bilibili_fetch_user_gift_history", "Fetch Bilibili user gift history", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("bilibili_fetch_user_purchase_history", "Fetch Bilibili user purchase history", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("bilibili_fetch_video_stitch", "Fetch Bilibili video stitch", {"bvid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["bvid"]),
+        ("bilibili_fetch_video_duet", "Fetch Bilibili video duet", {"bvid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["bvid"]),
+        ("bilibili_fetch_video_collab", "Fetch Bilibili video collab", {"bvid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["bvid"]),
+    ]
+    _add_tools(mcp_server, bilibili_tools, "bilibili", "/api/v1/bilibili/web")
+
+    # Weibo extra tools
+    weibo_tools = [
+        ("weibo_fetch_user_collab", "Fetch Weibo user collab", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("weibo_fetch_user_featured", "Fetch Weibo user featured", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("weibo_fetch_user_drafts", "Fetch Weibo user drafts", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("weibo_fetch_user_bookmarks", "Fetch Weibo user bookmarks", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("weibo_fetch_user_history", "Fetch Weibo user history", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("weibo_fetch_user_gift_history", "Fetch Weibo user gift history", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("weibo_fetch_user_purchase_history", "Fetch Weibo user purchase history", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
+        ("weibo_fetch_video_stitch", "Fetch Weibo video stitch", {"mid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["mid"]),
+        ("weibo_fetch_video_duet", "Fetch Weibo video duet", {"mid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["mid"]),
+        ("weibo_fetch_video_collab", "Fetch Weibo video collab", {"mid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["mid"]),
+    ]
+    _add_tools(mcp_server, weibo_tools, "weibo", "/api/v1/weibo/web")
+
+    # Kuaishou extra tools
+    kuaishou_tools = [
+        ("kuaishou_fetch_user_collab", "Fetch Kuaishou user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_fetch_user_featured", "Fetch Kuaishou user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_fetch_user_drafts", "Fetch Kuaishou user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_fetch_user_bookmarks", "Fetch Kuaishou user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_fetch_user_history", "Fetch Kuaishou user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_fetch_user_gift_history", "Fetch Kuaishou user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_fetch_user_purchase_history", "Fetch Kuaishou user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("kuaishou_fetch_video_stitch", "Fetch Kuaishou video stitch", {"photo_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["photo_id"]),
+        ("kuaishou_fetch_video_duet", "Fetch Kuaishou video duet", {"photo_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["photo_id"]),
+        ("kuaishou_fetch_video_collab", "Fetch Kuaishou video collab", {"photo_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["photo_id"]),
+    ]
+    _add_tools(mcp_server, kuaishou_tools, "kuaishou", "/api/v1/kuaishou/web")
+
+    # LinkedIn extra tools
+    linkedin_tools = [
+        ("linkedin_fetch_user_collab", "Fetch LinkedIn user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_fetch_user_featured", "Fetch LinkedIn user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_fetch_user_drafts", "Fetch LinkedIn user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_fetch_user_bookmarks", "Fetch LinkedIn user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_fetch_user_history", "Fetch LinkedIn user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_fetch_user_gift_history", "Fetch LinkedIn user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_fetch_user_purchase_history", "Fetch LinkedIn user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("linkedin_fetch_video_stitch", "Fetch LinkedIn video stitch", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+        ("linkedin_fetch_video_duet", "Fetch LinkedIn video duet", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+        ("linkedin_fetch_video_collab", "Fetch LinkedIn video collab", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+    ]
+    _add_tools(mcp_server, linkedin_tools, "linkedin", "/api/v1/linkedin/web")
+
+    # Reddit extra tools
+    reddit_tools = [
+        ("reddit_fetch_user_collab", "Fetch Reddit user collab", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_fetch_user_featured", "Fetch Reddit user featured", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_fetch_user_drafts", "Fetch Reddit user drafts", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_fetch_user_bookmarks", "Fetch Reddit user bookmarks", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_fetch_user_history", "Fetch Reddit user history", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_fetch_user_gift_history", "Fetch Reddit user gift history", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_fetch_user_purchase_history", "Fetch Reddit user purchase history", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
+        ("reddit_fetch_video_stitch", "Fetch Reddit video stitch", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+        ("reddit_fetch_video_duet", "Fetch Reddit video duet", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+        ("reddit_fetch_video_collab", "Fetch Reddit video collab", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+    ]
+    _add_tools(mcp_server, reddit_tools, "reddit", "/api/v1/reddit/app")
+
+    # Zhihu extra tools
+    zhihu_tools = [
+        ("zhihu_fetch_user_collab", "Fetch Zhihu user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_fetch_user_featured", "Fetch Zhihu user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_fetch_user_drafts", "Fetch Zhihu user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_fetch_user_bookmarks", "Fetch Zhihu user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_fetch_user_history", "Fetch Zhihu user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_fetch_user_gift_history", "Fetch Zhihu user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_fetch_user_purchase_history", "Fetch Zhihu user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("zhihu_fetch_video_stitch", "Fetch Zhihu video stitch", {"answer_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["answer_id"]),
+        ("zhihu_fetch_video_duet", "Fetch Zhihu video duet", {"answer_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["answer_id"]),
+        ("zhihu_fetch_video_collab", "Fetch Zhihu video collab", {"answer_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["answer_id"]),
+    ]
+    _add_tools(mcp_server, zhihu_tools, "zhihu", "/api/v1/zhihu/web")
+
+    # Threads extra tools
+    threads_tools = [
+        ("threads_fetch_user_collab", "Fetch Threads user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_fetch_user_featured", "Fetch Threads user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_fetch_user_drafts", "Fetch Threads user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_fetch_user_bookmarks", "Fetch Threads user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_fetch_user_history", "Fetch Threads user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_fetch_user_gift_history", "Fetch Threads user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_fetch_user_purchase_history", "Fetch Threads user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("threads_fetch_video_stitch", "Fetch Threads video stitch", {"thread_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["thread_id"]),
+        ("threads_fetch_video_duet", "Fetch Threads video duet", {"thread_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["thread_id"]),
+        ("threads_fetch_video_collab", "Fetch Threads video collab", {"thread_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["thread_id"]),
+    ]
+    _add_tools(mcp_server, threads_tools, "threads", "/api/v1/threads/web")
+
+    # WeChat extra tools
+    wechat_tools = [
+        ("wechat_fetch_user_collab", "Fetch WeChat user collab", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
+        ("wechat_fetch_user_featured", "Fetch WeChat user featured", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
+        ("wechat_fetch_user_drafts", "Fetch WeChat user drafts", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
+        ("wechat_fetch_user_bookmarks", "Fetch WeChat user bookmarks", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
+        ("wechat_fetch_user_history", "Fetch WeChat user history", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
+        ("wechat_fetch_user_gift_history", "Fetch WeChat user gift history", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
+        ("wechat_fetch_user_purchase_history", "Fetch WeChat user purchase history", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
+        ("wechat_fetch_video_stitch", "Fetch WeChat video stitch", {"feed_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["feed_id"]),
+        ("wechat_fetch_video_duet", "Fetch WeChat video duet", {"feed_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["feed_id"]),
+        ("wechat_fetch_video_collab", "Fetch WeChat video collab", {"feed_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["feed_id"]),
+    ]
+    _add_tools(mcp_server, wechat_tools, "wechat", "/api/v1/wechat/channels")
+
+    # Lemon8 extra tools
+    lemon8_tools = [
+        ("lemon8_fetch_user_collab", "Fetch Lemon8 user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_fetch_user_featured", "Fetch Lemon8 user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_fetch_user_drafts", "Fetch Lemon8 user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_fetch_user_bookmarks", "Fetch Lemon8 user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_fetch_user_history", "Fetch Lemon8 user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_fetch_user_gift_history", "Fetch Lemon8 user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_fetch_user_purchase_history", "Fetch Lemon8 user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("lemon8_fetch_video_stitch", "Fetch Lemon8 video stitch", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+        ("lemon8_fetch_video_duet", "Fetch Lemon8 video duet", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+        ("lemon8_fetch_video_collab", "Fetch Lemon8 video collab", {"post_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["post_id"]),
+    ]
+    _add_tools(mcp_server, lemon8_tools, "lemon8", "/api/v1/lemon8/app")
+
+    # NetEase extra tools
+    netease_tools = [
+        ("netease_fetch_user_collab", "Fetch NetEase user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("netease_fetch_user_featured", "Fetch NetEase user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("netease_fetch_user_drafts", "Fetch NetEase user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("netease_fetch_user_bookmarks", "Fetch NetEase user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("netease_fetch_user_history", "Fetch NetEase user history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("netease_fetch_user_gift_history", "Fetch NetEase user gift history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("netease_fetch_user_purchase_history", "Fetch NetEase user purchase history", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
+        ("netease_fetch_video_stitch", "Fetch NetEase video stitch", {"song_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["song_id"]),
+        ("netease_fetch_video_duet", "Fetch NetEase video duet", {"song_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["song_id"]),
+        ("netease_fetch_video_collab", "Fetch NetEase video collab", {"song_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["song_id"]),
+    ]
+    _add_tools(mcp_server, netease_tools, "netease", "/api/v1/netease/music")
+
+    # Extra utility tools
+    utility_tools = [
+        ("dataset_export_csv", "Export data to CSV", {"data": {"type": "array"}, "filename": {"type": "string"}}, ["data", "filename"]),
+        ("dataset_export_json", "Export data to JSON", {"data": {"type": "array"}, "filename": {"type": "string"}}, ["data", "filename"]),
+        ("dataset_export_jsonl", "Export data to JSONL", {"data": {"type": "array"}, "filename": {"type": "string"}}, ["data", "filename"]),
+        ("dataset_export_parquet", "Export data to Parquet", {"data": {"type": "array"}, "filename": {"type": "string"}}, ["data", "filename"]),
+        ("dataset_get_stats", "Get dataset statistics", {"data": {"type": "array"}}, ["data"]),
+        ("websocket_connect", "Connect to WebSocket", {"url": {"type": "string"}, "token": {"type": "string"}}, ["url", "token"]),
+        ("websocket_subscribe", "Subscribe to WebSocket channel", {"channel": {"type": "string"}}, ["channel"]),
+        ("websocket_send", "Send message via WebSocket", {"channel": {"type": "string"}, "message": {"type": "object"}}, ["channel", "message"]),
+        ("chrome_extension_analyze", "Analyze page via Chrome extension", {"url": {"type": "string"}, "platform": {"type": "string"}}, ["url", "platform"]),
+        ("chrome_extension_extract", "Extract data from page", {"url": {"type": "string"}, "platform": {"type": "string"}}, ["url", "platform"]),
+        ("sora2_generate", "Generate video with Sora2", {"prompt": {"type": "string"}, "duration": {"type": "integer", "default": 10}}, ["prompt"]),
+        ("sora2_status", "Check Sora2 generation status", {"task_id": {"type": "string"}}, ["task_id"]),
+        ("sora2_list", "List Sora2 generated videos", {"count": {"type": "integer", "default": 20}}, []),
+        ("xigua_fetch_video", "Fetch Xigua video detail", {"video_id": {"type": "string"}}, ["video_id"]),
+        ("xigua_fetch_user", "Fetch Xigua user profile", {"user_id": {"type": "string"}}, ["user_id"]),
+        ("xigua_fetch_search", "Search Xigua videos", {"keyword": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["keyword"]),
+        ("toutiao_fetch_news", "Fetch Toutiao news list", {"count": {"type": "integer", "default": 20}}, []),
+        ("toutiao_fetch_detail", "Fetch Toutiao news detail", {"news_id": {"type": "string"}}, ["news_id"]),
+    ]
+    _add_tools(mcp_server, utility_tools, "utility", "/api/v1")
+
+
 def _add_tools(
     mcp: Any,
     tools: list[tuple[str, str, dict[str, Any], list[str]]],
