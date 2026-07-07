@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "socialmedia-hub"
-version = "0.8.0"
+version = "0.9.0"
 description = "High-performance Python SDK and API server for multi-platform social media data."
 readme = "README.md"
 license = "MIT"

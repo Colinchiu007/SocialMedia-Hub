@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Any, Type
+from typing import Any
 
 logger = logging.getLogger("socialmedia_hub.integrations.langchain")
 
@@ -24,13 +24,6 @@ def create_langchain_tools(
     Returns:
         List of LangChain Tool objects
     """
-    try:
-        from langchain_core.tools import StructuredTool
-    except ImportError:
-        raise ImportError("langchain-core is required. Install with: pip install langchain-core")
-
-    from socialmedia_hub.server._core import proxy_request
-
     tools = []
     platform_list = platforms or [
         "douyin", "tiktok", "instagram", "youtube", "twitter",

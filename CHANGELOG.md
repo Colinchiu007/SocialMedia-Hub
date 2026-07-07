@@ -5,6 +5,23 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-07-07
+
+### Added
+
+#### MCP 工具扩展至 1000+
+- 新增 7 个次要平台 V3 工具 (LinkedIn/Reddit/Zhihu/Threads/WeChat/Lemon8/NetEase)
+- 新增 29 个实用工具 (analytics/scheduler/batch/export/compare/trend/sentiment/tag/translate/summarize/hashtag/optimize/schedule/competitor)
+- MCP 工具总数达到 1000 个
+
+#### 工具分布
+- 主要平台 (TikTok/Douyin/Instagram/YouTube/Twitter/Xiaohongshu/Bilibili/Weibo/Kuaishou): 各 60 个工具 (V1/V2/V3)
+- 次要平台 (LinkedIn/Reddit/Zhihu/Threads/WeChat/Lemon8/NetEase): 各 27-30 个工具 (V1/V2/V3)
+- 实用工具: 29 个
+
+### Changed
+- 版本号更新至 0.9.0
+
 ## [0.2.0] - 2026-07-06
 
 ### Added
