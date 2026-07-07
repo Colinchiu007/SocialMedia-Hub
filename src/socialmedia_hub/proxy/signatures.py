@@ -27,7 +27,8 @@ class SignatureGenerator:
             return {}
 
         generator = self._generators[platform]
-        return generator(**kwargs)
+        result: dict[str, str] = generator(**kwargs)
+        return result
 
 
 class DouyinSignatureGenerator:

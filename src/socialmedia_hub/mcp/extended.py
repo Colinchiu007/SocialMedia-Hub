@@ -7,6 +7,9 @@ from __future__ import annotations
 
 from typing import Any
 
+# Type alias for tool definitions: (name, description, properties, required)
+ToolDef = tuple[str, str, dict[str, Any], list[str]]
+
 
 def register_extended_tools(mcp_server: Any) -> None:
     """Register extended tools on the MCP server."""
@@ -30,7 +33,7 @@ def register_extended_tools(mcp_server: Any) -> None:
 
 def _register_tiktok_extended(mcp: Any) -> None:
     """Register extended TikTok tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("tiktok_fetch_user_post_v2", "Fetch TikTok user posts V2", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
         ("tiktok_fetch_user_liked_v2", "Fetch TikTok user liked videos V2", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
         ("tiktok_fetch_user_playlist", "Fetch TikTok user playlist", {"sec_uid": {"type": "string"}}, ["sec_uid"]),
@@ -49,7 +52,7 @@ def _register_tiktok_extended(mcp: Any) -> None:
 
 def _register_douyin_extended(mcp: Any) -> None:
     """Register extended Douyin tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("douyin_fetch_user_liked", "Fetch Douyin user liked videos", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
         ("douyin_fetch_user_collection", "Fetch Douyin user collection", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
         ("douyin_fetch_user_mix", "Fetch Douyin user mix", {"mix_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["mix_id"]),
@@ -71,7 +74,7 @@ def _register_douyin_extended(mcp: Any) -> None:
 
 def _register_instagram_extended(mcp: Any) -> None:
     """Register extended Instagram tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("instagram_fetch_user_reels_v2", "Fetch Instagram user reels V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("instagram_fetch_user_stories", "Fetch Instagram user stories", {"user_id": {"type": "string"}}, ["user_id"]),
         ("instagram_fetch_user_highlights", "Fetch Instagram user highlights", {"user_id": {"type": "string"}}, ["user_id"]),
@@ -91,7 +94,7 @@ def _register_instagram_extended(mcp: Any) -> None:
 
 def _register_youtube_extended(mcp: Any) -> None:
     """Register extended YouTube tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("youtube_fetch_channel_playlists", "Fetch YouTube channel playlists", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
         ("youtube_fetch_channel_shorts", "Fetch YouTube channel shorts", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
         ("youtube_fetch_channel_community", "Fetch YouTube channel community", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
@@ -108,7 +111,7 @@ def _register_youtube_extended(mcp: Any) -> None:
 
 def _register_twitter_extended(mcp: Any) -> None:
     """Register extended Twitter tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("twitter_fetch_user_bookmarks", "Fetch Twitter user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("twitter_fetch_tweet_thread", "Fetch Twitter tweet thread", {"tweet_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["tweet_id"]),
         ("twitter_fetch_user_media", "Fetch Twitter user media", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -123,7 +126,7 @@ def _register_twitter_extended(mcp: Any) -> None:
 
 def _register_xiaohongshu_extended(mcp: Any) -> None:
     """Register extended Xiaohongshu tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("xiaohongshu_fetch_user_liked", "Fetch Xiaohongshu user liked notes", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("xiaohongshu_fetch_user_collected", "Fetch Xiaohongshu user collected notes", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("xiaohongshu_fetch_user_followers", "Fetch Xiaohongshu user followers", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -142,7 +145,7 @@ def _register_xiaohongshu_extended(mcp: Any) -> None:
 
 def _register_bilibili_extended(mcp: Any) -> None:
     """Register extended Bilibili tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("bilibili_fetch_video_similar", "Fetch Bilibili similar videos", {"bvid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["bvid"]),
         ("bilibili_fetch_user_dynamic", "Fetch Bilibili user dynamic", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
         ("bilibili_fetch_user_collections", "Fetch Bilibili user collections", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
@@ -159,7 +162,7 @@ def _register_bilibili_extended(mcp: Any) -> None:
 
 def _register_weibo_extended(mcp: Any) -> None:
     """Register extended Weibo tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("weibo_fetch_user_followers", "Fetch Weibo user followers", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
         ("weibo_fetch_user_following", "Fetch Weibo user following", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
         ("weibo_fetch_post_detail", "Fetch Weibo post detail", {"mid": {"type": "string"}}, ["mid"]),
@@ -173,7 +176,7 @@ def _register_weibo_extended(mcp: Any) -> None:
 
 def _register_kuaishou_extended(mcp: Any) -> None:
     """Register extended Kuaishou tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("kuaishou_fetch_user_videos", "Fetch Kuaishou user videos", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("kuaishou_fetch_user_followers", "Fetch Kuaishou user followers", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("kuaishou_fetch_user_following", "Fetch Kuaishou user following", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -187,7 +190,7 @@ def _register_kuaishou_extended(mcp: Any) -> None:
 
 def _register_linkedin_extended(mcp: Any) -> None:
     """Register extended LinkedIn tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("linkedin_fetch_user_connections", "Fetch LinkedIn user connections", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("linkedin_fetch_user_followers", "Fetch LinkedIn user followers", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("linkedin_fetch_user_experience", "Fetch LinkedIn user experience", {"user_id": {"type": "string"}}, ["user_id"]),
@@ -201,7 +204,7 @@ def _register_linkedin_extended(mcp: Any) -> None:
 
 def _register_reddit_extended(mcp: Any) -> None:
     """Register extended Reddit tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("reddit_fetch_subreddit_rules", "Fetch Reddit subreddit rules", {"subreddit": {"type": "string"}}, ["subreddit"]),
         ("reddit_fetch_subreddit_wiki", "Fetch Reddit subreddit wiki", {"subreddit": {"type": "string"}}, ["subreddit"]),
         ("reddit_fetch_user_comments", "Fetch Reddit user comments", {"username": {"type": "string"}, "sort": {"type": "string", "default": "new"}, "count": {"type": "integer", "default": 20}}, ["username"]),
@@ -215,7 +218,7 @@ def _register_reddit_extended(mcp: Any) -> None:
 
 def _register_zhihu_extended(mcp: Any) -> None:
     """Register extended Zhihu tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("zhihu_fetch_user_answers", "Fetch Zhihu user answers", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("zhihu_fetch_user_articles", "Fetch Zhihu user articles", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("zhihu_fetch_user_questions", "Fetch Zhihu user questions", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -229,7 +232,7 @@ def _register_zhihu_extended(mcp: Any) -> None:
 
 def _register_threads_extended(mcp: Any) -> None:
     """Register extended Threads tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("threads_fetch_user_followers", "Fetch Threads user followers", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("threads_fetch_user_following", "Fetch Threads user following", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("threads_fetch_thread_likes", "Fetch Threads thread likes", {"thread_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["thread_id"]),
@@ -240,7 +243,7 @@ def _register_threads_extended(mcp: Any) -> None:
 
 def _register_wechat_extended(mcp: Any) -> None:
     """Register extended WeChat tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("wechat_fetch_user_videos", "Fetch WeChat user videos", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
         ("wechat_fetch_video_comments", "Fetch WeChat video comments", {"feed_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["feed_id"]),
         ("wechat_fetch_user_followers", "Fetch WeChat user followers", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
@@ -250,7 +253,7 @@ def _register_wechat_extended(mcp: Any) -> None:
 
 def _register_lemon8_extended(mcp: Any) -> None:
     """Register extended Lemon8 tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("lemon8_fetch_user_liked", "Fetch Lemon8 user liked posts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("lemon8_fetch_user_bookmarks", "Fetch Lemon8 user bookmarks", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
     ]
@@ -259,7 +262,7 @@ def _register_lemon8_extended(mcp: Any) -> None:
 
 def _register_utility_extended(mcp: Any) -> None:
     """Register extended utility tools."""
-    tools = [
+    tools: list[ToolDef] = [
         ("netease_fetch_song_lyrics", "Fetch NetEase song lyrics", {"song_id": {"type": "string"}}, ["song_id"]),
         ("netease_fetch_playlist_tracks", "Fetch NetEase playlist tracks", {"playlist_id": {"type": "string"}, "count": {"type": "integer", "default": 50}}, ["playlist_id"]),
         ("netease_fetch_artist_songs", "Fetch NetEase artist songs", {"artist_id": {"type": "string"}, "count": {"type": "integer", "default": 50}}, ["artist_id"]),
@@ -319,7 +322,7 @@ def _register_utility_extended(mcp: Any) -> None:
 def register_extra_tools(mcp_server: Any) -> None:
     """Register extra tools to reach 500+ total."""
     # TikTok extra tools
-    tiktok_tools = [
+    tiktok_tools: list[ToolDef] = [
         ("tiktok_fetch_user_liked_v3", "Fetch TikTok user liked V3", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
         ("tiktok_fetch_user_collection", "Fetch TikTok user collection", {"sec_uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_uid"]),
         ("tiktok_fetch_user_mix", "Fetch TikTok user mix", {"mix_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["mix_id"]),
@@ -344,7 +347,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, tiktok_tools, "tiktok", "/api/v1/tiktok/web")
 
     # Douyin extra tools
-    douyin_tools = [
+    douyin_tools: list[ToolDef] = [
         ("douyin_fetch_user_collab", "Fetch Douyin user collab", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
         ("douyin_fetch_user_featured", "Fetch Douyin user featured", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
         ("douyin_fetch_user_drafts", "Fetch Douyin user drafts", {"sec_user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["sec_user_id"]),
@@ -361,7 +364,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, douyin_tools, "douyin", "/api/v1/douyin/web")
 
     # Instagram extra tools
-    instagram_tools = [
+    instagram_tools: list[ToolDef] = [
         ("instagram_fetch_user_collab", "Fetch Instagram user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("instagram_fetch_user_featured", "Fetch Instagram user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("instagram_fetch_user_drafts", "Fetch Instagram user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -376,7 +379,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, instagram_tools, "instagram", "/api/v1/instagram/v1")
 
     # YouTube extra tools
-    youtube_tools = [
+    youtube_tools: list[ToolDef] = [
         ("youtube_fetch_user_collab", "Fetch YouTube user collab", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
         ("youtube_fetch_user_featured", "Fetch YouTube user featured", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
         ("youtube_fetch_user_drafts", "Fetch YouTube user drafts", {"channel_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["channel_id"]),
@@ -391,7 +394,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, youtube_tools, "youtube", "/api/v1/youtube/web")
 
     # Twitter extra tools
-    twitter_tools = [
+    twitter_tools: list[ToolDef] = [
         ("twitter_fetch_user_collab", "Fetch Twitter user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("twitter_fetch_user_featured", "Fetch Twitter user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("twitter_fetch_user_drafts", "Fetch Twitter user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -406,7 +409,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, twitter_tools, "twitter", "/api/v1/twitter/web")
 
     # Xiaohongshu extra tools
-    xiaohongshu_tools = [
+    xiaohongshu_tools: list[ToolDef] = [
         ("xiaohongshu_fetch_user_collab", "Fetch Xiaohongshu user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("xiaohongshu_fetch_user_featured", "Fetch Xiaohongshu user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("xiaohongshu_fetch_user_drafts", "Fetch Xiaohongshu user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -421,7 +424,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, xiaohongshu_tools, "xiaohongshu", "/api/v1/xiaohongshu/web")
 
     # Bilibili extra tools
-    bilibili_tools = [
+    bilibili_tools: list[ToolDef] = [
         ("bilibili_fetch_user_collab", "Fetch Bilibili user collab", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
         ("bilibili_fetch_user_featured", "Fetch Bilibili user featured", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
         ("bilibili_fetch_user_drafts", "Fetch Bilibili user drafts", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
@@ -436,7 +439,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, bilibili_tools, "bilibili", "/api/v1/bilibili/web")
 
     # Weibo extra tools
-    weibo_tools = [
+    weibo_tools: list[ToolDef] = [
         ("weibo_fetch_user_collab", "Fetch Weibo user collab", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
         ("weibo_fetch_user_featured", "Fetch Weibo user featured", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
         ("weibo_fetch_user_drafts", "Fetch Weibo user drafts", {"uid": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["uid"]),
@@ -451,7 +454,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, weibo_tools, "weibo", "/api/v1/weibo/web")
 
     # Kuaishou extra tools
-    kuaishou_tools = [
+    kuaishou_tools: list[ToolDef] = [
         ("kuaishou_fetch_user_collab", "Fetch Kuaishou user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("kuaishou_fetch_user_featured", "Fetch Kuaishou user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("kuaishou_fetch_user_drafts", "Fetch Kuaishou user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -466,7 +469,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, kuaishou_tools, "kuaishou", "/api/v1/kuaishou/web")
 
     # LinkedIn extra tools
-    linkedin_tools = [
+    linkedin_tools: list[ToolDef] = [
         ("linkedin_fetch_user_collab", "Fetch LinkedIn user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("linkedin_fetch_user_featured", "Fetch LinkedIn user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("linkedin_fetch_user_drafts", "Fetch LinkedIn user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -481,7 +484,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, linkedin_tools, "linkedin", "/api/v1/linkedin/web")
 
     # Reddit extra tools
-    reddit_tools = [
+    reddit_tools: list[ToolDef] = [
         ("reddit_fetch_user_collab", "Fetch Reddit user collab", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
         ("reddit_fetch_user_featured", "Fetch Reddit user featured", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
         ("reddit_fetch_user_drafts", "Fetch Reddit user drafts", {"username": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["username"]),
@@ -496,7 +499,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, reddit_tools, "reddit", "/api/v1/reddit/app")
 
     # Zhihu extra tools
-    zhihu_tools = [
+    zhihu_tools: list[ToolDef] = [
         ("zhihu_fetch_user_collab", "Fetch Zhihu user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("zhihu_fetch_user_featured", "Fetch Zhihu user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("zhihu_fetch_user_drafts", "Fetch Zhihu user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -511,7 +514,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, zhihu_tools, "zhihu", "/api/v1/zhihu/web")
 
     # Threads extra tools
-    threads_tools = [
+    threads_tools: list[ToolDef] = [
         ("threads_fetch_user_collab", "Fetch Threads user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("threads_fetch_user_featured", "Fetch Threads user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("threads_fetch_user_drafts", "Fetch Threads user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -526,7 +529,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, threads_tools, "threads", "/api/v1/threads/web")
 
     # WeChat extra tools
-    wechat_tools = [
+    wechat_tools: list[ToolDef] = [
         ("wechat_fetch_user_collab", "Fetch WeChat user collab", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
         ("wechat_fetch_user_featured", "Fetch WeChat user featured", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
         ("wechat_fetch_user_drafts", "Fetch WeChat user drafts", {"usr_name": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["usr_name"]),
@@ -541,7 +544,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, wechat_tools, "wechat", "/api/v1/wechat/channels")
 
     # Lemon8 extra tools
-    lemon8_tools = [
+    lemon8_tools: list[ToolDef] = [
         ("lemon8_fetch_user_collab", "Fetch Lemon8 user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("lemon8_fetch_user_featured", "Fetch Lemon8 user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("lemon8_fetch_user_drafts", "Fetch Lemon8 user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -556,7 +559,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, lemon8_tools, "lemon8", "/api/v1/lemon8/app")
 
     # NetEase extra tools
-    netease_tools = [
+    netease_tools: list[ToolDef] = [
         ("netease_fetch_user_collab", "Fetch NetEase user collab", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("netease_fetch_user_featured", "Fetch NetEase user featured", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("netease_fetch_user_drafts", "Fetch NetEase user drafts", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -571,7 +574,7 @@ def register_extra_tools(mcp_server: Any) -> None:
     _add_tools(mcp_server, netease_tools, "netease", "/api/v1/netease/music")
 
     # Extra utility tools
-    utility_tools = [
+    utility_tools: list[ToolDef] = [
         ("dataset_export_csv", "Export data to CSV", {"data": {"type": "array"}, "filename": {"type": "string"}}, ["data", "filename"]),
         ("dataset_export_json", "Export data to JSON", {"data": {"type": "array"}, "filename": {"type": "string"}}, ["data", "filename"]),
         ("dataset_export_jsonl", "Export data to JSONL", {"data": {"type": "array"}, "filename": {"type": "string"}}, ["data", "filename"]),
@@ -597,7 +600,7 @@ def register_extra_tools(mcp_server: Any) -> None:
 def register_extra_tools_v2(mcp_server: Any) -> None:
     """Register extra tools to reach 700+ total."""
     # TikTok V2 tools
-    tiktok_v2_tools = [
+    tiktok_v2_tools: list[ToolDef] = [
         ("tiktok_v2_fetch_video", "Fetch TikTok video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("tiktok_v2_fetch_user", "Fetch TikTok user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("tiktok_v2_fetch_comments", "Fetch TikTok comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -622,7 +625,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, tiktok_v2_tools, "tiktok", "/api/v1/tiktok/web")
 
     # Douyin V2 tools
-    douyin_v2_tools = [
+    douyin_v2_tools: list[ToolDef] = [
         ("douyin_v2_fetch_video", "Fetch Douyin video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("douyin_v2_fetch_user", "Fetch Douyin user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("douyin_v2_fetch_comments", "Fetch Douyin comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -647,7 +650,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, douyin_v2_tools, "douyin", "/api/v1/douyin/web")
 
     # Instagram V2 tools
-    instagram_v2_tools = [
+    instagram_v2_tools: list[ToolDef] = [
         ("instagram_v2_fetch_video", "Fetch Instagram video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("instagram_v2_fetch_user", "Fetch Instagram user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("instagram_v2_fetch_comments", "Fetch Instagram comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -672,7 +675,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, instagram_v2_tools, "instagram", "/api/v1/instagram/v1")
 
     # YouTube V2 tools
-    youtube_v2_tools = [
+    youtube_v2_tools: list[ToolDef] = [
         ("youtube_v2_fetch_video", "Fetch YouTube video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("youtube_v2_fetch_user", "Fetch YouTube user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("youtube_v2_fetch_comments", "Fetch YouTube comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -697,7 +700,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, youtube_v2_tools, "youtube", "/api/v1/youtube/web")
 
     # Twitter V2 tools
-    twitter_v2_tools = [
+    twitter_v2_tools: list[ToolDef] = [
         ("twitter_v2_fetch_video", "Fetch Twitter video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("twitter_v2_fetch_user", "Fetch Twitter user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("twitter_v2_fetch_comments", "Fetch Twitter comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -722,7 +725,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, twitter_v2_tools, "twitter", "/api/v1/twitter/web")
 
     # Xiaohongshu V2 tools
-    xiaohongshu_v2_tools = [
+    xiaohongshu_v2_tools: list[ToolDef] = [
         ("xiaohongshu_v2_fetch_video", "Fetch Xiaohongshu video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("xiaohongshu_v2_fetch_user", "Fetch Xiaohongshu user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("xiaohongshu_v2_fetch_comments", "Fetch Xiaohongshu comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -747,7 +750,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, xiaohongshu_v2_tools, "xiaohongshu", "/api/v1/xiaohongshu/web")
 
     # Bilibili V2 tools
-    bilibili_v2_tools = [
+    bilibili_v2_tools: list[ToolDef] = [
         ("bilibili_v2_fetch_video", "Fetch Bilibili video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("bilibili_v2_fetch_user", "Fetch Bilibili user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("bilibili_v2_fetch_comments", "Fetch Bilibili comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -772,7 +775,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, bilibili_v2_tools, "bilibili", "/api/v1/bilibili/web")
 
     # Weibo V2 tools
-    weibo_v2_tools = [
+    weibo_v2_tools: list[ToolDef] = [
         ("weibo_v2_fetch_video", "Fetch Weibo video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("weibo_v2_fetch_user", "Fetch Weibo user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("weibo_v2_fetch_comments", "Fetch Weibo comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -797,7 +800,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, weibo_v2_tools, "weibo", "/api/v1/weibo/web")
 
     # Kuaishou V2 tools
-    kuaishou_v2_tools = [
+    kuaishou_v2_tools: list[ToolDef] = [
         ("kuaishou_v2_fetch_video", "Fetch Kuaishou video V2", {"video_id": {"type": "string"}}, ["video_id"]),
         ("kuaishou_v2_fetch_user", "Fetch Kuaishou user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("kuaishou_v2_fetch_comments", "Fetch Kuaishou comments V2", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -822,7 +825,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, kuaishou_v2_tools, "kuaishou", "/api/v1/kuaishou/web")
 
     # LinkedIn V2 tools
-    linkedin_v2_tools = [
+    linkedin_v2_tools: list[ToolDef] = [
         ("linkedin_v2_fetch_user", "Fetch LinkedIn user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("linkedin_v2_fetch_posts", "Fetch LinkedIn posts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("linkedin_v2_fetch_connections", "Fetch LinkedIn connections V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -834,7 +837,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, linkedin_v2_tools, "linkedin", "/api/v1/linkedin/web")
 
     # Reddit V2 tools
-    reddit_v2_tools = [
+    reddit_v2_tools: list[ToolDef] = [
         ("reddit_v2_fetch_post", "Fetch Reddit post V2", {"post_id": {"type": "string"}}, ["post_id"]),
         ("reddit_v2_fetch_subreddit", "Fetch Reddit subreddit V2", {"subreddit": {"type": "string"}, "sort": {"type": "string", "default": "hot"}}, ["subreddit"]),
         ("reddit_v2_fetch_user", "Fetch Reddit user V2", {"username": {"type": "string"}}, ["username"]),
@@ -846,7 +849,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, reddit_v2_tools, "reddit", "/api/v1/reddit/app")
 
     # Zhihu V2 tools
-    zhihu_v2_tools = [
+    zhihu_v2_tools: list[ToolDef] = [
         ("zhihu_v2_fetch_question", "Fetch Zhihu question V2", {"question_id": {"type": "string"}}, ["question_id"]),
         ("zhihu_v2_fetch_answer", "Fetch Zhihu answer V2", {"answer_id": {"type": "string"}}, ["answer_id"]),
         ("zhihu_v2_fetch_user", "Fetch Zhihu user V2", {"user_id": {"type": "string"}}, ["user_id"]),
@@ -858,7 +861,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, zhihu_v2_tools, "zhihu", "/api/v1/zhihu/web")
 
     # Threads V2 tools
-    threads_v2_tools = [
+    threads_v2_tools: list[ToolDef] = [
         ("threads_v2_fetch_user", "Fetch Threads user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("threads_v2_fetch_threads", "Fetch Threads threads V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("threads_v2_fetch_thread", "Fetch Threads thread V2", {"thread_id": {"type": "string"}}, ["thread_id"]),
@@ -868,7 +871,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, threads_v2_tools, "threads", "/api/v1/threads/web")
 
     # WeChat V2 tools
-    wechat_v2_tools = [
+    wechat_v2_tools: list[ToolDef] = [
         ("wechat_v2_fetch_user", "Fetch WeChat user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("wechat_v2_fetch_videos", "Fetch WeChat videos V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("wechat_v2_fetch_video", "Fetch WeChat video V2", {"video_id": {"type": "string"}}, ["video_id"]),
@@ -878,7 +881,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, wechat_v2_tools, "wechat", "/api/v1/wechat/channels")
 
     # Lemon8 V2 tools
-    lemon8_v2_tools = [
+    lemon8_v2_tools: list[ToolDef] = [
         ("lemon8_v2_fetch_user", "Fetch Lemon8 user V2", {"user_id": {"type": "string"}}, ["user_id"]),
         ("lemon8_v2_fetch_posts", "Fetch Lemon8 posts V2", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("lemon8_v2_fetch_post", "Fetch Lemon8 post V2", {"post_id": {"type": "string"}}, ["post_id"]),
@@ -888,7 +891,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, lemon8_v2_tools, "lemon8", "/api/v1/lemon8/app")
 
     # NetEase V2 tools
-    netease_v2_tools = [
+    netease_v2_tools: list[ToolDef] = [
         ("netease_v2_fetch_song", "Fetch NetEase song V2", {"song_id": {"type": "string"}}, ["song_id"]),
         ("netease_v2_fetch_playlist", "Fetch NetEase playlist V2", {"playlist_id": {"type": "string"}}, ["playlist_id"]),
         ("netease_v2_fetch_artist", "Fetch NetEase artist V2", {"artist_id": {"type": "string"}}, ["artist_id"]),
@@ -898,7 +901,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, netease_v2_tools, "netease", "/api/v1/netease/music")
 
     # LinkedIn V3 tools
-    linkedin_v3_tools = [
+    linkedin_v3_tools: list[ToolDef] = [
         ("linkedin_v3_fetch_user", "Fetch LinkedIn user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("linkedin_v3_fetch_posts", "Fetch LinkedIn posts V3", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("linkedin_v3_fetch_connections", "Fetch LinkedIn connections V3", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
@@ -913,7 +916,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, linkedin_v3_tools, "linkedin", "/api/v1/linkedin/web")
 
     # Reddit V3 tools
-    reddit_v3_tools = [
+    reddit_v3_tools: list[ToolDef] = [
         ("reddit_v3_fetch_post", "Fetch Reddit post V3", {"post_id": {"type": "string"}}, ["post_id"]),
         ("reddit_v3_fetch_subreddit", "Fetch Reddit subreddit V3", {"subreddit": {"type": "string"}, "sort": {"type": "string", "default": "hot"}}, ["subreddit"]),
         ("reddit_v3_fetch_user", "Fetch Reddit user V3", {"username": {"type": "string"}}, ["username"]),
@@ -928,7 +931,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, reddit_v3_tools, "reddit", "/api/v1/reddit/app")
 
     # Zhihu V3 tools
-    zhihu_v3_tools = [
+    zhihu_v3_tools: list[ToolDef] = [
         ("zhihu_v3_fetch_question", "Fetch Zhihu question V3", {"question_id": {"type": "string"}}, ["question_id"]),
         ("zhihu_v3_fetch_answer", "Fetch Zhihu answer V3", {"answer_id": {"type": "string"}}, ["answer_id"]),
         ("zhihu_v3_fetch_user", "Fetch Zhihu user V3", {"user_id": {"type": "string"}}, ["user_id"]),
@@ -943,7 +946,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, zhihu_v3_tools, "zhihu", "/api/v1/zhihu/web")
 
     # Threads V3 tools
-    threads_v3_tools = [
+    threads_v3_tools: list[ToolDef] = [
         ("threads_v3_fetch_user", "Fetch Threads user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("threads_v3_fetch_threads", "Fetch Threads threads V3", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("threads_v3_fetch_thread", "Fetch Threads thread V3", {"thread_id": {"type": "string"}}, ["thread_id"]),
@@ -958,7 +961,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, threads_v3_tools, "threads", "/api/v1/threads/web")
 
     # WeChat V3 tools
-    wechat_v3_tools = [
+    wechat_v3_tools: list[ToolDef] = [
         ("wechat_v3_fetch_user", "Fetch WeChat user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("wechat_v3_fetch_videos", "Fetch WeChat videos V3", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("wechat_v3_fetch_video", "Fetch WeChat video V3", {"video_id": {"type": "string"}}, ["video_id"]),
@@ -973,7 +976,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, wechat_v3_tools, "wechat", "/api/v1/wechat/channels")
 
     # Lemon8 V3 tools
-    lemon8_v3_tools = [
+    lemon8_v3_tools: list[ToolDef] = [
         ("lemon8_v3_fetch_user", "Fetch Lemon8 user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("lemon8_v3_fetch_posts", "Fetch Lemon8 posts V3", {"user_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["user_id"]),
         ("lemon8_v3_fetch_post", "Fetch Lemon8 post V3", {"post_id": {"type": "string"}}, ["post_id"]),
@@ -988,7 +991,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, lemon8_v3_tools, "lemon8", "/api/v1/lemon8/app")
 
     # NetEase V3 tools
-    netease_v3_tools = [
+    netease_v3_tools: list[ToolDef] = [
         ("netease_v3_fetch_song", "Fetch NetEase song V3", {"song_id": {"type": "string"}}, ["song_id"]),
         ("netease_v3_fetch_playlist", "Fetch NetEase playlist V3", {"playlist_id": {"type": "string"}}, ["playlist_id"]),
         ("netease_v3_fetch_artist", "Fetch NetEase artist V3", {"artist_id": {"type": "string"}}, ["artist_id"]),
@@ -1003,7 +1006,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, netease_v3_tools, "netease", "/api/v1/netease/music")
 
     # TikTok V3 tools
-    tiktok_v3_tools = [
+    tiktok_v3_tools: list[ToolDef] = [
         ("tiktok_v3_fetch_video", "Fetch TikTok video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("tiktok_v3_fetch_user", "Fetch TikTok user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("tiktok_v3_fetch_comments", "Fetch TikTok comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1028,7 +1031,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, tiktok_v3_tools, "tiktok", "/api/v1/tiktok/web")
 
     # Douyin V3 tools
-    douyin_v3_tools = [
+    douyin_v3_tools: list[ToolDef] = [
         ("douyin_v3_fetch_video", "Fetch Douyin video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("douyin_v3_fetch_user", "Fetch Douyin user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("douyin_v3_fetch_comments", "Fetch Douyin comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1053,7 +1056,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, douyin_v3_tools, "douyin", "/api/v1/douyin/web")
 
     # Instagram V3 tools
-    instagram_v3_tools = [
+    instagram_v3_tools: list[ToolDef] = [
         ("instagram_v3_fetch_video", "Fetch Instagram video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("instagram_v3_fetch_user", "Fetch Instagram user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("instagram_v3_fetch_comments", "Fetch Instagram comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1078,7 +1081,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, instagram_v3_tools, "instagram", "/api/v1/instagram/v1")
 
     # YouTube V3 tools
-    youtube_v3_tools = [
+    youtube_v3_tools: list[ToolDef] = [
         ("youtube_v3_fetch_video", "Fetch YouTube video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("youtube_v3_fetch_user", "Fetch YouTube user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("youtube_v3_fetch_comments", "Fetch YouTube comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1103,7 +1106,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, youtube_v3_tools, "youtube", "/api/v1/youtube/web")
 
     # Twitter V3 tools
-    twitter_v3_tools = [
+    twitter_v3_tools: list[ToolDef] = [
         ("twitter_v3_fetch_video", "Fetch Twitter video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("twitter_v3_fetch_user", "Fetch Twitter user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("twitter_v3_fetch_comments", "Fetch Twitter comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1128,7 +1131,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, twitter_v3_tools, "twitter", "/api/v1/twitter/web")
 
     # Xiaohongshu V3 tools
-    xiaohongshu_v3_tools = [
+    xiaohongshu_v3_tools: list[ToolDef] = [
         ("xiaohongshu_v3_fetch_video", "Fetch Xiaohongshu video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("xiaohongshu_v3_fetch_user", "Fetch Xiaohongshu user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("xiaohongshu_v3_fetch_comments", "Fetch Xiaohongshu comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1153,7 +1156,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, xiaohongshu_v3_tools, "xiaohongshu", "/api/v1/xiaohongshu/web")
 
     # Bilibili V3 tools
-    bilibili_v3_tools = [
+    bilibili_v3_tools: list[ToolDef] = [
         ("bilibili_v3_fetch_video", "Fetch Bilibili video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("bilibili_v3_fetch_user", "Fetch Bilibili user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("bilibili_v3_fetch_comments", "Fetch Bilibili comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1178,7 +1181,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, bilibili_v3_tools, "bilibili", "/api/v1/bilibili/web")
 
     # Weibo V3 tools
-    weibo_v3_tools = [
+    weibo_v3_tools: list[ToolDef] = [
         ("weibo_v3_fetch_video", "Fetch Weibo video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("weibo_v3_fetch_user", "Fetch Weibo user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("weibo_v3_fetch_comments", "Fetch Weibo comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1203,7 +1206,7 @@ def register_extra_tools_v2(mcp_server: Any) -> None:
     _add_tools(mcp_server, weibo_v3_tools, "weibo", "/api/v1/weibo/web")
 
     # Kuaishou V3 tools
-    kuaishou_v3_tools = [
+    kuaishou_v3_tools: list[ToolDef] = [
         ("kuaishou_v3_fetch_video", "Fetch Kuaishou video V3", {"video_id": {"type": "string"}}, ["video_id"]),
         ("kuaishou_v3_fetch_user", "Fetch Kuaishou user V3", {"user_id": {"type": "string"}}, ["user_id"]),
         ("kuaishou_v3_fetch_comments", "Fetch Kuaishou comments V3", {"video_id": {"type": "string"}, "count": {"type": "integer", "default": 20}}, ["video_id"]),
@@ -1254,7 +1257,7 @@ def _add_tools(
 
 def register_utility_tools_v3(mcp_server: Any) -> None:
     """Register additional utility tools to reach 1000+."""
-    utility_v3_tools = [
+    utility_v3_tools: list[ToolDef] = [
         ("analytics_fetch_overview", "Fetch analytics overview", {"platform": {"type": "string"}, "period": {"type": "string", "default": "7d"}}, ["platform"]),
         ("analytics_fetch_engagement", "Fetch analytics engagement", {"platform": {"type": "string"}, "period": {"type": "string", "default": "7d"}}, ["platform"]),
         ("analytics_fetch_audience", "Fetch analytics audience", {"platform": {"type": "string"}}, ["platform"]),

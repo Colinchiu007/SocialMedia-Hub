@@ -5,6 +5,18 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2026-07-07
+
+### Added
+
+#### 类型安全
+- 修复 mypy 类型错误 (49 → 0)
+- 添加 ToolDef 类型别名
+- 完善 signatures.py 和 exporter.py 类型注解
+
+### Changed
+- 版本号更新至 1.0.0 (正式发布)
+
 ## [0.9.0] - 2026-07-07
 
 ### Added

@@ -174,7 +174,7 @@ class DatasetExporter:
         if not data:
             return {"count": 0, "fields": []}
 
-        fields = set()
+        fields: set[str] = set()
         for record in data:
             fields.update(record.keys())
 
