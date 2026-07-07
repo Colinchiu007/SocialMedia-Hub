@@ -5,6 +5,21 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-07-07
+
+### Added
+
+#### 测试覆盖率提升
+- 新增 37 个测试 (223 → 260)
+- `_auth.py` 覆盖率: 0% → 100%
+- `_types.py` 覆盖率: 0% → 100%
+- `_rate_limit.py` 覆盖率: 30% → 100%
+- `_base_client.py` 覆盖率: 44% → 50%
+- `cli/main.py` 覆盖率: 0% → 34%
+
+### Changed
+- 版本号更新至 1.1.0
+
 ## [1.0.0] - 2026-07-07
 
 ### Added
