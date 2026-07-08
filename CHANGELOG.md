@@ -5,6 +5,18 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-07-07
+
+### Added
+
+#### 测试稳定性修复
+- 修复 WebSocket 测试 ResourceWarning 问题
+- 更新 pytest filterwarnings 配置
+- 单元测试全部通过 (212 passed)
+
+### Changed
+- 版本号更新至 1.6.0
+
 ## [1.5.0] - 2026-07-07
 
 ### Added

@@ -6,7 +6,17 @@ import pytest
 from fastapi.testclient import TestClient
 
 from socialmedia_hub.server.main import app
-from socialmedia_hub.websocket.manager import ConnectionManager
+from socialmedia_hub.websocket.manager import ConnectionManager, manager
+
+
+@pytest.fixture(autouse=True)
+def reset_global_manager():
+    """Reset global manager state before each test."""
+    manager.active_connections.clear()
+    manager.subscriptions.clear()
+    yield
+    manager.active_connections.clear()
+    manager.subscriptions.clear()
 
 
 @pytest.fixture
@@ -77,27 +87,22 @@ class TestWebSocketIntegration:
     def test_manager_broadcast(self):
         """Test broadcast functionality."""
         mgr = ConnectionManager()
+        # Test broadcast to empty channel - should not raise
         import asyncio
-
-        async def test():
-            # Test broadcast to empty channel
-            await mgr.broadcast_to_channel("empty_channel", {"type": "test"})
-            # Should not raise
-
-        asyncio.run(test())
+        asyncio.run(mgr.broadcast_to_channel("empty_channel", {"type": "test"}))
 
     def test_manager_subscription_count(self):
         """Test subscription count."""
         mgr = ConnectionManager()
         import asyncio
 
-        async def test():
+        async def setup():
             await mgr.subscribe("client1", "channel1")
             await mgr.subscribe("client2", "channel1")
             await mgr.subscribe("client1", "channel2")
 
-            counts = mgr.get_subscription_count()
-            assert counts["channel1"] == 2
-            assert counts["channel2"] == 1
+        asyncio.run(setup())
 
-        asyncio.run(test())
+        counts = mgr.get_subscription_count()
+        assert counts["channel1"] == 2
+        assert counts["channel2"] == 1

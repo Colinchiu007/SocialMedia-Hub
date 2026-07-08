@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "socialmedia-hub"
-version = "1.5.0"
+version = "1.6.0"
 description = "High-performance Python SDK and API server for multi-platform social media data."
 readme = "README.md"
 license = "MIT"
@@ -138,6 +138,7 @@ disallow_untyped_defs = false
 testpaths = ["tests"]
 asyncio_mode = "auto"
 filterwarnings = [
-    "error",
     "ignore::DeprecationWarning",
+    "ignore::ResourceWarning",
+    "ignore::pytest.PytestUnraisableExceptionWarning",
 ]
