@@ -5,6 +5,18 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-07-07
+
+### Added
+
+#### TikTok Web 覆盖率提升
+- TikTok web: 26% → 50%
+- 新增 30 个正确参数的测试
+- 修复测试参数名匹配实际端点
+
+### Changed
+- 版本号更新至 2.3.0
+
 ## [2.2.0] - 2026-07-07
 
 ### Added
