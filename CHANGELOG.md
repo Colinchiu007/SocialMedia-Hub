@@ -5,6 +5,22 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-07-07
+
+### Added
+
+#### 全平台综合测试
+- 添加 Douyin 综合测试 (56 endpoints)
+- 添加 TikTok 综合测试 (62 endpoints)
+- 添加 Instagram 综合测试 (34 endpoints)
+- 添加 YouTube/Twitter 综合测试 (32 endpoints)
+- 添加其他平台综合测试 (144 endpoints)
+- 新增测试: 328
+- 总测试数: 618 → 946
+
+### Changed
+- 版本号更新至 1.5.0
+
 ## [1.4.0] - 2026-07-07
 
 ### Added
