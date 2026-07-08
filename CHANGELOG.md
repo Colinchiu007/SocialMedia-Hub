@@ -5,6 +5,20 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-07-07
+
+### Added
+
+#### 测试并行化 + 覆盖率突破
+- 安装 pytest-xdist 支持并行测试
+- 单元测试: 22s (并行) vs 34s (串行)
+- 集成测试: 8min (并行) vs 30+min (串行)
+- 总测试: 1888 passed
+- 覆盖率: 35% → **59%**
+
+### Changed
+- 版本号更新至 1.7.0
+
 ## [1.6.0] - 2026-07-07
 
 ### Added
