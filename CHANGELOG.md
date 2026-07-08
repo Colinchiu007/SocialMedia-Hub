@@ -5,6 +5,19 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-07-07
+
+### Added
+
+#### 核心模块覆盖率提升
+- 新增 53 个测试 (pagination + errors)
+- _errors.py: 79% → 100%
+- _pagination.py: 70% → 94%
+- WebSocket endpoints: 16% → 93%
+
+### Changed
+- 版本号更新至 1.9.0
+
 ## [1.8.0] - 2026-07-07
 
 ### Added
