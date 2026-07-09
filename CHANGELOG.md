@@ -5,6 +5,19 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2026-07-07
+
+### Added
+
+#### 核心模块覆盖率提升
+- 新增 25 个测试 (base_client/retries/cookies/pool/real_proxy)
+- _base_client.py: 64% → 75%
+- real_proxy.py: 71% → 86%
+- 总测试数: 3373
+
+### Changed
+- 版本号更新至 3.2.0
+
 ## [3.1.0] - 2026-07-07
 
 ### Added
