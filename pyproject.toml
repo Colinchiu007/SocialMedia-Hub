@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "socialmedia-hub"
-version = "3.0.0"
+version = "3.1.0"
 description = "High-performance Python SDK and API server for multi-platform social media data."
 readme = "README.md"
 license = "MIT"
@@ -141,11 +141,6 @@ filterwarnings = [
     "ignore::DeprecationWarning",
     "ignore::ResourceWarning",
     "ignore::pytest.PytestUnraisableExceptionWarning",
-]
-
-[tool.coverage.run]
-omit = [
-    "*/auto_*.py",
 ]
 
 [tool.coverage.report]
