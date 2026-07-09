@@ -5,6 +5,18 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-07-07
+
+### Added
+
+#### Weibo/Xiaohongshu 覆盖率提升
+- 新增 81 个测试 (Weibo + Xiaohongshu)
+- 覆盖率: 61% → 62%
+- 总测试数: 2227
+
+### Changed
+- 版本号更新至 2.4.0
+
 ## [2.3.0] - 2026-07-07
 
 ### Added
