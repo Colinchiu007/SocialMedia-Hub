@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 13 个平台签名生成器（简化版）
 - 公开页面不需要签名
 
+#### 测试优化
+- pytest-xdist 并行测试
+- 测试时间减半
+
 ### Changed
 - 版本号更新至 4.1.0
 
