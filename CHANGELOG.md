@@ -5,6 +5,30 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.8.0] - 2026-07-10
+
+### Added
+
+#### 智能获取系统
+- `smart_fetch()` 方法：yt-dlp 优先，API 降级
+- 平台自动检测：从 URL 自动识别平台
+- 签名自动处理：yt-dlp 自动处理签名
+
+#### 代理服务集成
+- `ProxyProvider` 抽象基类
+- `KuaiDaiLiProvider`：快代理 API 集成
+- `ZhiMaProvider`：芝麻代理 API 集成
+- `BrightDataProvider`：Bright Data 住宅代理
+- `FreeProxyProvider`：免费代理列表
+
+#### 语音识别
+- `WhisperTranscriber` 类：语音转文字
+- 支持多语言（中英文等）
+- 视频音频提取 + 转录
+
+### Changed
+- 版本号更新至 3.8.0
+
 ## [3.7.0] - 2026-07-10
 
 ### Added

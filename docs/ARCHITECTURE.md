@@ -55,8 +55,29 @@
 |------|------|
 | `main.py` | FastAPI 应用入口 |
 | `_core.py` | 共享核心（认证、代理、平台配置） |
-| `routes/auto_*.py` | 自动生成的路由（1010 端点） |
+| `routes/auto_*.py` | 自动生成的路由（1068 端点） |
 | `routes/*.py` | 手写路由（Live Room、NetEase） |
+
+### 3. 智能获取层 (`proxy/`)
+
+| 组件 | 职责 |
+|------|------|
+| `RealProxyLayer` | 统一代理层（认证+签名+代理+限流） |
+| `smart_fetch()` | 智能获取（yt-dlp 优先，API 降级） |
+| `CookieManager` | Cookie 管理和轮换 |
+| `ProxyPool` | 代理池（4 种轮换策略） |
+| `YTDLExtractor` | yt-dlp 视频信息提取 |
+| `WhisperTranscriber` | 语音转文字 |
+
+### 4. 代理服务集成 (`proxy/providers.py`)
+
+| 组件 | 职责 |
+|------|------|
+| `ProxyProvider` | 代理服务抽象基类 |
+| `KuaiDaiLiProvider` | 快代理 API 集成 |
+| `ZhiMaProvider` | 芝麻代理 API 集成 |
+| `BrightDataProvider` | Bright Data 住宅代理 |
+| `FreeProxyProvider` | 免费代理列表 |
 
 **路由注册顺序**（重要）：
 1. 自动生成的路由（按平台分组）

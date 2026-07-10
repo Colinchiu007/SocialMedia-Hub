@@ -794,7 +794,57 @@ def get_user_info(user_id: str):
         return client.douyin_web.fetch_user_profile_by_uid(uid=user_id)
 ```
 
-### 6. 数据验证
+### 6. 智能获取视频信息
+
+```python
+from socialmedia_hub.proxy.real_proxy import real_proxy
+
+# 方式1: 智能获取（推荐）
+# 自动尝试 yt-dlp，失败则降级到 API
+result = await real_proxy.smart_fetch(
+    "https://www.tiktok.com/@user/video/123"
+)
+print(result['data']['title'])  # 标题
+print(result['data']['description'])  # 文案
+
+# 方式2: 直接使用 yt-dlp
+result = await real_proxy.extract_video_info(
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+)
+
+# 方式3: 语音识别获取文案
+result = await real_proxy.transcribe_video(
+    "https://www.tiktok.com/@user/video/123",
+    language="zh"  # 中文
+)
+print(result['data']['transcription'])  # 语音文字
+```
+
+### 7. 配置代理服务
+
+```python
+from socialmedia_hub.proxy.providers import create_provider
+from socialmedia_hub.proxy.pool import ProxyPool
+from socialmedia_hub.proxy.real_proxy import RealProxyLayer
+
+# 方式1: 使用快代理
+provider = create_provider("kuaidaili", api_key="your_api_key")
+proxies = provider.get_proxies(count=10)
+
+# 方式2: 使用免费代理（不稳定）
+provider = create_provider("free")
+proxies = provider.get_proxies(count=5)
+
+# 创建代理池和代理层
+pool = ProxyPool()
+pool.add_proxies(proxies)
+layer = RealProxyLayer(proxy_pool=pool)
+
+# 使用
+result = await layer.smart_fetch("https://www.tiktok.com/@user/video/123")
+```
+
+### 8. 数据验证
 
 ```python
 def safe_get(data: dict, *keys, default=None):
