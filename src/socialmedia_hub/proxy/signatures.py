@@ -157,6 +157,48 @@ class WeiboSignatureGenerator:
         }
 
 
+class YouTubeSignatureGenerator:
+    """Generate signatures for YouTube API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate YouTube signature."""
+        timestamp = str(int(time.time()))
+
+        return {
+            "X-YouTube-Client-Name": "1",
+            "X-YouTube-Client-Version": "2.20240101.00.00",
+            "X-Goog-Visitor-Id": hashlib.md5(f"visitor_{timestamp}".encode()).hexdigest(),
+        }
+
+
+class TwitterSignatureGenerator:
+    """Generate signatures for Twitter/X API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Twitter signature."""
+        timestamp = str(int(time.time() * 1000))
+
+        return {
+            "X-Csrf-Token": hashlib.md5(f"csrf_{timestamp}".encode()).hexdigest(),
+            "X-Twitter-Active-User": "yes",
+            "X-Twitter-Client-Language": "en",
+        }
+
+
+class KuaishouSignatureGenerator:
+    """Generate signatures for Kuaishou API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Kuaishou signature."""
+        timestamp = str(int(time.time()))
+
+        return {
+            "Kpf": "PCJS",
+            "Kpn": "www.kuaishou.com",
+            "Cookie": f"kpf={hashlib.md5(f'kpf_{timestamp}'.encode()).hexdigest()[:16]}",
+        }
+
+
 class SignatureManager:
     """Manage signature generators for all platforms."""
 
@@ -172,6 +214,9 @@ class SignatureManager:
         self.generator.register_generator("xiaohongshu", XiaohongshuSignatureGenerator())
         self.generator.register_generator("bilibili", BilibiliSignatureGenerator())
         self.generator.register_generator("weibo", WeiboSignatureGenerator())
+        self.generator.register_generator("youtube", YouTubeSignatureGenerator())
+        self.generator.register_generator("twitter", TwitterSignatureGenerator())
+        self.generator.register_generator("kuaishou", KuaishouSignatureGenerator())
 
     def generate_signature(self, platform: str, **kwargs: Any) -> dict[str, str]:
         """Generate signature for a platform."""
