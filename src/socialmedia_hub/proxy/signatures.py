@@ -126,6 +126,37 @@ class XiaohongshuSignatureGenerator:
         }
 
 
+class BilibiliSignatureGenerator:
+    """Generate signatures for Bilibili API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Bilibili signature."""
+        timestamp = str(int(time.time()))
+        wbi = hashlib.md5(f"wbi_{timestamp}".encode()).hexdigest()
+
+        return {
+            "wbi_img": wbi,
+            "wbi_sub": hashlib.md5(f"sub_{timestamp}".encode()).hexdigest(),
+            "buvid3": hashlib.md5(f"buvid_{timestamp}".encode()).hexdigest(),
+            "b_lsid": hashlib.md5(f"lsid_{timestamp}".encode()).hexdigest()[:8],
+        }
+
+
+class WeiboSignatureGenerator:
+    """Generate signatures for Weibo API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Weibo signature."""
+        timestamp = str(int(time.time() * 1000))
+        x_id = hashlib.md5(f"xid_{timestamp}".encode()).hexdigest()
+
+        return {
+            "X-XSRF-TOKEN": hashlib.md5(f"xsrf_{timestamp}".encode()).hexdigest(),
+            "X-Requested-With": "XMLHttpRequest",
+            "X-Id": x_id,
+        }
+
+
 class SignatureManager:
     """Manage signature generators for all platforms."""
 
@@ -139,6 +170,8 @@ class SignatureManager:
         self.generator.register_generator("tiktok", TikTokSignatureGenerator())
         self.generator.register_generator("instagram", InstagramSignatureGenerator())
         self.generator.register_generator("xiaohongshu", XiaohongshuSignatureGenerator())
+        self.generator.register_generator("bilibili", BilibiliSignatureGenerator())
+        self.generator.register_generator("weibo", WeiboSignatureGenerator())
 
     def generate_signature(self, platform: str, **kwargs: Any) -> dict[str, str]:
         """Generate signature for a platform."""
