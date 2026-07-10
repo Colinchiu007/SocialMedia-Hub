@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import random
 import time
 from typing import Any
 
@@ -23,7 +24,8 @@ class RealProxyLayer:
     - Cookie management for authentication
     - Signature generation for anti-crawl
     - Proxy rotation for IP diversity
-    - Request rate control
+    - Request rate control with random delays
+    - Cookie rotation for multiple accounts
     - Session management
     """
 
@@ -32,6 +34,8 @@ class RealProxyLayer:
         cookie_manager: CookieManager | None = None,
         signature_manager: SignatureManager | None = None,
         proxy_pool: ProxyPool | None = None,
+        min_delay: float = 1.0,
+        max_delay: float = 3.0,
     ) -> None:
         """Initialize the proxy layer.
 
@@ -39,6 +43,8 @@ class RealProxyLayer:
             cookie_manager: Cookie manager instance
             signature_manager: Signature manager instance
             proxy_pool: Proxy pool instance
+            min_delay: Minimum delay between requests (seconds)
+            max_delay: Maximum delay between requests (seconds)
         """
         self.cookie_manager = cookie_manager or cookie_manager_global
         self.signature_manager = signature_manager or signature_manager_global
@@ -47,6 +53,8 @@ class RealProxyLayer:
         # Request rate control
         self._request_times: dict[str, list[float]] = {}
         self._min_interval: float = 1.0  # Minimum seconds between requests to same domain
+        self._min_delay = min_delay
+        self._max_delay = max_delay
 
     async def fetch(
         self,
@@ -74,14 +82,18 @@ class RealProxyLayer:
         Returns:
             Response data as dictionary
         """
-        # Rate control
+        # Rate control with random delay
         await self._rate_control(platform)
 
-        # Get cookies for domain
+        # Random delay between requests (anti-crawl)
+        delay = random.uniform(self._min_delay, self._max_delay)
+        await asyncio.sleep(delay)
+
+        # Get cookies for domain with rotation
         from urllib.parse import urlparse
         parsed = urlparse(url)
         domain = parsed.hostname or ""
-        cookie_header = self.cookie_manager.get_cookie_header(domain)
+        cookie_header = self._get_rotating_cookie(domain)
 
         # Merge with provided cookies
         if cookies:
@@ -152,6 +164,21 @@ class RealProxyLayer:
 
             logger.error(f"Request failed: {e}")
             return {"status_code": 0, "error": str(e)}
+
+    def _get_rotating_cookie(self, domain: str) -> str:
+        """Get cookie header with rotation for multiple accounts."""
+        cookies = self.cookie_manager.get_cookies_for_domain(domain)
+        if not cookies:
+            return ""
+
+        # If multiple cookies, rotate randomly
+        if len(cookies) > 1:
+            cookie_name = random.choice(list(cookies.keys()))
+            return f"{cookie_name}={cookies[cookie_name]}"
+
+        # Single cookie
+        cookie_name = list(cookies.keys())[0]
+        return f"{cookie_name}={cookies[cookie_name]}"
 
     async def _rate_control(self, platform: str) -> None:
         """Control request rate per platform."""

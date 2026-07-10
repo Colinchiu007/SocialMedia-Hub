@@ -5,6 +5,21 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.0] - 2026-07-10
+
+### Added
+
+#### 反爬机制强制实现
+- **随机延迟**: 请求间添加 1-3 秒随机延迟
+- **Cookie 轮换**: 支持多 Cookie 自动轮换
+- **速率限制**: 每平台每分钟最多 10 个请求
+- **代理轮换**: 支持 4 种策略 (round_robin/random/least_used/best_success)
+- **错误重试**: 429 自动等待重试
+
+### Changed
+- RealProxyLayer 添加 `min_delay` 和 `max_delay` 参数
+- 版本号更新至 3.6.0
+
 ## [3.5.0] - 2026-07-09
 
 ### Added
