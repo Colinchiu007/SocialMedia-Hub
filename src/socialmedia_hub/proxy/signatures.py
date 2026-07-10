@@ -96,6 +96,36 @@ class InstagramSignatureGenerator:
         }
 
 
+class XiaohongshuSignatureGenerator:
+    """Generate signatures for Xiaohongshu API requests.
+
+    Xiaohongshu requires:
+    - X-Signature: Request signature
+    - X-XS: Encrypted parameters
+    - X-T: Timestamp
+    - Cookie: Session cookie
+    """
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Xiaohongshu signature."""
+        timestamp = str(int(time.time() * 1000))
+        url = kwargs.get("url", "")
+
+        # Generate signature based on URL and timestamp
+        sign_str = f"{url}{timestamp}"
+        signature = hashlib.md5(sign_str.encode()).hexdigest()
+
+        # Generate XS token (simplified)
+        xs_token = hashlib.md5(f"xs_{timestamp}_{url}".encode()).hexdigest()
+
+        return {
+            "X-Signature": signature,
+            "X-XS": xs_token,
+            "X-T": timestamp,
+            "X-B3-Traceid": hashlib.md5(f"trace_{timestamp}".encode()).hexdigest()[:16],
+        }
+
+
 class SignatureManager:
     """Manage signature generators for all platforms."""
 
@@ -108,6 +138,7 @@ class SignatureManager:
         self.generator.register_generator("douyin", DouyinSignatureGenerator())
         self.generator.register_generator("tiktok", TikTokSignatureGenerator())
         self.generator.register_generator("instagram", InstagramSignatureGenerator())
+        self.generator.register_generator("xiaohongshu", XiaohongshuSignatureGenerator())
 
     def generate_signature(self, platform: str, **kwargs: Any) -> dict[str, str]:
         """Generate signature for a platform."""
