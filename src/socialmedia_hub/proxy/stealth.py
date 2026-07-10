@@ -3,9 +3,22 @@
 from __future__ import annotations
 
 import logging
+import random
 from typing import Any
 
 logger = logging.getLogger("socialmedia_hub.proxy.stealth")
+
+# User-Agent pool for randomization
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 Edg/118.0.0.0",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+]
 
 
 class StealthFetcher:
@@ -13,18 +26,28 @@ class StealthFetcher:
 
     Features:
     - TLS fingerprint impersonation (curl_cffi)
-    - Real browser headers
-    - Request header ordering
-    - Cookie management
+    - Randomized browser headers
+    - Smart request intervals
+    - Cookie rotation support
     """
 
-    def __init__(self, impersonate: str = "chrome") -> None:
+    def __init__(
+        self,
+        impersonate: str = "edge",
+        min_delay: float = 2.0,
+        max_delay: float = 5.0,
+    ) -> None:
         """Initialize stealth fetcher.
 
         Args:
             impersonate: Browser to impersonate ('chrome', 'edge', 'safari', etc.)
+            min_delay: Minimum delay between requests (seconds)
+            max_delay: Maximum delay between requests (seconds)
         """
         self.impersonate = impersonate
+        self.min_delay = min_delay
+        self.max_delay = max_delay
+        self._last_request_time = 0
         self._check_curl_cffi()
 
     def _check_curl_cffi(self) -> None:
@@ -34,6 +57,34 @@ class StealthFetcher:
             logger.info("curl_cffi available for stealth fetching")
         except ImportError:
             logger.warning("curl_cffi not installed. Install with: pip install curl-cffi")
+
+    def _get_random_user_agent(self) -> str:
+        """Get a random User-Agent from the pool."""
+        return random.choice(USER_AGENTS)
+
+    def _get_smart_delay(self) -> float:
+        """Get smart delay between requests.
+
+        - 90% chance: 2-5 seconds (normal)
+        - 10% chance: 10-30 seconds (long pause, simulates human behavior)
+        """
+        if random.random() < 0.1:  # 10% chance for long delay
+            return random.uniform(10.0, 30.0)
+        return random.uniform(self.min_delay, self.max_delay)
+
+    def _wait_if_needed(self) -> None:
+        """Wait if needed based on smart delay."""
+        import time
+        now = time.time()
+        elapsed = now - self._last_request_time
+        delay = self._get_smart_delay()
+
+        if elapsed < delay:
+            wait_time = delay - elapsed
+            logger.debug(f"Waiting {wait_time:.2f}s for smart delay")
+            time.sleep(wait_time)
+
+        self._last_request_time = time.time()
 
     def fetch(
         self,
@@ -60,8 +111,12 @@ class StealthFetcher:
         try:
             from curl_cffi import requests as curl_requests
 
-            # Merge headers
+            # Smart delay before request
+            self._wait_if_needed()
+
+            # Merge headers with random User-Agent
             final_headers = {
+                "User-Agent": self._get_random_user_agent(),
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
                 "Accept-Language": "en-US,en;q=0.9",
                 "Accept-Encoding": "gzip, deflate, br",
