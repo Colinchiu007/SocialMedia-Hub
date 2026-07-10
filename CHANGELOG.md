@@ -5,6 +5,19 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.7.0] - 2026-07-10
+
+### Added
+
+#### yt-dlp 集成
+- 添加 `YTDLExtractor` 类用于视频信息提取
+- 支持 TikTok、Douyin、YouTube、Instagram、Bilibili
+- 与 RealProxyLayer 集成获取视频元数据
+- 提取视频标题、描述、时长等信息
+
+### Changed
+- 版本号更新至 3.7.0
+
 ## [3.6.0] - 2026-07-10
 
 ### Added
