@@ -5,6 +5,23 @@ All notable changes to `socialmedia-hub` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2026-07-10
+
+### Added
+
+#### 反检测增强
+- StealthFetcher (curl_cffi): Edge TLS 指纹模拟
+- 随机 User-Agent: 8 个浏览器轮换
+- 智能延迟: 2-5s 正常，10% 概率 10-30s
+
+#### 签名策略
+- 依赖 yt-dlp 处理签名，不逆向工程
+- 13 个平台签名生成器（简化版）
+- 公开页面不需要签名
+
+### Changed
+- 版本号更新至 4.1.0
+
 ## [3.8.0] - 2026-07-10
 
 ### Added
