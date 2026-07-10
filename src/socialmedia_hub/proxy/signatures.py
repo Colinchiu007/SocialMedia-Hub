@@ -1,279 +1,59 @@
-"""Signature generator for social media platform APIs."""
+"""Signature handling for social media platforms.
+
+Strategy: Use yt-dlp for signature handling instead of reverse engineering.
+yt-dlp community maintains up-to-date signature algorithms for all platforms.
+
+Supported platforms via yt-dlp:
+- TikTok: Automatic signature handling
+- YouTube: No signature needed (public API)
+- Instagram: Requires cookies
+- Douyin: Requires cookies
+- Bilibili: Automatic signature handling
+- Twitter/X: Automatic signature handling
+- And more...
+"""
 
 from __future__ import annotations
 
-import hashlib
 import logging
-import time
 from typing import Any
 
 logger = logging.getLogger("socialmedia_hub.proxy.signature")
 
 
-class SignatureGenerator:
-    """Generate signatures for social media platform APIs."""
-
-    def __init__(self) -> None:
-        self._generators: dict[str, Any] = {}
-
-    def register_generator(self, platform: str, generator: Any) -> None:
-        """Register a signature generator for a platform."""
-        self._generators[platform] = generator
-
-    def generate(self, platform: str, **kwargs: Any) -> dict[str, str]:
-        """Generate signature for a platform request."""
-        if platform not in self._generators:
-            logger.warning(f"No signature generator for {platform}")
-            return {}
-
-        generator = self._generators[platform]
-        result: dict[str, str] = generator(**kwargs)
-        return result
-
-
-class DouyinSignatureGenerator:
-    """Generate signatures for Douyin API requests.
-
-    This is a simplified implementation. Real implementation would need:
-    - ABogus algorithm
-    - X-Bogus algorithm
-    - msToken generation
-    - ttwid generation
-    """
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Douyin signature."""
-        # Simplified signature generation
-        # In production, this would implement the actual ABogus/X-Bogus algorithms
-        timestamp = str(int(time.time()))
-        data = kwargs.get("data", "")
-
-        # Simple hash-based signature (placeholder)
-        signature = hashlib.md5(f"{timestamp}{data}".encode()).hexdigest()
-
-        return {
-            "X-Bogus": signature,
-            "msToken": self._generate_ms_token(),
-            "ttwid": self._generate_ttwid(),
-        }
-
-    def _generate_ms_token(self) -> str:
-        """Generate msToken (simplified)."""
-        return hashlib.md5(str(time.time()).encode()).hexdigest()
-
-    def _generate_ttwid(self) -> str:
-        """Generate ttwid (simplified)."""
-        return hashlib.md5(str(time.time()).encode()).hexdigest()
-
-
-class TikTokSignatureGenerator:
-    """Generate signatures for TikTok API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate TikTok signature."""
-        timestamp = str(int(time.time()))
-        data = kwargs.get("data", "")
-
-        # Simplified signature generation
-        signature = hashlib.md5(f"{timestamp}{data}".encode()).hexdigest()
-
-        return {
-            "X-Bogus": signature,
-            "msToken": hashlib.md5(str(time.time()).encode()).hexdigest(),
-        }
-
-
-class InstagramSignatureGenerator:
-    """Generate signatures for Instagram API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Instagram signature."""
-        # Instagram uses different authentication mechanism
-        # This is a simplified placeholder
-        return {
-            "X-IG-App-ID": "936619743392459",
-            "X-IG-WWW-Claim": "0",
-        }
-
-
-class XiaohongshuSignatureGenerator:
-    """Generate signatures for Xiaohongshu API requests.
-
-    Xiaohongshu requires:
-    - X-Signature: Request signature
-    - X-XS: Encrypted parameters
-    - X-T: Timestamp
-    - Cookie: Session cookie
-    """
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Xiaohongshu signature."""
-        timestamp = str(int(time.time() * 1000))
-        url = kwargs.get("url", "")
-
-        # Generate signature based on URL and timestamp
-        sign_str = f"{url}{timestamp}"
-        signature = hashlib.md5(sign_str.encode()).hexdigest()
-
-        # Generate XS token (simplified)
-        xs_token = hashlib.md5(f"xs_{timestamp}_{url}".encode()).hexdigest()
-
-        return {
-            "X-Signature": signature,
-            "X-XS": xs_token,
-            "X-T": timestamp,
-            "X-B3-Traceid": hashlib.md5(f"trace_{timestamp}".encode()).hexdigest()[:16],
-        }
-
-
-class BilibiliSignatureGenerator:
-    """Generate signatures for Bilibili API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Bilibili signature."""
-        timestamp = str(int(time.time()))
-        wbi = hashlib.md5(f"wbi_{timestamp}".encode()).hexdigest()
-
-        return {
-            "wbi_img": wbi,
-            "wbi_sub": hashlib.md5(f"sub_{timestamp}".encode()).hexdigest(),
-            "buvid3": hashlib.md5(f"buvid_{timestamp}".encode()).hexdigest(),
-            "b_lsid": hashlib.md5(f"lsid_{timestamp}".encode()).hexdigest()[:8],
-        }
-
-
-class WeiboSignatureGenerator:
-    """Generate signatures for Weibo API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Weibo signature."""
-        timestamp = str(int(time.time() * 1000))
-        x_id = hashlib.md5(f"xid_{timestamp}".encode()).hexdigest()
-
-        return {
-            "X-XSRF-TOKEN": hashlib.md5(f"xsrf_{timestamp}".encode()).hexdigest(),
-            "X-Requested-With": "XMLHttpRequest",
-            "X-Id": x_id,
-        }
-
-
-class YouTubeSignatureGenerator:
-    """Generate signatures for YouTube API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate YouTube signature."""
-        timestamp = str(int(time.time()))
-
-        return {
-            "X-YouTube-Client-Name": "1",
-            "X-YouTube-Client-Version": "2.20240101.00.00",
-            "X-Goog-Visitor-Id": hashlib.md5(f"visitor_{timestamp}".encode()).hexdigest(),
-        }
-
-
-class TwitterSignatureGenerator:
-    """Generate signatures for Twitter/X API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Twitter signature."""
-        timestamp = str(int(time.time() * 1000))
-
-        return {
-            "X-Csrf-Token": hashlib.md5(f"csrf_{timestamp}".encode()).hexdigest(),
-            "X-Twitter-Active-User": "yes",
-            "X-Twitter-Client-Language": "en",
-        }
-
-
-class KuaishouSignatureGenerator:
-    """Generate signatures for Kuaishou API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Kuaishou signature."""
-        timestamp = str(int(time.time()))
-
-        return {
-            "Kpf": "PCJS",
-            "Kpn": "www.kuaishou.com",
-            "Cookie": f"kpf={hashlib.md5(f'kpf_{timestamp}'.encode()).hexdigest()[:16]}",
-        }
-
-
-class LinkedInSignatureGenerator:
-    """Generate signatures for LinkedIn API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate LinkedIn signature."""
-        timestamp = str(int(time.time()))
-        return {
-            "Csrf-Token": hashlib.md5(f"csrf_{timestamp}".encode()).hexdigest(),
-            "X-Restli-Protocol-Version": "2.0.0",
-        }
-
-
-class RedditSignatureGenerator:
-    """Generate signatures for Reddit API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Reddit signature."""
-        timestamp = str(int(time.time()))
-        return {
-            "X-Reddit-Session": hashlib.md5(f"session_{timestamp}".encode()).hexdigest()[:16],
-            "User-Agent": "SocialMedia-Hub/1.0",
-        }
-
-
-class ThreadsSignatureGenerator:
-    """Generate signatures for Threads API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Threads signature."""
-        timestamp = str(int(time.time()))
-        return {
-            "X-IG-App-ID": "238260118697367",
-            "X-ASBD-ID": "129477",
-            "X-IG-WWW-Claim": "0",
-        }
-
-
-class ZhihuSignatureGenerator:
-    """Generate signatures for Zhihu API requests."""
-
-    def __call__(self, **kwargs: Any) -> dict[str, str]:
-        """Generate Zhihu signature."""
-        timestamp = str(int(time.time()))
-        return {
-            "x-zse-93": hashlib.md5(f"zse_{timestamp}".encode()).hexdigest()[:16],
-            "x-zse-96": hashlib.md5(f"zse96_{timestamp}".encode()).hexdigest(),
-        }
-
-
 class SignatureManager:
-    """Manage signature generators for all platforms."""
+    """Manage signature generation for social media platforms.
+
+    This is a placeholder that documents the signature strategy.
+    Actual signature handling is done by yt-dlp.
+    """
 
     def __init__(self) -> None:
-        self.generator = SignatureGenerator()
-        self._register_default_generators()
-
-    def _register_default_generators(self) -> None:
-        """Register default signature generators."""
-        self.generator.register_generator("douyin", DouyinSignatureGenerator())
-        self.generator.register_generator("tiktok", TikTokSignatureGenerator())
-        self.generator.register_generator("instagram", InstagramSignatureGenerator())
-        self.generator.register_generator("xiaohongshu", XiaohongshuSignatureGenerator())
-        self.generator.register_generator("bilibili", BilibiliSignatureGenerator())
-        self.generator.register_generator("weibo", WeiboSignatureGenerator())
-        self.generator.register_generator("youtube", YouTubeSignatureGenerator())
-        self.generator.register_generator("twitter", TwitterSignatureGenerator())
-        self.generator.register_generator("kuaishou", KuaishouSignatureGenerator())
-        self.generator.register_generator("linkedin", LinkedInSignatureGenerator())
-        self.generator.register_generator("reddit", RedditSignatureGenerator())
-        self.generator.register_generator("threads", ThreadsSignatureGenerator())
-        self.generator.register_generator("zhihu", ZhihuSignatureGenerator())
+        self._supported_platforms = [
+            "douyin", "tiktok", "instagram", "youtube", "twitter",
+            "xiaohongshu", "bilibili", "weibo", "kuaishou",
+            "linkedin", "reddit", "threads", "zhihu",
+        ]
 
     def generate_signature(self, platform: str, **kwargs: Any) -> dict[str, str]:
-        """Generate signature for a platform."""
-        return self.generator.generate(platform, **kwargs)
+        """Generate signature for a platform.
+
+        Note: For most platforms, yt-dlp handles signatures automatically.
+        This method returns empty dict as a placeholder.
+
+        Args:
+            platform: Platform name
+            **kwargs: Additional parameters
+
+        Returns:
+            Empty dict (signatures handled by yt-dlp)
+        """
+        if platform not in self._supported_platforms:
+            logger.warning(f"Platform {platform} not in supported list")
+
+        # yt-dlp handles all signatures automatically
+        # Return empty dict as placeholder
+        return {}
 
 
 # Global signature manager
