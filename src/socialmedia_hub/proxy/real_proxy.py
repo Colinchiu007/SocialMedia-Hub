@@ -129,17 +129,28 @@ class RealProxyLayer:
         if cookie_header:
             headers["Cookie"] = cookie_header
 
-        # Add signature if needed
-        if use_signature:
-            sig_headers = self.signature_manager.generate_signature(platform, url=url)
-            headers.update(sig_headers)
+        # Note: Signatures are handled by yt-dlp when using smart_fetch
+        # For direct API calls, most platforms don't need signatures for public data
 
         # Get proxy
         proxy_url = None
         if use_proxy:
             proxy_url = self.proxy_pool.get_proxy_url()
 
-        # Make request
+        # Make request - try stealth first, fallback to httpx
+        try:
+            # Try stealth fetch (curl_cffi with browser fingerprint)
+            result = await self._stealth_request(url, method, headers, cookies, json_body)
+            if result.get("status_code") == 200:
+                return result
+
+            # Fallback to httpx if stealth fails
+            logger.warning("Stealth fetch failed, falling back to httpx")
+
+        except Exception as e:
+            logger.warning(f"Stealth fetch error: {e}, falling back to httpx")
+
+        # Fallback: httpx
         try:
             async with httpx.AsyncClient(
                 timeout=30.0,
@@ -180,6 +191,38 @@ class RealProxyLayer:
 
             logger.error(f"Request failed: {e}")
             return {"status_code": 0, "error": str(e)}
+
+    async def _stealth_request(
+        self,
+        url: str,
+        method: str,
+        headers: dict[str, str],
+        cookies: dict[str, str] | None,
+        json_body: Any = None,
+    ) -> dict[str, Any]:
+        """Internal stealth request using curl_cffi."""
+        result = self.stalth_fetcher.fetch(
+            url=url,
+            method=method,
+            headers=headers,
+            cookies=cookies,
+            json_data=json_body,
+        )
+
+        if result.get("status_code") == 200:
+            try:
+                import json
+                data = json.loads(result.get("text", "{}"))
+            except Exception:
+                data = {"raw": result.get("text", "")[:2000]}
+
+            return {
+                "status_code": result["status_code"],
+                "data": data,
+                "headers": result.get("headers", {}),
+            }
+
+        return {"status_code": result.get("status_code", 0), "error": result.get("error", "")}
 
     def _load_proxy_cache(self) -> None:
         """Load proxies from smart cache."""
