@@ -832,6 +832,93 @@ except SMHHTTPError as e:
 
 ---
 
+## MCP 集成
+
+### 创建 MCP 服务器
+
+```python
+from socialmedia_hub.mcp import create_mcp_server
+
+# 创建 MCP 服务器
+mcp = create_mcp_server(api_key="YOUR_API_KEY")
+
+# 列出所有工具
+tools = mcp.list_tools()
+print(f"可用工具: {len(tools)}")
+
+# 调用工具
+result = mcp.call_tool("tiktok_fetch_video", {"video_id": "123"})
+print(result)
+```
+
+### 可用工具 (1000 个)
+
+| 平台 | 工具数 | 示例工具 |
+|------|--------|----------|
+| TikTok | 60 | tiktok_fetch_video, tiktok_fetch_user |
+| 抖音 | 60 | douyin_fetch_video, douyin_fetch_user |
+| Instagram | 60 | instagram_fetch_post, instagram_fetch_user |
+| YouTube | 60 | youtube_fetch_video, youtube_fetch_channel |
+| 其他平台 | 760 | 每个平台 27-60 个工具 |
+
+---
+
+## 反爬机制
+
+### 自动反爬
+
+SocialMedia-Hub 内置完整的反爬机制，自动处理：
+
+1. **速率限制** — 每平台每分钟最多 10 个请求
+2. **随机延迟** — 请求间 1-3 秒随机延迟
+3. **Cookie 轮换** — 多账号 Cookie 自动轮换
+4. **代理轮换** — 支持 4 种代理策略
+5. **错误重试** — 429 自动等待重试
+
+### 配置反爬参数
+
+```python
+from socialmedia_hub.proxy.real_proxy import RealProxyLayer
+
+layer = RealProxyLayer(
+    min_delay=1.0,  # 最小延迟（秒）
+    max_delay=3.0,  # 最大延迟（秒）
+)
+```
+
+### 配置代理池
+
+```python
+from socialmedia_hub.proxy.pool import ProxyPool
+
+pool = ProxyPool()
+pool.add_proxy(host="proxy1.com", port=8080)
+pool.add_proxy(host="proxy2.com", port=8081)
+
+# 使用不同策略
+proxy = pool.get_proxy(strategy="round_robin")  # 轮询
+proxy = pool.get_proxy(strategy="random")       # 随机
+proxy = pool.get_proxy(strategy="least_used")   # 最少使用
+proxy = pool.get_proxy(strategy="best_success") # 最高成功率
+```
+
+### 配置 Cookie 轮换
+
+```python
+from socialmedia_hub.proxy.cookies import CookieManager
+
+manager = CookieManager(storage_path="cookies.json")
+
+# 添加多个账号的 Cookie
+manager.set_cookie("session1", "value1", "www.douyin.com")
+manager.set_cookie("session2", "value2", "www.douyin.com")
+
+# 自动轮换使用
+cookie_header = manager.get_cookie_header("www.douyin.com")
+```
+
+---
+
 ## 附录
 
 ### 错误码参考

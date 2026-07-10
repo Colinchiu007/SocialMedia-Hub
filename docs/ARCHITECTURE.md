@@ -10,7 +10,7 @@
 │  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐     │
 │  │   SDK Client    │    │   API Server    │    │   MCP Server    │     │
 │  │                 │    │                 │    │                 │     │
-│  │  SocialMedia    │    │    FastAPI      │    │  150+ Tools     │     │
+│  │  SocialMedia    │    │    FastAPI      │    │  1000 Tools    │     │
 │  │  Hub / Async    │───▶│    1068 路由    │───▶│  16 平台        │     │
 │  │  SocialMedia    │    │    认证+限流     │    │  AI Agent 集成  │     │
 │  │  Hub            │    │                 │    │                 │     │
@@ -73,7 +73,7 @@
 | `list_tools()` | 列出所有工具 |
 | `call_tool()` | 调用指定工具 |
 
-**工具分布**：150 个工具覆盖 16 个平台
+**工具分布**：1000 个工具覆盖 16 个平台
 
 ### 4. 代码生成管线 (`scripts/`)
 
@@ -142,6 +142,44 @@ Proxy Layer (httpx)
 | 密钥脱敏 | 异常信息中自动脱敏 Authorization |
 | 输入验证 | 参数类型和范围验证 |
 | CORS | 可配置的跨域策略 |
+
+## 反爬机制
+
+### RealProxyLayer
+
+```
+用户请求
+    │
+    ▼
+① 速率检查（每分钟 10 个请求/平台）
+    │
+    ▼
+② 随机延迟（1-3 秒）
+    │
+    ▼
+③ Cookie 轮换（选择随机 Cookie）
+    │
+    ▼
+④ 签名生成（X-Bogus, msToken）
+    │
+    ▼
+⑤ 代理轮换（选择代理 IP）
+    │
+    ▼
+⑥ 发送请求
+    │
+    ▼
+⑦ 失败重试（429 自动等待）
+```
+
+### 配置参数
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `min_delay` | 1.0s | 最小请求间隔 |
+| `max_delay` | 3.0s | 最大请求间隔 |
+| `max_requests_per_minute` | 10 | 每平台每分钟最大请求数 |
+| `proxy_strategy` | round_robin | 代理轮换策略 |
 
 ## 扩展性
 
