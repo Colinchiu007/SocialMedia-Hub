@@ -10,6 +10,7 @@ High-performance Python SDK and API server for multi-platform social media data.
 - **1068+ endpoints**: Complete API coverage across all platforms
 - **1000 MCP tools**: Model Context Protocol integration for AI agents
 - **RealProxyLayer**: Cookie management, signature generation, proxy rotation
+- **Proxy Providers**: 集成快代理、芝麻代理、Bright Data 等
 - **WebSocket support**: Real-time data push for live rooms
 - **Chrome Extension**: Browser sidebar for social media analytics
 - **LangChain integration**: 45 LangChain tools for AI workflows
