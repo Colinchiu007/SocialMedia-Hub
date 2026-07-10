@@ -37,6 +37,8 @@ from socialmedia_hub._pagination import (
     PagePaginator,
 )
 from socialmedia_hub._version import __version__
+from socialmedia_hub.automation import BatchProcessor, DataExporter, TaskScheduler
+from socialmedia_hub.transcription import WhisperTranscriber, whisper_transcriber
 
 # Aliases for convenience
 SocialMediaHub = BaseClient
@@ -46,7 +48,9 @@ __all__ = [
     "AsyncBaseClient",
     "AsyncSocialMediaHub",
     "BaseClient",
+    "BatchProcessor",
     "CursorPaginator",
+    "DataExporter",
     "OffsetPaginator",
     "Page",
     "PagePaginator",
@@ -66,5 +70,7 @@ __all__ = [
     "SMHUpstreamError",
     "SMHValidationError",
     "SocialMediaHub",
+    "TaskScheduler",
+    "WhisperTranscriber",
     "__version__",
 ]

@@ -14,6 +14,7 @@ from socialmedia_hub.proxy.cookies import CookieManager
 from socialmedia_hub.proxy.pool import ProxyPool
 from socialmedia_hub.proxy.signatures import SignatureManager
 from socialmedia_hub.proxy.ytdlp_extractor import YTDLExtractor, ytdlp_extractor
+from socialmedia_hub.transcription.whisper import WhisperTranscriber, whisper_transcriber
 
 logger = logging.getLogger("socialmedia_hub.proxy")
 
@@ -36,8 +37,10 @@ class RealProxyLayer:
         signature_manager: SignatureManager | None = None,
         proxy_pool: ProxyPool | None = None,
         ytdlp_extractor: YTDLExtractor | None = None,
+        whisper_transcriber: Any | None = None,
         min_delay: float = 1.0,
         max_delay: float = 3.0,
+        use_proxy_cache: bool = True,
     ) -> None:
         """Initialize the proxy layer.
 
@@ -46,19 +49,27 @@ class RealProxyLayer:
             signature_manager: Signature manager instance
             proxy_pool: Proxy pool instance
             ytdlp_extractor: yt-dlp extractor instance
+            whisper_transcriber: Whisper transcriber instance
             min_delay: Minimum delay between requests (seconds)
             max_delay: Maximum delay between requests (seconds)
+            use_proxy_cache: Whether to use smart proxy caching
         """
         self.cookie_manager = cookie_manager or cookie_manager_global
         self.signature_manager = signature_manager or signature_manager_global
         self.proxy_pool = proxy_pool or proxy_pool_global
         self.ytdlp_extractor = ytdlp_extractor or ytdlp_extractor_global
+        self.whisper_transcriber = whisper_transcriber or whisper_transcriber_global
 
         # Request rate control
         self._request_times: dict[str, list[float]] = {}
         self._min_interval: float = 1.0  # Minimum seconds between requests to same domain
         self._min_delay = min_delay
         self._max_delay = max_delay
+
+        # Smart proxy cache
+        self._use_proxy_cache = use_proxy_cache
+        if use_proxy_cache and len(self.proxy_pool.proxies) == 0:
+            self._load_proxy_cache()
 
     async def fetch(
         self,
@@ -169,6 +180,18 @@ class RealProxyLayer:
             logger.error(f"Request failed: {e}")
             return {"status_code": 0, "error": str(e)}
 
+    def _load_proxy_cache(self) -> None:
+        """Load proxies from smart cache."""
+        try:
+            from socialmedia_hub.proxy.providers import FreeProxyProvider
+            provider = FreeProxyProvider()
+            proxies = provider.get_proxies(count=5)
+            if proxies:
+                self.proxy_pool.add_proxies(proxies)
+                logger.info(f"Loaded {len(proxies)} proxies from cache")
+        except Exception as e:
+            logger.warning(f"Failed to load proxy cache: {e}")
+
     def _get_rotating_cookie(self, domain: str) -> str:
         """Get cookie header with rotation for multiple accounts."""
         cookies = self.cookie_manager.get_cookies_for_domain(domain)
@@ -215,6 +238,133 @@ class RealProxyLayer:
             },
         }
 
+    async def transcribe_video(self, url: str, language: str | None = None) -> dict[str, Any]:
+        """Transcribe video audio to text using Whisper.
+
+        Args:
+            url: Video URL to transcribe
+            language: Language code (e.g., 'en', 'zh') or None for auto-detect
+
+        Returns:
+            Transcription result with text, segments, and metadata
+        """
+        try:
+            result = self.ytdlp_extractor.extract_info(url)
+            if not result:
+                return {"status_code": 404, "error": "Video not found"}
+
+            # Download and transcribe
+            import yt_dlp
+            import tempfile
+            from pathlib import Path
+
+            with tempfile.TemporaryDirectory() as temp_dir:
+                output_path = Path(temp_dir) / "video.%(ext)s"
+
+                ydl_opts = {
+                    "format": "bestaudio/best",
+                    "outtmpl": str(output_path),
+                    "quiet": True,
+                }
+
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    info = ydl.extract_info(url, download=True)
+                    filename = ydl.prepare_filename(info)
+
+                # Transcribe
+                transcription = self.whisper_transcriber.transcribe_file(
+                    filename, language
+                )
+
+                return {
+                    "status_code": 200,
+                    "data": {
+                        "title": info.get("title"),
+                        "description": info.get("description"),
+                        "transcription": transcription["text"],
+                        "segments": transcription["segments"],
+                        "language": transcription.get("language"),
+                        "duration": info.get("duration"),
+                    },
+                    "source": "whisper",
+                }
+
+        except Exception as e:
+            logger.error(f"Transcription failed: {e}")
+            return {"status_code": 500, "error": str(e)}
+
+    async def smart_fetch(self, url: str, platform: str | None = None) -> dict[str, Any]:
+        """Smart fetch video info - try yt-dlp first, fallback to API.
+
+        Args:
+            url: Video URL
+            platform: Platform name (auto-detected if None)
+
+        Returns:
+            Video information dictionary
+        """
+        # Auto-detect platform from URL
+        if platform is None:
+            platform = self._detect_platform(url)
+
+        # 1. Try yt-dlp first (recommended)
+        try:
+            result = await self.extract_video_info(url)
+            if result and result.get("status_code") == 200:
+                result["method"] = "yt-dlp"
+                return result
+        except Exception as e:
+            logger.warning(f"yt-dlp failed: {e}")
+
+        # 2. Fallback to API
+        if platform:
+            try:
+                result = await self.fetch(
+                    platform=platform,
+                    url=url,
+                    use_signature=True,
+                )
+                result["method"] = "api"
+                return result
+            except Exception as e:
+                logger.warning(f"API fallback failed: {e}")
+
+        return {"status_code": 404, "error": "Could not fetch video info"}
+
+    def _detect_platform(self, url: str) -> str | None:
+        """Auto-detect platform from URL.
+
+        Args:
+            url: Video URL
+
+        Returns:
+            Platform name or None
+        """
+        url_lower = url.lower()
+        platform_patterns = {
+            "tiktok": ["tiktok.com"],
+            "douyin": ["douyin.com", "v.douyin.com"],
+            "instagram": ["instagram.com"],
+            "youtube": ["youtube.com", "youtu.be"],
+            "bilibili": ["bilibili.com"],
+            "twitter": ["twitter.com", "x.com"],
+            "xiaohongshu": ["xiaohongshu.com", "xhslink.com"],
+            "weibo": ["weibo.com", "m.weibo.cn"],
+            "kuaishou": ["kuaishou.com"],
+            "reddit": ["reddit.com"],
+            "linkedin": ["linkedin.com"],
+            "zhihu": ["zhihu.com"],
+            "threads": ["threads.net"],
+            "wechat": ["mp.weixin.qq.com", "channels.weixin.qq.com"],
+            "lemon8": ["lemon8-app.com"],
+        }
+
+        for platform, patterns in platform_patterns.items():
+            for pattern in patterns:
+                if pattern in url_lower:
+                    return platform
+        return None
+
     async def extract_video_info(self, url: str) -> dict[str, Any] | None:
         """Extract video information using yt-dlp.
 
@@ -255,6 +405,7 @@ cookie_manager_global = CookieManager()
 signature_manager_global = SignatureManager()
 proxy_pool_global = ProxyPool()
 ytdlp_extractor_global = YTDLExtractor()
+whisper_transcriber_global = WhisperTranscriber()
 
 # Global proxy layer
 real_proxy = RealProxyLayer()
