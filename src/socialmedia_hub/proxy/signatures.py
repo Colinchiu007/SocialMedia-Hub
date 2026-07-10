@@ -199,6 +199,55 @@ class KuaishouSignatureGenerator:
         }
 
 
+class LinkedInSignatureGenerator:
+    """Generate signatures for LinkedIn API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate LinkedIn signature."""
+        timestamp = str(int(time.time()))
+        return {
+            "Csrf-Token": hashlib.md5(f"csrf_{timestamp}".encode()).hexdigest(),
+            "X-Restli-Protocol-Version": "2.0.0",
+        }
+
+
+class RedditSignatureGenerator:
+    """Generate signatures for Reddit API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Reddit signature."""
+        timestamp = str(int(time.time()))
+        return {
+            "X-Reddit-Session": hashlib.md5(f"session_{timestamp}".encode()).hexdigest()[:16],
+            "User-Agent": "SocialMedia-Hub/1.0",
+        }
+
+
+class ThreadsSignatureGenerator:
+    """Generate signatures for Threads API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Threads signature."""
+        timestamp = str(int(time.time()))
+        return {
+            "X-IG-App-ID": "238260118697367",
+            "X-ASBD-ID": "129477",
+            "X-IG-WWW-Claim": "0",
+        }
+
+
+class ZhihuSignatureGenerator:
+    """Generate signatures for Zhihu API requests."""
+
+    def __call__(self, **kwargs: Any) -> dict[str, str]:
+        """Generate Zhihu signature."""
+        timestamp = str(int(time.time()))
+        return {
+            "x-zse-93": hashlib.md5(f"zse_{timestamp}".encode()).hexdigest()[:16],
+            "x-zse-96": hashlib.md5(f"zse96_{timestamp}".encode()).hexdigest(),
+        }
+
+
 class SignatureManager:
     """Manage signature generators for all platforms."""
 
@@ -217,6 +266,10 @@ class SignatureManager:
         self.generator.register_generator("youtube", YouTubeSignatureGenerator())
         self.generator.register_generator("twitter", TwitterSignatureGenerator())
         self.generator.register_generator("kuaishou", KuaishouSignatureGenerator())
+        self.generator.register_generator("linkedin", LinkedInSignatureGenerator())
+        self.generator.register_generator("reddit", RedditSignatureGenerator())
+        self.generator.register_generator("threads", ThreadsSignatureGenerator())
+        self.generator.register_generator("zhihu", ZhihuSignatureGenerator())
 
     def generate_signature(self, platform: str, **kwargs: Any) -> dict[str, str]:
         """Generate signature for a platform."""
