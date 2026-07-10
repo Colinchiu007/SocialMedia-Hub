@@ -13,6 +13,7 @@ import httpx
 from socialmedia_hub.proxy.cookies import CookieManager
 from socialmedia_hub.proxy.pool import ProxyPool
 from socialmedia_hub.proxy.signatures import SignatureManager
+from socialmedia_hub.proxy.ytdlp_extractor import YTDLExtractor, ytdlp_extractor
 
 logger = logging.getLogger("socialmedia_hub.proxy")
 
@@ -34,6 +35,7 @@ class RealProxyLayer:
         cookie_manager: CookieManager | None = None,
         signature_manager: SignatureManager | None = None,
         proxy_pool: ProxyPool | None = None,
+        ytdlp_extractor: YTDLExtractor | None = None,
         min_delay: float = 1.0,
         max_delay: float = 3.0,
     ) -> None:
@@ -43,12 +45,14 @@ class RealProxyLayer:
             cookie_manager: Cookie manager instance
             signature_manager: Signature manager instance
             proxy_pool: Proxy pool instance
+            ytdlp_extractor: yt-dlp extractor instance
             min_delay: Minimum delay between requests (seconds)
             max_delay: Maximum delay between requests (seconds)
         """
         self.cookie_manager = cookie_manager or cookie_manager_global
         self.signature_manager = signature_manager or signature_manager_global
         self.proxy_pool = proxy_pool or proxy_pool_global
+        self.ytdlp_extractor = ytdlp_extractor or ytdlp_extractor_global
 
         # Request rate control
         self._request_times: dict[str, list[float]] = {}
@@ -211,11 +215,46 @@ class RealProxyLayer:
             },
         }
 
+    async def extract_video_info(self, url: str) -> dict[str, Any] | None:
+        """Extract video information using yt-dlp.
+
+        Args:
+            url: Video URL to extract information from
+
+        Returns:
+            Video information dictionary or None
+        """
+        try:
+            info = self.ytdlp_extractor.extract_info(url)
+            if info:
+                return {
+                    "status_code": 200,
+                    "data": {
+                        "title": info.get("title"),
+                        "description": info.get("description"),
+                        "duration": info.get("duration"),
+                        "uploader": info.get("uploader"),
+                        "upload_date": info.get("upload_date"),
+                        "view_count": info.get("view_count"),
+                        "like_count": info.get("like_count"),
+                        "comment_count": info.get("comment_count"),
+                        "thumbnail": info.get("thumbnail"),
+                        "webpage_url": info.get("webpage_url"),
+                        "formats": info.get("formats", []),
+                    },
+                    "source": "yt-dlp",
+                }
+            return {"status_code": 404, "error": "Video not found"}
+        except Exception as e:
+            logger.error(f"yt-dlp extraction failed: {e}")
+            return {"status_code": 500, "error": str(e)}
+
 
 # Global instances
 cookie_manager_global = CookieManager()
 signature_manager_global = SignatureManager()
 proxy_pool_global = ProxyPool()
+ytdlp_extractor_global = YTDLExtractor()
 
 # Global proxy layer
 real_proxy = RealProxyLayer()
