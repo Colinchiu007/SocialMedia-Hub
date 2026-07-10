@@ -145,6 +145,28 @@ Proxy Layer (httpx)
 
 ## 反爬机制
 
+### yt-dlp 集成（推荐）
+
+**重要发现：yt-dlp 已经处理了签名问题！**
+
+| 平台 | 签名处理 | 说明 |
+|------|----------|------|
+| YouTube | ✅ 无需签名 | 直接提取 |
+| TikTok | ✅ 自动处理 | yt-dlp 内置提取器 |
+| 抖音 | ⚠️ 需要 Cookie | 提供 Cookie 即可 |
+| Bilibili | ✅ 支持 | 内置提取器 |
+
+**使用 yt-dlp 无需逆向签名算法！** 社区已维护提取器。
+
+```python
+from socialmedia_hub.proxy.real_proxy import real_proxy
+
+# 使用 yt-dlp 提取视频信息
+result = await real_proxy.extract_video_info(
+    "https://www.tiktok.com/@user/video/123"
+)
+```
+
 ### RealProxyLayer
 
 ```

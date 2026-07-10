@@ -9,11 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-#### yt-dlp 集成
+#### yt-dlp 集成（解决签名问题）
 - 添加 `YTDLExtractor` 类用于视频信息提取
 - 支持 TikTok、Douyin、YouTube、Instagram、Bilibili
 - 与 RealProxyLayer 集成获取视频元数据
 - 提取视频标题、描述、时长等信息
+
+**重要发现：yt-dlp 已自动处理签名，无需逆向！**
+- TikTok: yt-dlp 内置提取器自动处理签名
+- YouTube: 无需签名，直接提取
+- 抖音: 需要 Cookie，但 yt-dlp 可处理
 
 ### Changed
 - 版本号更新至 3.7.0
