@@ -13,6 +13,7 @@ import httpx
 from socialmedia_hub.proxy.cookies import CookieManager
 from socialmedia_hub.proxy.pool import ProxyPool
 from socialmedia_hub.proxy.signatures import SignatureManager
+from socialmedia_hub.proxy.stealth import StealthFetcher, stealth_fetcher
 from socialmedia_hub.proxy.ytdlp_extractor import YTDLExtractor, ytdlp_extractor
 from socialmedia_hub.transcription.whisper import WhisperTranscriber, whisper_transcriber
 
@@ -238,6 +239,112 @@ class RealProxyLayer:
             },
         }
 
+    async def stealth_fetch(
+        self,
+        url: str,
+        headers: dict[str, str] | None = None,
+        cookies: dict[str, str] | None = None,
+    ) -> dict[str, Any]:
+        """Fetch URL with enhanced anti-detection (curl_cffi).
+
+        Uses real browser TLS fingerprint to avoid detection.
+
+        Args:
+            url: Target URL
+            headers: Additional headers
+            cookies: Cookies to send
+
+        Returns:
+            Response dictionary
+        """
+        # Rate control
+        await self._rate_control("stealth")
+
+        # Random delay
+        delay = random.uniform(self._min_delay, self._max_delay)
+        await asyncio.sleep(delay)
+
+        # Use stealth fetcher
+        result = self.stalth_fetcher.fetch(
+            url=url,
+            headers=headers,
+            cookies=cookies,
+        )
+
+        return result
+
+    async def smart_fetch(self, url: str, platform: str | None = None) -> dict[str, Any]:
+        """Smart fetch video info - try yt-dlp first, fallback to API.
+
+        Args:
+            url: Video URL
+            platform: Platform name (auto-detected if None)
+
+        Returns:
+            Video information dictionary
+        """
+        # Auto-detect platform from URL
+        if platform is None:
+            platform = self._detect_platform(url)
+
+        # 1. Try yt-dlp first (recommended)
+        try:
+            result = await self.extract_video_info(url)
+            if result and result.get("status_code") == 200:
+                result["method"] = "yt-dlp"
+                return result
+        except Exception as e:
+            logger.warning(f"yt-dlp failed: {e}")
+
+        # 2. Fallback to API
+        if platform:
+            try:
+                result = await self.fetch(
+                    platform=platform,
+                    url=url,
+                    use_signature=True,
+                )
+                result["method"] = "api"
+                return result
+            except Exception as e:
+                logger.warning(f"API fallback failed: {e}")
+
+        return {"status_code": 404, "error": "Could not fetch video info"}
+
+    def _detect_platform(self, url: str) -> str | None:
+        """Auto-detect platform from URL.
+
+        Args:
+            url: Video URL
+
+        Returns:
+            Platform name or None
+        """
+        url_lower = url.lower()
+        platform_patterns = {
+            "tiktok": ["tiktok.com"],
+            "douyin": ["douyin.com", "v.douyin.com"],
+            "instagram": ["instagram.com"],
+            "youtube": ["youtube.com", "youtu.be"],
+            "bilibili": ["bilibili.com"],
+            "twitter": ["twitter.com", "x.com"],
+            "xiaohongshu": ["xiaohongshu.com", "xhslink.com"],
+            "weibo": ["weibo.com", "m.weibo.cn"],
+            "kuaishou": ["kuaishou.com"],
+            "reddit": ["reddit.com"],
+            "linkedin": ["linkedin.com"],
+            "zhihu": ["zhihu.com"],
+            "threads": ["threads.net"],
+            "wechat": ["mp.weixin.qq.com", "channels.weixin.qq.com"],
+            "lemon8": ["lemon8-app.com"],
+        }
+
+        for platform, patterns in platform_patterns.items():
+            for pattern in patterns:
+                if pattern in url_lower:
+                    return platform
+        return None
+
     async def transcribe_video(self, url: str, language: str | None = None) -> dict[str, Any]:
         """Transcribe video audio to text using Whisper.
 
@@ -406,6 +513,7 @@ signature_manager_global = SignatureManager()
 proxy_pool_global = ProxyPool()
 ytdlp_extractor_global = YTDLExtractor()
 whisper_transcriber_global = WhisperTranscriber()
+stalth_fetcher_global = StealthFetcher()
 
 # Global proxy layer
 real_proxy = RealProxyLayer()
